@@ -1,0 +1,937 @@
+/* ============================================================
+   AlternateIncomeSource.com — Main Stylesheet
+   File: assets/css/style.css
+   
+   What this file does:
+   → Controls how EVERYTHING looks on your website
+   → Colors, fonts, sizes, spacing, animations
+   → Works for all pages automatically
+   → Handles Day/Night mode + 7 color palettes
+   ============================================================ */
+
+
+/* ============================================================
+   SECTION 1 — COLOR PALETTES
+   
+   What are CSS variables?
+   → Like saved settings. You change one value here
+     and it updates everywhere on your entire site.
+   → Example: if you change --accent color here,
+     every button, every link, every glow updates instantly.
+   ============================================================ */
+
+/* --- DEFAULT PALETTE (Cyan / Teal) --- */
+:root {
+  --accent:        #00E5CC;
+  --accent-2:      #00B4FF;
+  --accent-glow:   rgba(0, 229, 204, 0.25);
+  --accent-soft:   rgba(0, 229, 204, 0.08);
+}
+
+/* --- PALETTE 2 — Purple / Violet --- */
+[data-palette="purple"] {
+  --accent:        #AA00FF;
+  --accent-2:      #7C4DFF;
+  --accent-glow:   rgba(170, 0, 255, 0.25);
+  --accent-soft:   rgba(170, 0, 255, 0.08);
+}
+
+/* --- PALETTE 3 — Gold / Amber --- */
+[data-palette="gold"] {
+  --accent:        #FFB300;
+  --accent-2:      #FF6D00;
+  --accent-glow:   rgba(255, 179, 0, 0.25);
+  --accent-soft:   rgba(255, 179, 0, 0.08);
+}
+
+/* --- PALETTE 4 — Green / Emerald --- */
+[data-palette="green"] {
+  --accent:        #00E676;
+  --accent-2:      #00BFA5;
+  --accent-glow:   rgba(0, 230, 118, 0.25);
+  --accent-soft:   rgba(0, 230, 118, 0.08);
+}
+
+/* --- PALETTE 5 — Pink / Rose --- */
+[data-palette="pink"] {
+  --accent:        #FF4081;
+  --accent-2:      #F50057;
+  --accent-glow:   rgba(255, 64, 129, 0.25);
+  --accent-soft:   rgba(255, 64, 129, 0.08);
+}
+
+/* --- PALETTE 6 — Orange / Fire --- */
+[data-palette="orange"] {
+  --accent:        #FF6E40;
+  --accent-2:      #FF3D00;
+  --accent-glow:   rgba(255, 110, 64, 0.25);
+  --accent-soft:   rgba(255, 110, 64, 0.08);
+}
+
+/* --- PALETTE 7 — Ice / White --- */
+[data-palette="ice"] {
+  --accent:        #E0F7FA;
+  --accent-2:      #B2EBF2;
+  --accent-glow:   rgba(224, 247, 250, 0.25);
+  --accent-soft:   rgba(224, 247, 250, 0.08);
+}
+
+
+/* ============================================================
+   SECTION 2 — DARK MODE COLORS (Default)
+   
+   These are the base colors used in dark/night mode.
+   Dark mode is the DEFAULT because your site is premium SaaS.
+   ============================================================ */
+
+:root {
+  /* Backgrounds — from darkest to slightly lighter */
+  --bg-darkest:    #02020A;
+  --bg-dark:       #04040F;
+  --bg-card:       rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+
+  /* Text colors */
+  --text-primary:  #F0F0FF;
+  --text-secondary:#A0A0C0;
+  --text-muted:    #505070;
+
+  /* Borders */
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-bright: rgba(255, 255, 255, 0.14);
+
+  /* Navbar */
+  --nav-bg:        rgba(2, 2, 12, 0.92);
+
+  /* Shadow */
+  --shadow:        0 8px 40px rgba(0, 0, 0, 0.6);
+
+  /* Mode flag */
+  --mode: dark;
+}
+
+
+/* ============================================================
+   SECTION 3 — LIGHT MODE COLORS
+   
+   When user clicks the Day/Night toggle button,
+   the HTML element gets data-theme="light"
+   and all these colors replace the dark ones automatically.
+   ============================================================ */
+
+[data-theme="light"] {
+  --bg-darkest:    #F0F4FF;
+  --bg-dark:       #E8EEFF;
+  --bg-card:       rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+
+  --text-primary:  #0A0A1A;
+  --text-secondary:#404060;
+  --text-muted:    #9090A0;
+
+  --border:        rgba(0, 0, 0, 0.08);
+  --border-bright: rgba(0, 0, 0, 0.15);
+
+  --nav-bg:        rgba(240, 244, 255, 0.95);
+
+  --shadow:        0 8px 40px rgba(0, 0, 0, 0.12);
+
+  --mode: light;
+}
+
+
+/* ============================================================
+   SECTION 4 — RESET & BASE
+   
+   What is a CSS reset?
+   → Browsers have their own default styles (margins, padding)
+   → These defaults look different in Chrome vs Firefox vs Safari
+   → Reset removes all defaults so YOUR design looks the same
+     everywhere in the world on any browser.
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box; /* Makes sizing predictable */
+  margin: 0;              /* Remove default spacing */
+  padding: 0;             /* Remove default spacing */
+}
+
+html {
+  scroll-behavior: smooth; /* Smooth scrolling when clicking nav links */
+  font-size: 16px;          /* Base font size — all other sizes relative to this */
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-darkest);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevents horizontal scroll on mobile */
+  transition: background-color 0.4s ease, color 0.4s ease;
+  /* transition = smooth change when theme switches */
+}
+
+/* Custom scrollbar — makes your site look premium */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-darkest); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   SECTION 5 — TYPOGRAPHY (Text Styles)
+   
+   Typography = how your text looks
+   A good typography system makes your site feel professional.
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+/* clamp = minimum, preferred, maximum size
+   So h1 is never smaller than 2rem or larger than 3.5rem
+   but scales perfectly on any screen size */
+
+h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover { opacity: 0.8; }
+
+
+/* ============================================================
+   SECTION 6 — LAYOUT CONTAINERS
+   
+   Container = a box that limits content width
+   so text does not stretch too wide on large screens.
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;        /* Center it horizontally */
+  padding: 0 1.5rem;     /* Space on left and right sides */
+}
+
+.section {
+  padding: 5rem 0;       /* Space above and below each section */
+}
+
+.section-sm {
+  padding: 3rem 0;
+}
+
+
+/* ============================================================
+   SECTION 7 — NAVIGATION BAR
+   
+   The navbar stays fixed at the top of the screen
+   so users can always navigate no matter how far they scroll.
+   ============================================================ */
+
+.navbar {
+  position: fixed;           /* Stays at top even when scrolling */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;             /* Appears above all other content */
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px); /* Glass blur effect behind navbar */
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow);
+  border-bottom-color: var(--border-bright);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Logo (your brand name in the navbar) */
+.nav-logo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo span {
+  color: var(--accent);  /* The accent part glows with your palette color */
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Underline animation when hovering nav links */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a:hover::after {
+  width: 100%;  /* Underline slides in from left on hover */
+}
+
+/* Right side of navbar — theme controls */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Day/Night toggle button */
+.theme-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 6px 14px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Palette picker button */
+.palette-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.palette-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Mobile hamburger menu button */
+.hamburger {
+  display: none;  /* Hidden on desktop, shown on mobile */
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+
+/* ============================================================
+   SECTION 8 — HERO SECTION
+   
+   The hero is the first thing users see.
+   It must create the WOW effect in 2-3 seconds.
+   ============================================================ */
+
+.hero {
+  min-height: 100vh;    /* Takes full screen height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 1.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Canvas (where your animation runs) */
+.hero canvas {
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  display: block;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title .highlight {
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+/* Hero CTA buttons area */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;  /* Wraps to next line on small screens */
+  margin-bottom: 1rem;
+}
+
+/* Small trust line below buttons */
+.hero-trust {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   SECTION 9 — BUTTONS
+   
+   Two button styles:
+   Primary = filled with accent color (main action)
+   Secondary = outlined (secondary action)
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+}
+
+/* Primary button — glows with your accent color */
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);  /* Lifts up slightly on hover */
+  box-shadow: 0 8px 30px var(--accent-glow);
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: translateY(0);  /* Presses down when clicked */
+}
+
+/* Secondary button — outlined */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-bright);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   SECTION 10 — TOOL CARDS
+   
+   Cards show your tools on the homepage.
+   Each card has a 3D tilt effect when hovered.
+   ============================================================ */
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* auto-fill = creates as many columns as fit
+     minmax = each column is between 280px and equal share */
+  gap: 1.5rem;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+
+  /* 3D tilt requires this */
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+/* Glowing accent line at top of card */
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tool-card:hover::before {
+  opacity: 1;  /* Glow line appears on hover */
+}
+
+.tool-card:hover {
+  border-color: var(--border-bright);
+  background: var(--bg-card-hover);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px var(--accent-glow);
+  transform: perspective(1000px) translateY(-4px);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.card-tag {
+  display: inline-block;
+  margin-top: 1rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Card arrow that appears on hover */
+.card-arrow {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.tool-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* ============================================================
+   SECTION 11 — SECTION HEADERS
+   
+   Consistent title style used across all sections.
+   ============================================================ */
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-label {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+
+/* ============================================================
+   SECTION 12 — PALETTE POPUP
+   
+   The color palette selector that appears when user
+   clicks the palette button in the navbar.
+   ============================================================ */
+
+.palette-popup {
+  position: fixed;
+  top: 72px;
+  right: 1.5rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-bright);
+  border-radius: 14px;
+  padding: 1rem;
+  display: none;          /* Hidden by default */
+  z-index: 2000;
+  box-shadow: var(--shadow);
+  min-width: 200px;
+}
+
+.palette-popup.open {
+  display: block;         /* Shown when user clicks palette button */
+  animation: fadeDown 0.2s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.palette-popup-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.palette-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.palette-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: none;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.palette-option:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.palette-option.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.palette-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SECTION 13 — FOOTER
+   
+   Clean professional footer with legal links.
+   Required for AdSense approval.
+   ============================================================ */
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  max-width: 320px;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.footer-links-group h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.footer-links-group ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-links-group a {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links-group a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-copy {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+
+/* ============================================================
+   SECTION 14 — MOBILE RESPONSIVE
+   
+   What is responsive design?
+   → Your site automatically adjusts its layout
+     for different screen sizes.
+   → Mobile phones (small) → different layout than desktop (wide)
+   
+   @media = "if screen is this size, use these styles instead"
+   ============================================================ */
+
+/* Tablet and mobile — screens smaller than 768px */
+@media (max-width: 768px) {
+
+  /* Hide desktop nav links */
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Show mobile menu when open */
+  .nav-links.mobile-open {
+    display: flex;
+  }
+
+  /* Show hamburger menu button */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Stack hero buttons vertically on mobile */
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    max-width: 280px;
+  }
+
+  /* Stack footer on mobile */
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tools grid — 1 column on mobile */
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Large desktop — screens wider than 1400px */
+@media (min-width: 1400px) {
+  .tools-grid {
+    grid-template-columns: repeat(4, 1fr);  /* 4 columns on big screens */
+  }
+}
+
+
+/* ============================================================
+   SECTION 15 — UTILITY CLASSES
+   
+   Small helper classes you can add to any element.
+   ============================================================ */
+
+.text-accent  { color: var(--accent); }
+.text-muted   { color: var(--text-muted); }
+.text-center  { text-align: center; }
+.mt-1  { margin-top: 0.5rem; }
+.mt-2  { margin-top: 1rem; }
+.mt-3  { margin-top: 1.5rem; }
+.mt-4  { margin-top: 2rem; }
+.mb-1  { margin-bottom: 0.5rem; }
+.mb-2  { margin-bottom: 1rem; }
+.mb-3  { margin-bottom: 1.5rem; }
+.mb-4  { margin-bottom: 2rem; }
+.hidden { display: none; }
+
+/* Smooth fade in animation for page elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; animation-name: fadeInUp; animation-duration: 0.6s; }
+.fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; animation-name: fadeInUp; animation-duration: 0.6s; }
+.fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; animation-name: fadeInUp; animation-duration: 0.6s; }
