@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!--
+  AlternateIncomeSource.com — Homepage
+  File: index.html
+  Language: HTML (HyperText Markup Language)
+  
+  What is DOCTYPE?
+  → Tells the browser "this is a modern HTML5 page"
+  → Without it, browsers use old broken rendering mode
+  → Always the very first line of every HTML file
+-->
+
+<html lang="en" data-theme="dark">
+<!--
+  What is <html>?
+  → The root element — everything lives inside this tag
+  
+  lang="en"
+  → Tells search engines and screen readers this page is in English
+  → Helps Google rank you for English searches worldwide
+  
+  data-theme="dark"
+  → Sets dark mode as default
+  → theme.js reads this and applies correct colors
+-->
+
+<head>
+<!--
+  What is <head>?
+  → The invisible part of your page
+  → Contains information FOR the browser and search engines
+  → Nothing in <head> is visible to users
+  → But it controls SEO, speed, and appearance
+-->
+
+  <!-- ================================================
+       BASIC META TAGS
+       
+       What are meta tags?
+       → Small pieces of information about your page
+       → Search engines read these to understand your page
+       → Never visible to users but critical for ranking
+       ================================================ -->
+
+  <meta charset="UTF-8">
+  <!--
+    UTF-8 = Universal character encoding
+    Why? → Supports every language, emoji, and symbol on earth
+    Without it → foreign characters show as broken symbols
+  -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    What is viewport?
+    → Tells mobile browsers "show this page at the correct size"
+    → Without this → your site looks tiny zoomed out on phones
+    → This one line makes your site mobile-friendly
+  -->
+
+  <!-- ================================================
+       SEO META TAGS
+       These are what Google reads to rank your page
+       ================================================ -->
+
+  <title>AlternateIncomeSource — Free Tools, Free Learning, Free Earning</title>
+  <!--
+    What is title?
+    → The text shown in the browser tab
+    → Also the blue clickable link shown on Google results
+    → One of the most important SEO elements
+    → Keep it under 60 characters for best results
+  -->
+
+  <meta name="description" content="Free online tools, guides, and earning methods for everyone worldwide. No investment required. Start earning online today with zero cost.">
+  <!--
+    What is description?
+    → The grey text shown below your link on Google
+    → Tells users what your page is about before they click
+    → Keep it between 150-160 characters
+    → Does not directly affect ranking but affects click rate
+  -->
+
+  <meta name="keywords" content="free online tools, earn money online free, free earning methods, online income, free tools for everyone">
+
+  <meta name="author" content="AlternateIncomeSource">
+
+  <!-- ================================================
+       OPEN GRAPH TAGS
+       
+       What is Open Graph?
+       → Controls how your page looks when shared on
+         Facebook, WhatsApp, LinkedIn, Twitter etc.
+       → Without these → shared links look ugly and broken
+       → With these → shared links show a proper image and title
+       ================================================ -->
+
+  <meta property="og:title" content="AlternateIncomeSource — Free Tools for Everyone">
+  <meta property="og:description" content="Free tools, free learning, free earning. Zero investment. For everyone worldwide.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alternateincomesource.com">
+  <meta property="og:site_name" content="AlternateIncomeSource">
+
+  <!-- ================================================
+       FAVICON
+       
+       What is favicon?
+       → The tiny icon shown in the browser tab
+       → We will add a real image later
+       → For now this shows the default
+       ================================================ -->
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- ================================================
+       STYLESHEET LINK
+       
+       What is this?
+       → Connects your style.css file to this HTML page
+       → Without this line → page has zero styling (plain white)
+       → href = the path to your CSS file
+       ================================================ -->
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+<!--
+  What is <body>?
+  → Everything inside here is VISIBLE to users
+  → All your content, navbar, sections, footer go here
+-->
+
+  <!-- ================================================
+       NAVBAR
+       
+       What is a navbar?
+       → Navigation bar — stays fixed at top of screen
+       → Users can always click to go anywhere on your site
+       → Even when they scroll down 10 pages
+       
+       id="navbar"
+       → theme.js uses this ID to add scroll shadow effect
+       ================================================ -->
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <!-- Logo — your brand name, clicking takes user home -->
+      <a href="/" class="nav-logo">
+        Alternate<span>Income</span>Source
+        <!--
+          The <span> wraps "Income" so CSS can color it
+          with your accent color — making it pop visually
+        -->
+      </a>
+
+      <!-- Mobile hamburger button — only visible on phones -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        ☰
+      </button>
+
+      <!-- Navigation links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/school/">Free School</a></li>
+        <li><a href="/earn/">How I Earn</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+
+      <!-- Right side controls -->
+      <div class="nav-controls">
+
+        <!-- Day/Night toggle button -->
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+          🌙 Night
+          <!--
+            theme.js changes this text automatically
+            Dark mode → shows "☀️ Day"
+            Light mode → shows "🌙 Night"
+          -->
+        </button>
+
+        <!-- Palette picker button -->
+        <button class="palette-btn" id="palette-toggle" aria-label="Change color palette">
+          🎨
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================================================
+       PALETTE POPUP
+       
+       Hidden by default — appears when user clicks 🎨
+       theme.js controls opening and closing this
+       ================================================ -->
+
+  <div class="palette-popup" id="palette-popup">
+    <div class="palette-popup-title">Choose Color Theme</div>
+    <div class="palette-list" id="palette-list">
+      <!-- theme.js builds the palette buttons here automatically -->
+    </div>
+  </div>
+
+  <!-- ================================================
+       HERO SECTION
+       
+       What is a hero section?
+       → The very first thing users see when they land
+       → Must create WOW effect in 2-3 seconds
+       → Contains: animation + headline + buttons
+       ================================================ -->
+
+  <section class="hero" id="hero">
+
+    <!-- Your Core Strength Animation Lives Here -->
+    <canvas id="hero-canvas"></canvas>
+    <!--
+      What is canvas?
+      → A blank drawing area in HTML
+      → JavaScript draws your animation inside it
+      → animation.js (created in next step) draws on this canvas
+      → Without JS, canvas shows nothing — that is correct
+    -->
+
+    <!-- Small tag above headline -->
+    <div class="hero-tag fade-in">
+      ⚡ Free Tools · Free Learning · Free Earning
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="hero-title fade-in-delay-1">
+      Your <span class="highlight">Income System</span><br>
+      Starts Here
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle fade-in-delay-2">
+      Free tools, free guides, and real earning methods —
+      for everyone, worldwide. Zero investment required.
+      Start your online income journey today.
+    </p>
+
+    <!-- Call to action buttons -->
+    <div class="hero-buttons fade-in-delay-3">
+      <a href="/tools/" class="btn btn-primary">
+        ⚡ Explore Free Tools
+      </a>
+      <a href="/earn/" class="btn btn-secondary">
+        💰 How I Earn Online
+      </a>
+    </div>
+
+    <!-- Trust line below buttons -->
+    <p class="hero-trust fade-in-delay-3">
+      100% Free · No Registration · No Investment · Works Worldwide
+    </p>
+
+  </section>
+
+  <!-- ================================================
+       TOOLS SECTION
+       
+       Shows all your tools as clickable cards
+       Each card links to a dedicated tool page
+       ================================================ -->
+
+  <section class="section" id="tools">
+    <div class="container">
+
+      <!-- Section header -->
+      <div class="section-header">
+        <span class="section-label">⚙️ Free Tools</span>
+        <h2 class="section-title">Everything You Need. Completely Free.</h2>
+        <p class="section-desc">
+          Professional-grade tools for students, creators, developers,
+          and anyone who needs them — always free, always working.
+        </p>
+      </div>
+
+      <!-- Tools grid — cards go here -->
+      <div class="tools-grid" id="tools-grid">
+
+        <!-- Tool Card 1 — Word Counter -->
+        <a href="/tools/word-counter/" class="tool-card">
+          <span class="card-icon">📝</span>
+          <div class="card-title">Word Counter</div>
+          <p class="card-desc">
+            Count words, characters, sentences, and paragraphs
+            instantly. Perfect for writers and students.
+          </p>
+          <span class="card-tag">Writing</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- Tool Card 2 — Password Generator -->
+        <a href="/tools/password-generator/" class="tool-card">
+          <span class="card-icon">🔐</span>
+          <div class="card-title">Password Generator</div>
+          <p class="card-desc">
+            Generate strong, secure passwords instantly.
+            Never use a weak password again.
+          </p>
+          <span class="card-tag">Security</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- Tool Card 3 — Percentage Calculator -->
+        <a href="/tools/percentage-calculator/" class="tool-card">
+          <span class="card-icon">📊</span>
+          <div class="card-title">Percentage Calculator</div>
+          <p class="card-desc">
+            Calculate percentages, discounts, and increases
+            instantly. Simple and accurate.
+          </p>
+          <span class="card-tag">Math</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- Tool Card 4 — Color Picker -->
+        <a href="/tools/color-picker/" class="tool-card">
+          <span class="card-icon">🎨</span>
+          <div class="card-title">Color Picker</div>
+          <p class="card-desc">
+            Pick any color and get its HEX, RGB, and HSL codes
+            instantly. Perfect for designers.
+          </p>
+          <span class="card-tag">Design</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- Tool Card 5 — BMI Calculator -->
+        <a href="/tools/bmi-calculator/" class="tool-card">
+          <span class="card-icon">⚖️</span>
+          <div class="card-title">BMI Calculator</div>
+          <p class="card-desc">
+            Calculate your Body Mass Index instantly.
+            Works for all ages and units worldwide.
+          </p>
+          <span class="card-tag">Health</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+        <!-- Tool Card 6 — Coming Soon placeholder -->
+        <a href="/tools/" class="tool-card">
+          <span class="card-icon">🚀</span>
+          <div class="card-title">More Tools Coming</div>
+          <p class="card-desc">
+            New free tools added regularly.
+            Bookmark this page and check back soon.
+          </p>
+          <span class="card-tag">Coming Soon</span>
+          <span class="card-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FOOTER
+       
+       Why footer is important?
+       → Required for AdSense approval
+       → Legal pages must be linked here
+       → Every professional website has one
+       → Builds trust with visitors
+       ================================================ -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- Left side — brand info -->
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            Alternate<span>Income</span>Source
+          </a>
+          <p>
+            Free tools, free learning, free earning —
+            for everyone, worldwide. Zero investment required.
+          </p>
+        </div>
+
+        <!-- Right side — legal links (required for AdSense) -->
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/legal/privacy.html">Privacy Policy</a></li>
+            <li><a href="/legal/terms.html">Terms & Conditions</a></li>
+            <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
+            <li><a href="/legal/affiliate.html">Affiliate Disclosure</a></li>
+            <li><a href="/legal/earnings.html">Earnings Disclaimer</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2025 AlternateIncomeSource.com — All rights reserved.
+        </p>
+        <p class="footer-copy">
+          Made with ❤️ for everyone, worldwide.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================================================
+       JAVASCRIPT FILES
+       
+       Why are scripts at the BOTTOM of body?
+       → HTML loads top to bottom
+       → If script is at top, it runs before page elements exist
+       → At bottom = page loads first, then JS runs
+       → Result: faster page load, no errors
+       ================================================ -->
+
+  <!-- Theme system — day/night + palettes -->
+  <script src="assets/js/theme.js"></script>
+  <!--
+    This connects your theme.js file
+    It runs after page loads and activates:
+    → Saved theme preference
+    → Saved palette preference
+    → Toggle button functionality
+  -->
+
+  <!-- Animation — loaded last because it is heaviest -->
+  <script src="assets/js/animation.js"></script>
+  <!--
+    This will run your Core Strength hero animation
+    We create animation.js in the next step
+    For now this line just waits — no error occurs
+  -->
+
+</body>
+</html>
