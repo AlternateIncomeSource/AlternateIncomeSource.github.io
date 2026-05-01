@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<!--
+  AlternateIncomeSource.com — Blog Page
+  File: blog/index.html
+  Language: HTML + CSS
+
+  WHAT this page does:
+  → Lists all blog articles as clickable cards
+  → Each card shows title, description, date, category
+  → Clicking a card takes visitor to that article
+  → Currently shows placeholder cards you will fill later
+
+  WHY a blog matters:
+  → Every article = one more page Google can rank
+  → More pages = more search keywords covered
+  → More keywords = more worldwide visitors
+  → More visitors = more AdSense income
+  → Blog builds authority in your niche over time
+
+  HOW blog grows your site:
+  → Write 1 article per week minimum
+  → Each article answers one specific question
+  → Questions people actually search on Google
+  → Over 6 months = 24 articles = 24 entry points
+-->
+
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Free Blog — Earn Online, Free Tools & Learning | AlternateIncomeSource</title>
+
+  <meta name="description" content="Free guides and articles on earning money online, free tools, HTML CSS learning, and building websites for free. Real experience. Worldwide audience.">
+
+  <meta name="keywords" content="earn money online blog, free tools guide, learn HTML free, make money online free 2026, online earning tips">
+  <meta name="author" content="AlternateIncomeSource">
+
+  <meta property="og:title" content="Free Blog — AlternateIncomeSource">
+  <meta property="og:description" content="Real guides on earning online, free tools, and learning web skills. Zero investment. Worldwide.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alternateincomesource.com/blog/">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <style>
+    /*
+      WHAT is this style block?
+      → Page-specific CSS only for the blog page
+      → Keeps main style.css clean and shared
+
+      Blog-specific styles include:
+      → Blog card layout
+      → Category filter buttons
+      → Reading time badge
+      → Featured post styling
+    */
+
+    /* Category filter buttons */
+    .filter-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      /*
+        WHAT is font-family: inherit?
+        → Buttons have their own default font
+        → inherit = use same font as parent element
+        → Keeps everything consistent
+      */
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Blog grid layout */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Individual blog card */
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Top colored accent bar */
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        transparent
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .blog-card:hover::before { opacity: 1; }
+
+    .blog-card:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3),
+                  0 0 20px var(--accent-glow);
+    }
+
+    .blog-card-body {
+      padding: 1.5rem;
+    }
+
+    /* Category + reading time row */
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .blog-category {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .blog-read-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .blog-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 0.65rem;
+      transition: color 0.2s ease;
+    }
+
+    .blog-card:hover .blog-title {
+      color: var(--accent);
+    }
+
+    .blog-excerpt {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Bottom row — date + read more */
+    .blog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .blog-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .blog-read-link {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Featured post — larger card at top */
+    .featured-card {
+      grid-column: 1 / -1;
+      /*
+        WHAT is grid-column: 1 / -1?
+        → Makes this card span ALL columns
+        → So featured post takes full width
+        → -1 means "to the last column"
+      */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .featured-card .featured-label {
+      padding: 1.5rem 1.5rem 0;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .featured-card .blog-card-body {
+      padding: 1.5rem;
+    }
+
+    .featured-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    /* Coming soon card style */
+    .coming-soon-card {
+      border-style: dashed;
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .coming-soon-card:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: var(--border);
+    }
+
+    /* Newsletter section */
+    .newsletter-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        transparent
+      );
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        Alternate<span>Income</span>Source
+      </a>
+      <button class="hamburger" id="hamburger">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/school/">Free School</a></li>
+        <li><a href="/earn/">How I Earn</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="theme-btn" id="theme-toggle">🌙 Night</button>
+        <button class="palette-btn" id="palette-toggle">🎨</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="palette-popup" id="palette-popup">
+    <div class="palette-popup-title">Choose Color Theme</div>
+    <div class="palette-list" id="palette-list"></div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section style="padding:120px 0 60px; text-align:center;">
+    <div class="container">
+      <span class="section-label">📝 Free Blog</span>
+      <h1 style="font-size:clamp(2rem,5vw,3rem); margin:1rem 0;">
+        Real Guides.<br>
+        <span class="text-accent">Zero Fluff.</span>
+      </h1>
+      <p style="max-width:560px; margin:0 auto 2rem;
+         color:var(--text-secondary); font-size:1.1rem; line-height:1.8;">
+        Practical articles on earning online, free tools,
+        learning web skills, and building your own income
+        system — all completely free.
+      </p>
+
+      <!-- Category filters -->
+      <div class="filter-row">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Earning Online</button>
+        <button class="filter-btn">Free Tools</button>
+        <button class="filter-btn">Web Learning</button>
+        <button class="filter-btn">Free Websites</button>
+        <button class="filter-btn">AI & Tech</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BLOG ARTICLES -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="blog-grid">
+
+        <!-- FEATURED POST -->
+        <a href="/blog/earn-online-zero-investment/" class="blog-card featured-card">
+          <div class="featured-label">
+            <span class="featured-badge">⭐ Featured</span>
+            <p class="blog-category" style="display:inline-block; margin-left:0.5rem;">
+              Earning Online
+            </p>
+          </div>
+          <div class="blog-card-body">
+            <div class="featured-title">
+              How To Earn Money Online With Zero
+              Investment in 2026 — The Complete Guide
+            </div>
+            <p class="blog-excerpt">
+              After 7+ years of earning online with nothing
+              to invest, I am sharing everything that actually
+              works. No hype. No paid tools. Just honest
+              methods that work worldwide for anyone
+              with internet access.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">May 2026</span>
+              <span class="blog-read-link">Read guide →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- POST 2 -->
+        <a href="/blog/best-free-tools-2026/" class="blog-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">Free Tools</span>
+              <span class="blog-read-time">⏱ 5 min read</span>
+            </div>
+            <div class="blog-title">
+              Best Free Online Tools Every Student
+              Needs in 2026
+            </div>
+            <p class="blog-excerpt">
+              A curated list of the most useful free
+              online tools for students worldwide —
+              tested and approved. No registration.
+              No payment. Just use them instantly.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">May 2026</span>
+              <span class="blog-read-link">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- POST 3 -->
+        <a href="/blog/start-free-website/" class="blog-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">Free Websites</span>
+              <span class="blog-read-time">⏱ 8 min read</span>
+            </div>
+            <div class="blog-title">
+              How To Start a Free Website in
+              30 Minutes — No Coding Needed
+            </div>
+            <p class="blog-excerpt">
+              GitHub Pages lets anyone build and host
+              a real website completely free. I built
+              this site exactly this way. Here is the
+              exact step by step guide to do the same.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">May 2026</span>
+              <span class="blog-read-link">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- POST 4 -->
+        <a href="/blog/html-10-minutes/" class="blog-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">Web Learning</span>
+              <span class="blog-read-time">⏱ 10 min read</span>
+            </div>
+            <div class="blog-title">
+              HTML in 10 Minutes — Your Very
+              First Lesson (No Experience Needed)
+            </div>
+            <p class="blog-excerpt">
+              You do not need to be technical to
+              understand HTML. In 10 minutes you
+              will understand what HTML is, why
+              it exists, and write your first
+              working webpage.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">May 2026</span>
+              <span class="blog-read-link">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- POST 5 -->
+        <a href="/blog/what-is-google-adsense/" class="blog-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">Earning Online</span>
+              <span class="blog-read-time">⏱ 6 min read</span>
+            </div>
+            <div class="blog-title">
+              What Is Google AdSense and How
+              Do You Get Approved in 2026?
+            </div>
+            <p class="blog-excerpt">
+              AdSense is how millions of website
+              owners earn passive income from ads.
+              Here is exactly what it is, how it
+              works, and what your site needs
+              before applying.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">Coming Soon</span>
+              <span class="blog-read-link">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- POST 6 -->
+        <a href="/blog/ai-earn-free-2026/" class="blog-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">AI & Tech</span>
+              <span class="blog-read-time">⏱ 7 min read</span>
+            </div>
+            <div class="blog-title">
+              How AI Is Creating New Free Earning
+              Opportunities in 2026
+            </div>
+            <p class="blog-excerpt">
+              AI tools are now free and accessible
+              to anyone. Here is how ordinary people
+              worldwide are using free AI tools to
+              earn money online — without any
+              technical background.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">Coming Soon</span>
+              <span class="blog-read-link">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- COMING SOON PLACEHOLDER -->
+        <div class="blog-card coming-soon-card">
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-category">Coming Soon</span>
+            </div>
+            <div class="blog-title">
+              New Article Every Week
+            </div>
+            <p class="blog-excerpt">
+              Fresh guides and articles are added
+              regularly. Bookmark this page and
+              check back soon. Everything is always
+              free and practical.
+            </p>
+            <div class="blog-footer">
+              <span class="blog-date">Weekly updates</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Newsletter / bookmark prompt -->
+      <div class="newsletter-box">
+        <span style="font-size:2.5rem; display:block; margin-bottom:1rem;">
+          📬
+        </span>
+        <h3 style="font-size:1.4rem; margin-bottom:0.75rem;">
+          New articles added every week
+        </h3>
+        <p style="color:var(--text-secondary); max-width:480px;
+           margin:0 auto 1.5rem; line-height:1.7; font-size:0.95rem;">
+          Bookmark this page and come back regularly.
+          Every article is practical, honest, and
+          completely free — no email required.
+        </p>
+        <div class="hero-buttons" style="justify-content:center;">
+          <a href="/earn/" class="btn btn-primary">
+            💰 How I Earn Online
+          </a>
+          <a href="/school/" class="btn btn-secondary">
+            📚 Free School
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            Alternate<span>Income</span>Source
+          </a>
+          <p>
+            Free tools, free learning, free earning —
+            for everyone, worldwide.
+          </p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <ul>
+            <li>
+              <a href="/legal/privacy.html">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="/legal/terms.html">
+                Terms & Conditions
+              </a>
+            </li>
+            <li>
+              <a href="/legal/disclaimer.html">Disclaimer</a>
+            </li>
+            <li>
+              <a href="/legal/affiliate.html">
+                Affiliate Disclosure
+              </a>
+            </li>
+            <li>
+              <a href="/legal/earnings.html">
+                Earnings Disclaimer
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 AlternateIncomeSource.com
+          — All rights reserved.
+        </p>
+        <p class="footer-copy">
+          Made with ❤️ for everyone, worldwide.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+
+</body>
+</html>
