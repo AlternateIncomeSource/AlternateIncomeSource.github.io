@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<!--
+  AlternateIncomeSource.com — Free School Page
+  File: school/index.html
+  Language: HTML + CSS + JavaScript
+
+  WHAT this page does:
+  → Teaches HTML, CSS, JavaScript interactively
+  → User experiences the language BEFORE reading about it
+  → Live code editor — type and see results instantly
+  → Every concept explained at 5 levels simultaneously
+  → Progress tracking with achievement badges
+
+  WHY this approach works:
+  → Traditional learning = read → try → maybe understand
+  → Our approach = see → feel → try → understand → read why
+  → Curiosity is triggered BEFORE explanation begins
+  → Nobody feels stupid — every level is welcome
+  → Nobody feels bored — always something to interact with
+
+  WHO this is for:
+  → A 5 year old who sees colors change magically
+  → A student who wants to understand code
+  → A non-technical person curious about websites
+  → A developer who appreciates clean teaching
+  → Anyone on earth who can read
+-->
+
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Free School — Learn HTML CSS JavaScript Free | AlternateIncomeSource</title>
+
+  <meta name="description" content="Learn HTML, CSS, and JavaScript completely free with live interactive examples. Experience the code working before you read about it. For complete beginners worldwide.">
+
+  <meta name="keywords" content="learn HTML free, learn CSS free, learn JavaScript free, free coding school, HTML for beginners, web development free 2026">
+  <meta name="author" content="AlternateIncomeSource">
+
+  <meta property="og:title" content="Free School — Learn Web Skills Interactively">
+  <meta property="og:description" content="The world's most beginner-friendly free coding school. Experience code working before you read about it.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alternateincomesource.com/school/">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <style>
+    /*
+      WHAT is this style block?
+      → All styles specific to the school page only
+      → Main style.css handles shared styles
+      → This handles the unique interactive elements
+
+      WHAT languages are used here?
+      → CSS (Cascading Style Sheets)
+      → Controls every visual element on this page
+      → Colors, sizes, layouts, animations, transitions
+    */
+
+    /* ── PROGRESS BAR ── */
+    /*
+      WHAT is the progress bar?
+      → Shows user how many lessons they completed
+      → Fills up as they interact with each lesson
+      → Human brain wants to complete things = they keep going
+    */
+    .school-progress {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border);
+      z-index: 999;
+    }
+
+    .school-progress-fill {
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--accent-2)
+      );
+      width: 0%;
+      transition: width 0.6s ease;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* ── LESSON SECTIONS ── */
+    .lesson {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lesson:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Lesson number badge */
+    .lesson-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.85rem;
+      font-weight: 900;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .lesson-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    /* ── DEMO BOX ── */
+    /*
+      WHAT is the demo box?
+      → The interactive visual that appears FIRST
+      → User sees something happening before reading
+      → This triggers curiosity automatically
+    */
+    .demo-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .demo-header {
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Browser dot decorations (like a real browser) */
+    .demo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .demo-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+      font-family: var(--font-mono, monospace);
+    }
+
+    .demo-content {
+      padding: 2rem;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── LIVE EDITOR ── */
+    /*
+      WHAT is the live editor?
+      → Split view: left = code, right = live result
+      → User types in left panel
+      → Right panel updates INSTANTLY
+      → No save button, no compile, just instant magic
+      → This is the core of the learning experience
+
+      LANGUAGE USED: JavaScript
+      WHY JavaScript?
+      → Only JS can watch for typing events in real time
+      → Only JS can update another element's content/style
+      → CSS and HTML cannot do real-time watching
+    */
+    .editor-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border-bright);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .editor-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor-panel-header {
+      padding: 10px 16px;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* The actual editable code area */
+    .code-input {
+      background: #0a0a14;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      padding: 1.25rem;
+      border: none;
+      outline: none;
+      resize: none;
+      min-height: 180px;
+      width: 100%;
+      tab-size: 2;
+      /*
+        WHAT is font-family monospace?
+        → Monospace = every character is same width
+        → Used for code because it keeps things aligned
+        → Makes code readable and professional looking
+      */
+    }
+
+    /* The live preview panel */
+    .preview-panel {
+      background: #ffffff;
+      min-height: 180px;
+      padding: 1.25rem;
+      /*
+        WHY white background for preview?
+        → Browser default = white background
+        → This simulates what a real browser shows
+        → Visitors understand they are seeing real output
+      */
+    }
+
+    .preview-panel.dark-preview {
+      background: #0a0a14;
+    }
+
+    /* ── EXPLANATION CARDS ── */
+    /*
+      WHAT is an explanation card?
+      → Appears AFTER the demo/interaction
+      → Now visitor is curious → explanation feels rewarding
+      → Each card answers one W question (What/Why/How/When/Where/Which)
+    */
+    .explain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .explain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+    }
+
+    .explain-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .explain-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .explain-q {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .explain-a {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── LEVEL EXPLAINER ── */
+    /*
+      WHAT is the level explainer?
+      → Shows the SAME concept at 3 different levels
+      → 5 year old version → beginner version → technical version
+      → Everyone finds their level and feels included
+    */
+    .levels-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .level-tab-row {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .level-tab {
+      flex: 1;
+      padding: 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .level-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .level-content {
+      padding: 1.5rem;
+      display: none;
+    }
+
+    .level-content.active {
+      display: block;
+    }
+
+    .level-content p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* ── ACHIEVEMENT BADGE ── */
+    /*
+      WHAT is an achievement badge?
+      → Appears after user interacts with a lesson
+      → Gives a small reward feeling
+      → Encourages continuing to next lesson
+      → Builds emotional connection with your site
+    */
+    .achievement {
+      display: none;
+      background: linear-gradient(
+        135deg,
+        var(--accent-soft),
+        rgba(0,0,0,0)
+      );
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 1rem;
+      animation: achieveIn 0.5s ease;
+    }
+
+    .achievement.show {
+      display: flex;
+    }
+
+    @keyframes achieveIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .achieve-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .achieve-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .achieve-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* ── TRY IT BUTTON ── */
+    .try-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .try-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* ── MISTAKE BOX ── */
+    /*
+      WHAT is the mistake box?
+      → Shows what broken code looks like
+      → Teaches by showing what NOT to do
+      → Red = broken, green = fixed
+      → Recognizing mistakes = understanding deeply
+    */
+    .mistake-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .mistake-box,
+    .fixed-box {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .mistake-header,
+    .fixed-header {
+      padding: 8px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mistake-header {
+      background: rgba(255,64,81,0.15);
+      color: #ff4051;
+    }
+
+    .fixed-header {
+      background: rgba(0,230,118,0.15);
+      color: #00e676;
+    }
+
+    .mistake-code,
+    .fixed-code {
+      background: #0a0a14;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .mistake-code { color: #ff6b6b; }
+    .fixed-code   { color: #69ff97; }
+
+    /* ── CSS PLAYGROUND ── */
+    .css-playground {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .slider-row {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .slider-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /*
+      WHAT is input[type=range]?
+      → A slider the user can drag
+      → Changing it fires a JavaScript event
+      → JS reads the value and updates the CSS live
+
+      LANGUAGE: CSS for appearance,
+                JavaScript for the live update logic
+    */
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .slider-value {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .css-preview-box {
+      width: 100%;
+      height: 80px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: all 0.1s ease;
+      color: white;
+      font-size: 16px;
+      margin-top: 1rem;
+    }
+
+    /* ── JS COUNTER ── */
+    .js-demo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin: 1.5rem 0;
+    }
+
+    .js-counter-display {
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--accent);
+      text-shadow: 0 0 40px var(--accent-glow);
+      line-height: 1;
+      font-family: 'Courier New', monospace;
+      transition: transform 0.1s ease;
+    }
+
+    .js-counter-display.bump {
+      transform: scale(1.2);
+    }
+
+    .js-click-btn {
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #000;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 0 24px var(--accent-glow);
+      transition: all 0.15s ease;
+    }
+
+    .js-click-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .js-click-btn:active {
+      transform: scale(0.95);
+    }
+
+    .js-code-reveal {
+      background: #0a0a14;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: #69ff97;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .js-code-reveal.show { opacity: 1; }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .editor-wrap {
+        grid-template-columns: 1fr;
+      }
+      .mistake-wrap {
+        grid-template-columns: 1fr;
+      }
+      .slider-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- PROGRESS BAR (fixed at top, fills as lessons complete) -->
+  <div class="school-progress">
+    <div class="school-progress-fill" id="progress-fill"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        Alternate<span>Income</span>Source
+      </a>
+      <button class="hamburger" id="hamburger">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/school/">Free School</a></li>
+        <li><a href="/earn/">How I Earn</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="theme-btn" id="theme-toggle">🌙 Night</button>
+        <button class="palette-btn" id="palette-toggle">🎨</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="palette-popup" id="palette-popup">
+    <div class="palette-popup-title">Choose Color Theme</div>
+    <div class="palette-list" id="palette-list"></div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section style="padding:100px 0 4rem; text-align:center;">
+    <div class="container">
+      <span class="section-label">📚 Free School</span>
+      <h1 style="font-size:clamp(2rem,5vw,3rem); margin:1rem 0;">
+        Learn By
+        <span class="text-accent">Doing</span>,<br>
+        Not Just Reading.
+      </h1>
+      <p style="max-width:580px; margin:0 auto 1.5rem;
+         color:var(--text-secondary); font-size:1.05rem; line-height:1.8;">
+        Three lessons. Three languages. Zero reading before
+        you see it working. Touch it, change it, and
+        understand it before we explain why it works.
+        For absolute beginners to experienced developers —
+        everyone learns something here.
+      </p>
+
+      <!-- Lesson progress indicator -->
+      <div style="display:flex; justify-content:center;
+           gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <div id="badge-html" style="padding:8px 18px; border-radius:50px;
+             border:1px solid var(--border); font-size:0.82rem;
+             color:var(--text-muted); transition:all 0.3s ease;">
+          📄 Lesson 1 — HTML
+        </div>
+        <div id="badge-css" style="padding:8px 18px; border-radius:50px;
+             border:1px solid var(--border); font-size:0.82rem;
+             color:var(--text-muted); transition:all 0.3s ease;">
+          🎨 Lesson 2 — CSS
+        </div>
+        <div id="badge-js" style="padding:8px 18px; border-radius:50px;
+             border:1px solid var(--border); font-size:0.82rem;
+             color:var(--text-muted); transition:all 0.3s ease;">
+          ⚡ Lesson 3 — JavaScript
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       LESSON 1 — HTML
+  ════════════════════════════════════════ -->
+  <section class="lesson" id="lesson-html">
+    <div class="container" style="max-width:900px;">
+
+      <div class="lesson-number">1</div>
+      <div class="lesson-label">Lesson One — The Skeleton</div>
+      <h2 class="lesson-title">
+        What Is HTML?
+      </h2>
+      <p style="color:var(--text-secondary); font-size:1rem;
+         line-height:1.8; max-width:620px; margin-bottom:2rem;">
+        Before we explain anything —
+        <strong style="color:var(--text-primary);">
+          try it first.
+        </strong>
+        Type anything inside the code on the left.
+        Watch what happens on the right.
+        Then scroll down to understand why.
+      </p>
+
+      <!-- LIVE HTML EDITOR -->
+      <div class="editor-wrap">
+        <div class="editor-panel">
+          <div class="editor-panel-header">
+            ✏️ Edit the HTML code here
+          </div>
+          <textarea class="code-input" id="html-input"
+            spellcheck="false"
+            oninput="runHTML()"
+          ><h1>Hello World</h1>
+<p>I am learning HTML right now.</p>
+<p>Change this text and see it update!</p>
+<button>I am a button</button></textarea>
+        </div>
+        <div class="editor-panel">
+          <div class="editor-panel-header">
+            👁️ Live result — updates as you type
+          </div>
+          <div class="preview-panel" id="html-preview"></div>
+        </div>
+      </div>
+
+      <!-- Achievement after editing -->
+      <div class="achievement" id="achieve-html">
+        <span class="achieve-icon">🏆</span>
+        <div>
+          <div class="achieve-title">
+            HTML Explorer Unlocked!
+          </div>
+          <div class="achieve-desc">
+            You just edited real HTML.
+            You are already a web developer.
+          </div>
+        </div>
+      </div>
+
+      <!-- Level explanations -->
+      <h3 style="margin:2.5rem 0 1rem; font-size:1.1rem;">
+        Understand it at your level:
+      </h3>
+
+      <div class="levels-box">
+        <div class="level-tab-row">
+          <button class="level-tab active"
+            onclick="switchLevel('html','child',this)">
+            👶 Simple
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('html','beginner',this)">
+            📖 Beginner
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('html','tech',this)">
+            💻 Technical
+          </button>
+        </div>
+        <div class="level-content active" id="html-child">
+          <p>
+            🧱 <strong style="color:var(--text-primary);">
+            HTML is like LEGO bricks for websites.</strong>
+            Each piece you add builds part of the page.
+            A heading brick. A paragraph brick.
+            A button brick. Stack them together
+            and you have a webpage!
+          </p>
+        </div>
+        <div class="level-content" id="html-beginner">
+          <p>
+            HTML tells the browser
+            <strong style="color:var(--text-primary);">
+            WHAT to show on the page.</strong>
+            A heading. A paragraph. A button. An image.
+            Each piece of content gets a tag — like a label —
+            that tells the browser "this is a heading"
+            or "this is a button."
+            Without HTML the browser has no idea
+            what anything is.
+          </p>
+        </div>
+        <div class="level-content" id="html-tech">
+          <p>
+            <strong style="color:var(--text-primary);">
+            HTML (HyperText Markup Language)</strong>
+            is the standard markup language for web documents.
+            Created in 1993 by Tim Berners-Lee.
+            It uses a system of elements represented by tags
+            to structure content semantically.
+            The browser parses the HTML document into a DOM
+            (Document Object Model) tree which CSS and
+            JavaScript then interact with.
+          </p>
+        </div>
+      </div>
+
+      <!-- W Questions -->
+      <div class="explain-grid">
+        <div class="explain-card">
+          <span class="explain-icon">❓</span>
+          <div class="explain-q">WHAT language is this?</div>
+          <div class="explain-a">
+            HTML — HyperText Markup Language.
+            Not a programming language.
+            A markup language — it labels content,
+            it does not calculate or think.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">🤔</span>
+          <div class="explain-q">WHY does HTML exist?</div>
+          <div class="explain-a">
+            Without HTML, a browser sees raw text.
+            No headings. No structure. No buttons.
+            HTML gives meaning to content so browsers
+            know how to display each piece.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">⚙️</span>
+          <div class="explain-q">HOW does it work?</div>
+          <div class="explain-a">
+            Tags come in pairs — opening and closing.
+            Content goes between them.
+            &lt;h1&gt;Hello&lt;/h1&gt; = big heading.
+            The browser reads them top to bottom.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">📍</span>
+          <div class="explain-q">WHERE does HTML go?</div>
+          <div class="explain-a">
+            Inside a file ending in .html
+            Always named index.html for homepages.
+            Browser automatically loads this file
+            when someone visits your website address.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">🕐</span>
+          <div class="explain-q">WHEN do you use it?</div>
+          <div class="explain-a">
+            Always. Every webpage ever built uses HTML.
+            It is always the FIRST file you create.
+            Before CSS (design) and JS (logic).
+            HTML = foundation. Always first.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">⚠️</span>
+          <div class="explain-q">Common mistakes</div>
+          <div class="explain-a">
+            Forgetting the closing tag.
+            Missing the / in closing tag.
+            Wrong spelling of tag name.
+            These are shown below so you
+            recognise them instantly.
+          </div>
+        </div>
+      </div>
+
+      <!-- MISTAKE vs FIXED -->
+      <h3 style="margin:2rem 0 1rem; font-size:1.05rem;">
+        🔴 Broken vs ✅ Fixed — spot the difference:
+      </h3>
+      <div class="mistake-wrap">
+        <div class="mistake-box">
+          <div class="mistake-header">❌ Broken code</div>
+          <div class="mistake-code">
+&lt;h1&gt;Hello World
+&lt;p&gt;Missing closing tags
+&lt;buttn&gt;Wrong spelling</div>
+        </div>
+        <div class="fixed-box">
+          <div class="fixed-header">✅ Fixed code</div>
+          <div class="fixed-code">
+&lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;p&gt;Closing tag added&lt;/p&gt;
+&lt;button&gt;Correct spelling&lt;/button&gt;</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       LESSON 2 — CSS
+  ════════════════════════════════════════ -->
+  <section class="lesson" id="lesson-css">
+    <div class="container" style="max-width:900px;">
+
+      <div class="lesson-number">2</div>
+      <div class="lesson-label">Lesson Two — The Painter</div>
+      <h2 class="lesson-title">What Is CSS?</h2>
+      <p style="color:var(--text-secondary); font-size:1rem;
+         line-height:1.8; max-width:620px; margin-bottom:2rem;">
+        <strong style="color:var(--text-primary);">
+          Drag the sliders first.
+        </strong>
+        Watch the box change. Then we explain
+        what just happened and why.
+      </p>
+
+      <!-- CSS PLAYGROUND -->
+      <div class="css-playground">
+        <div class="slider-row">
+          <span class="slider-label">Background color</span>
+          <input type="range" id="css-hue"
+            min="0" max="360" value="180"
+            oninput="updateCSS()">
+          <span class="slider-value" id="hue-val">
+            hue: 180
+          </span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Text size</span>
+          <input type="range" id="css-size"
+            min="12" max="48" value="20"
+            oninput="updateCSS()">
+          <span class="slider-value" id="size-val">
+            20px
+          </span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-label">Corner radius</span>
+          <input type="range" id="css-radius"
+            min="0" max="50" value="10"
+            oninput="updateCSS()">
+          <span class="slider-value" id="radius-val">
+            10px
+          </span>
+        </div>
+
+        <div class="css-preview-box" id="css-preview">
+          You are controlling CSS right now!
+        </div>
+
+        <!-- Live CSS code display -->
+        <div style="margin-top:1rem; background:#0a0a14;
+             border-radius:10px; padding:1rem;
+             font-family:'Courier New',monospace;
+             font-size:12px; line-height:1.8; color:#69ff97;">
+          <span style="color:#888;">/* Live CSS —
+            updates as you drag */</span><br>
+          .box {<br>
+          &nbsp;&nbsp;background: <span id="code-bg">
+            hsl(180, 70%, 50%)</span>;<br>
+          &nbsp;&nbsp;font-size: <span id="code-size">
+            20px</span>;<br>
+          &nbsp;&nbsp;border-radius: <span id="code-radius">
+            10px</span>;<br>
+          }
+        </div>
+      </div>
+
+      <!-- Achievement -->
+      <div class="achievement" id="achieve-css">
+        <span class="achieve-icon">🎨</span>
+        <div>
+          <div class="achieve-title">CSS Artist Unlocked!</div>
+          <div class="achieve-desc">
+            You just styled a webpage with CSS.
+            Every website you see was built exactly this way.
+          </div>
+        </div>
+      </div>
+
+      <!-- Level explanations -->
+      <div class="levels-box" style="margin-top:2rem;">
+        <div class="level-tab-row">
+          <button class="level-tab active"
+            onclick="switchLevel('css','child',this)">
+            👶 Simple
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('css','beginner',this)">
+            📖 Beginner
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('css','tech',this)">
+            💻 Technical
+          </button>
+        </div>
+        <div class="level-content active" id="css-child">
+          <p>
+            🎨
+            <strong style="color:var(--text-primary);">
+            CSS is the painter of your webpage.</strong>
+            HTML builds the walls.
+            CSS decides what color they are,
+            how big the windows look,
+            and how round the corners should be.
+            Without CSS, every website looks
+            like a plain black and white document.
+          </p>
+        </div>
+        <div class="level-content" id="css-beginner">
+          <p>
+            CSS tells the browser
+            <strong style="color:var(--text-primary);">
+            HOW things should look.</strong>
+            Colors, sizes, fonts, spacing, animations.
+            You write rules like:
+            "make this heading blue"
+            or "make this button round."
+            The browser reads your rules and
+            applies them to the HTML structure.
+          </p>
+        </div>
+        <div class="level-content" id="css-tech">
+          <p>
+            <strong style="color:var(--text-primary);">
+            CSS (Cascading Style Sheets)</strong>
+            is a style sheet language used to describe
+            presentation of HTML documents.
+            The "cascading" refers to the priority
+            system that resolves conflicts when
+            multiple rules apply to the same element.
+            Specificity, inheritance, and the
+            cascade determine the final computed style.
+          </p>
+        </div>
+      </div>
+
+      <!-- W Questions -->
+      <div class="explain-grid">
+        <div class="explain-card">
+          <span class="explain-icon">❓</span>
+          <div class="explain-q">WHAT language is this?</div>
+          <div class="explain-a">
+            CSS — Cascading Style Sheets.
+            Not a programming language.
+            A styling language — it describes
+            appearance, not logic.
+            Written in style.css file.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">🤔</span>
+          <div class="explain-q">WHY does CSS exist?</div>
+          <div class="explain-a">
+            HTML has no design by default.
+            Without CSS every site is black text
+            on white background. CSS separates
+            design from structure — change your
+            design without touching your content.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">⚙️</span>
+          <div class="explain-q">HOW does it work?</div>
+          <div class="explain-a">
+            You select an element and give it rules.
+            h1 { color: blue; font-size: 32px; }
+            Selector = what to style.
+            Property = what to change.
+            Value = what to change it to.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">📍</span>
+          <div class="explain-q">WHERE does CSS go?</div>
+          <div class="explain-a">
+            In a separate file called style.css
+            linked to your HTML with a
+            &lt;link&gt; tag in the &lt;head&gt;.
+            Or inside &lt;style&gt; tags.
+            Separate file is better for larger sites.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       LESSON 3 — JAVASCRIPT
+  ════════════════════════════════════════ -->
+  <section class="lesson" id="lesson-js">
+    <div class="container" style="max-width:900px;">
+
+      <div class="lesson-number">3</div>
+      <div class="lesson-label">Lesson Three — The Brain</div>
+      <h2 class="lesson-title">What Is JavaScript?</h2>
+      <p style="color:var(--text-secondary); font-size:1rem;
+         line-height:1.8; max-width:620px; margin-bottom:2rem;">
+        <strong style="color:var(--text-primary);">
+          Click the button below. Just click it.
+        </strong>
+        See what happens. We explain the
+        3 lines that made it work afterwards.
+      </p>
+
+      <!-- JS COUNTER DEMO -->
+      <div class="js-demo-area">
+        <div class="js-counter-display" id="js-count">0</div>
+        <button class="js-click-btn" id="js-btn"
+          onclick="clickCount()">
+          Click me!
+        </button>
+        <p style="font-size:0.85rem; color:var(--text-muted);
+           text-align:center;">
+          Click 10 times for a surprise 🎉
+        </p>
+
+        <!-- Code reveal after first click -->
+        <div class="js-code-reveal" id="js-reveal">
+<span style="color:#888;">// JavaScript — the 3 lines that power this button</span>
+let count = 0;
+
+button.addEventListener('click', function() {
+  count = count + 1;
+  display.textContent = count;
+});
+        </div>
+      </div>
+
+      <!-- Achievement -->
+      <div class="achievement" id="achieve-js">
+        <span class="achieve-icon">⚡</span>
+        <div>
+          <div class="achieve-title">
+            JavaScript Developer Unlocked!
+          </div>
+          <div class="achieve-desc">
+            You just triggered real JavaScript.
+            Every interactive website runs on this.
+          </div>
+        </div>
+      </div>
+
+      <!-- Level explanations -->
+      <div class="levels-box" style="margin-top:2rem;">
+        <div class="level-tab-row">
+          <button class="level-tab active"
+            onclick="switchLevel('js','child',this)">
+            👶 Simple
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('js','beginner',this)">
+            📖 Beginner
+          </button>
+          <button class="level-tab"
+            onclick="switchLevel('js','tech',this)">
+            💻 Technical
+          </button>
+        </div>
+        <div class="level-content active" id="js-child">
+          <p>
+            ⚡
+            <strong style="color:var(--text-primary);">
+            JavaScript is the brain of the website.</strong>
+            HTML is the body. CSS is the clothes.
+            JavaScript is the brain that REACTS
+            when you do something.
+            Click a button → something happens.
+            Type something → page responds.
+            That is JavaScript doing its job.
+          </p>
+        </div>
+        <div class="level-content" id="js-beginner">
+          <p>
+            JavaScript makes websites
+            <strong style="color:var(--text-primary);">
+            react to what you do.</strong>
+            Without it, clicking a button does nothing.
+            Without it, forms cannot submit.
+            Without it, menus cannot open and close.
+            JavaScript watches for your actions
+            and responds to them — instantly.
+          </p>
+        </div>
+        <div class="level-content" id="js-tech">
+          <p>
+            <strong style="color:var(--text-primary);">
+            JavaScript</strong> is a high-level,
+            interpreted programming language.
+            It is the only language browsers execute
+            natively — making it the world's most
+            widely deployed programming language.
+            It enables dynamic content, event handling,
+            DOM manipulation, async operations,
+            and full application logic in the browser.
+          </p>
+        </div>
+      </div>
+
+      <!-- W Questions -->
+      <div class="explain-grid">
+        <div class="explain-card">
+          <span class="explain-icon">❓</span>
+          <div class="explain-q">WHAT language is this?</div>
+          <div class="explain-a">
+            JavaScript — JS for short.
+            A real programming language.
+            The ONLY language that runs
+            natively inside every browser
+            on earth. No installation needed.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">🤔</span>
+          <div class="explain-q">WHY does JS exist?</div>
+          <div class="explain-a">
+            HTML and CSS are static — they show
+            content but cannot react to users.
+            JavaScript adds intelligence.
+            It watches, listens, and responds
+            to everything the user does.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">⚙️</span>
+          <div class="explain-q">HOW does it work?</div>
+          <div class="explain-a">
+            JS listens for events — click,
+            type, scroll, move mouse.
+            When an event happens it runs
+            a function. The function changes
+            something on the page.
+            Event → Function → Change.
+          </div>
+        </div>
+        <div class="explain-card">
+          <span class="explain-icon">📍</span>
+          <div class="explain-q">WHERE does JS go?</div>
+          <div class="explain-a">
+            In a separate .js file linked
+            at the BOTTOM of your HTML body.
+            Why bottom? Page loads first,
+            then JS runs. Faster page load.
+            No errors from missing elements.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPLETION SECTION -->
+  <section style="padding:5rem 0; text-align:center;"
+    id="completion">
+    <div class="container">
+      <div id="complete-banner" style="display:none;">
+        <div style="font-size:4rem; margin-bottom:1rem;">🎓</div>
+        <h2 style="font-size:clamp(1.5rem,4vw,2.5rem);
+             margin-bottom:1rem;">
+          You Just Learned
+          <span class="text-accent">3 Languages.</span>
+        </h2>
+        <p style="color:var(--text-secondary); max-width:520px;
+           margin:0 auto 2rem; line-height:1.8;">
+          HTML builds structure. CSS adds design.
+          JavaScript adds intelligence. These 3 languages
+          built every website you have ever visited.
+          Now you understand how they work.
+        </p>
+        <div class="hero-buttons" style="justify-content:center;">
+          <a href="/tools/" class="btn btn-primary">
+            ⚙️ Use Free Tools
+          </a>
+          <a href="/earn/" class="btn btn-secondary">
+            💰 Start Earning Online
+          </a>
+        </div>
+      </div>
+
+      <div id="progress-prompt">
+        <p style="color:var(--text-muted); font-size:0.95rem;">
+          ↑ Complete all 3 lessons above to unlock your
+          certificate 🎓
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            Alternate<span>Income</span>Source
+          </a>
+          <p>
+            Free tools, free learning, free earning —
+            for everyone, worldwide.
+          </p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <ul>
+            <li>
+              <a href="/legal/privacy.html">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="/legal/terms.html">
+                Terms & Conditions
+              </a>
+            </li>
+            <li>
+              <a href="/legal/disclaimer.html">Disclaimer</a>
+            </li>
+            <li>
+              <a href="/legal/affiliate.html">
+                Affiliate Disclosure
+              </a>
+            </li>
+            <li>
+              <a href="/legal/earnings.html">
+                Earnings Disclaimer
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 AlternateIncomeSource.com
+          — All rights reserved.
+        </p>
+        <p class="footer-copy">
+          Made with ❤️ for everyone, worldwide.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/theme.js"></script>
+
+  <script>
+    /*
+      WHAT is this script block?
+      → All JavaScript that powers the school interactions
+      → Live HTML editor, CSS sliders, JS counter
+      → Progress tracking, achievements, level tabs
+
+      LANGUAGE: JavaScript
+      WHY JavaScript here?
+      → Only JS can watch for typing and update live
+      → Only JS can track which lessons are completed
+      → Only JS can show/hide elements dynamically
+      → CSS and HTML cannot do any of this
+
+      HOW it works:
+      → Each function is called by user interaction
+      → Results update the page instantly
+      → Progress is tracked and saved
+    */
+
+    /* ── PROGRESS TRACKING ── */
+    /*
+      WHAT is this?
+      → Tracks which of the 3 lessons user interacted with
+      → Updates the progress bar and badge colors
+      → Shows completion banner when all 3 done
+    */
+    let lessonsDone = { html: false, css: false, js: false };
+
+    function markLesson(lesson) {
+      if (lessonsDone[lesson]) return;
+      lessonsDone[lesson] = true;
+
+      /* Update lesson badge color */
+      const badge = document.getElementById('badge-' + lesson);
+      if (badge) {
+        badge.style.borderColor = 'var(--accent)';
+        badge.style.color = 'var(--accent)';
+        badge.style.background = 'var(--accent-soft)';
+      }
+
+      /* Update progress bar */
+      const done = Object.values(lessonsDone)
+        .filter(Boolean).length;
+      const pct = (done / 3) * 100;
+      document.getElementById('progress-fill')
+        .style.width = pct + '%';
+
+      /* Show completion when all done */
+      if (done === 3) {
+        setTimeout(function() {
+          document.getElementById('complete-banner')
+            .style.display = 'block';
+          document.getElementById('progress-prompt')
+            .style.display = 'none';
+        }, 800);
+      }
+    }
+
+    /* ── LIVE HTML EDITOR ── */
+    /*
+      WHAT does this do?
+      → Reads the textarea content
+      → Puts it directly into the preview div as HTML
+      → Browser renders it instantly
+      → Result updates with every keystroke
+
+      WHY innerHTML?
+      → innerHTML tells browser to render the string as HTML
+      → Not just text — actual working HTML elements
+    */
+    function runHTML() {
+      const input = document.getElementById('html-input');
+      const preview = document.getElementById('html-preview');
+      preview.innerHTML = input.value;
+      /* Show achievement on first edit */
+      document.getElementById('achieve-html')
+        .classList.add('show');
+      markLesson('html');
+    }
+
+    /* Run once on page load to show initial state */
+    runHTML();
+
+    /* ── CSS PLAYGROUND ── */
+    /*
+      WHAT does this do?
+      → Reads 3 slider values (hue, size, radius)
+      → Builds CSS property values from them
+      → Applies them to the preview box
+      → Updates the live code display simultaneously
+    */
+    function updateCSS() {
+      const hue    = document.getElementById('css-hue').value;
+      const size   = document.getElementById('css-size').value;
+      const radius = document.getElementById('css-radius').value;
+
+      /* Update the preview box */
+      const box = document.getElementById('css-preview');
+      box.style.background =
+        'hsl(' + hue + ', 70%, 45%)';
+      box.style.fontSize   = size + 'px';
+      box.style.borderRadius = radius + 'px';
+
+      /* Update the value labels */
+      document.getElementById('hue-val').textContent =
+        'hue: ' + hue;
+      document.getElementById('size-val').textContent =
+        size + 'px';
+      document.getElementById('radius-val').textContent =
+        radius + 'px';
+
+      /* Update the live code display */
+      document.getElementById('code-bg').textContent =
+        'hsl(' + hue + ', 70%, 45%)';
+      document.getElementById('code-size').textContent =
+        size + 'px';
+      document.getElementById('code-radius').textContent =
+        radius + 'px';
+
+      /* Show achievement */
+      document.getElementById('achieve-css')
+        .classList.add('show');
+      markLesson('css');
+    }
+
+    /* Run once to set initial state */
+    updateCSS();
+
+    /* ── JS CLICK COUNTER ── */
+    /*
+      WHAT does this do?
+      → Counts how many times button is clicked
+      → Animates the number
+      → Reveals code after first click
+      → Shows confetti effect at 10 clicks
+
+      WHY this specific demo?
+      → Simplest possible JS example
+      → Immediate visible result
+      → Satisfying to click
+      → Curiosity makes them want to see the code
+    */
+    let clickTotal = 0;
+
+    function clickCount() {
+      clickTotal++;
+
+      /* Update display */
+      const display =
+        document.getElementById('js-count');
+      display.textContent = clickTotal;
+
+      /* Bump animation */
+      display.classList.add('bump');
+      setTimeout(function() {
+        display.classList.remove('bump');
+      }, 100);
+
+      /* Reveal code on first click */
+      if (clickTotal === 1) {
+        document.getElementById('js-reveal')
+          .classList.add('show');
+        document.getElementById('achieve-js')
+          .classList.add('show');
+        markLesson('js');
+      }
+
+      /* Confetti surprise at 10 clicks */
+      if (clickTotal === 10) {
+        celebrate();
+        document.getElementById('js-btn')
+          .textContent = '🎉 Amazing!';
+      }
+
+      /* Change color at milestones */
+      if (clickTotal % 5 === 0 && clickTotal > 0) {
+        display.style.color =
+          'hsl(' + (clickTotal * 36) + ', 80%, 60%)';
+      }
+    }
+
+    /* Simple confetti effect */
+    function celebrate() {
+      const colors = [
+        '#00ffcc','#ff4081','#ffb300',
+        '#aa00ff','#00e676'
+      ];
+      for (let i = 0; i < 60; i++) {
+        setTimeout(function() {
+          const dot = document.createElement('div');
+          const color =
+            colors[Math.floor(Math.random() * colors.length)];
+          dot.style.cssText =
+            'position:fixed;width:8px;height:8px;' +
+            'border-radius:50%;pointer-events:none;' +
+            'z-index:9999;background:' + color + ';' +
+            'left:' + Math.random() * 100 + 'vw;' +
+            'top:-10px;' +
+            'animation:fall ' +
+            (1 + Math.random()) + 's linear forwards;';
+          document.body.appendChild(dot);
+          setTimeout(function() { dot.remove(); }, 2000);
+        }, i * 30);
+      }
+
+      /* Add fall animation */
+      if (!document.getElementById('fall-style')) {
+        const s = document.createElement('style');
+        s.id = 'fall-style';
+        s.textContent =
+          '@keyframes fall{' +
+          'to{transform:translateY(110vh) rotate(720deg);' +
+          'opacity:0;}}';
+        document.head.appendChild(s);
+      }
+    }
+
+    /* ── LEVEL TABS ── */
+    /*
+      WHAT does this do?
+      → Switches between Simple / Beginner / Technical
+        explanation for each lesson
+      → Shows the selected content, hides the others
+      → Updates which tab looks "active"
+    */
+    function switchLevel(lesson, level, btn) {
+      /* Hide all content panels for this lesson */
+      const contents = btn.closest('.levels-box')
+        .querySelectorAll('.level-content');
+      contents.forEach(function(c) {
+        c.classList.remove('active');
+      });
+
+      /* Remove active from all tabs in this group */
+      const tabs = btn.closest('.level-tab-row')
+        .querySelectorAll('.level-tab');
+      tabs.forEach(function(t) {
+        t.classList.remove('active');
+      });
+
+      /* Show selected content */
+      document.getElementById(lesson + '-' + level)
+        .classList.add('active');
+
+      /* Mark selected tab */
+      btn.classList.add('active');
+    }
+
+  </script>
+
+</body>
+</html>
