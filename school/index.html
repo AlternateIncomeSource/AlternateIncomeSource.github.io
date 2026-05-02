@@ -1378,111 +1378,367 @@ button.addEventListener('click', function() {
       → Progress is tracked and saved
     */
 
-    /* ── PROGRESS TRACKING ── */
-    /*
-      WHAT is this?
-      → Tracks which of the 3 lessons user interacted with
-      → Updates the progress bar and badge colors
-      → Shows completion banner when all 3 done
-    */
+    /* ============================================================
+       PROGRESS TRACKING — FIXED VERSION
+
+       WHAT changed from before?
+       → Before: only interaction triggered progress
+       → Now: SCROLLING into a lesson also triggers progress
+       → This uses IntersectionObserver
+
+       WHAT is IntersectionObserver?
+       → A browser tool that watches when an element
+         appears on screen
+       → When lesson section scrolls into view
+         it automatically marks that lesson as seen
+       → Much better UX — user does not have to
+         interact to get credit for viewing
+    ============================================================ */
+
     let lessonsDone = { html: false, css: false, js: false };
 
     function markLesson(lesson) {
       if (lessonsDone[lesson]) return;
       lessonsDone[lesson] = true;
 
-      /* Update lesson badge color */
+      /* Light up the lesson badge */
       const badge = document.getElementById('badge-' + lesson);
       if (badge) {
         badge.style.borderColor = 'var(--accent)';
         badge.style.color = 'var(--accent)';
         badge.style.background = 'var(--accent-soft)';
+        badge.style.boxShadow = '0 0 12px var(--accent-glow)';
       }
 
       /* Update progress bar */
       const done = Object.values(lessonsDone)
         .filter(Boolean).length;
       const pct = (done / 3) * 100;
-      document.getElementById('progress-fill')
-        .style.width = pct + '%';
+      const fill = document.getElementById('progress-fill');
+      if (fill) fill.style.width = pct + '%';
 
-      /* Show completion when all done */
+      /* Show completion when all 3 done */
       if (done === 3) {
         setTimeout(function() {
-          document.getElementById('complete-banner')
-            .style.display = 'block';
-          document.getElementById('progress-prompt')
-            .style.display = 'none';
-        }, 800);
+          const banner = document.getElementById('complete-banner');
+          const prompt = document.getElementById('progress-prompt');
+          if (banner) banner.style.display = 'block';
+          if (prompt) prompt.style.display = 'none';
+          /* Celebrate completion */
+          celebrate();
+        }, 600);
       }
     }
 
-    /* ── LIVE HTML EDITOR ── */
-    /*
-      WHAT does this do?
-      → Reads the textarea content
-      → Puts it directly into the preview div as HTML
-      → Browser renders it instantly
-      → Result updates with every keystroke
+    /* ============================================================
+       INTERSECTION OBSERVER — SCROLL DETECTION
 
-      WHY innerHTML?
-      → innerHTML tells browser to render the string as HTML
-      → Not just text — actual working HTML elements
-    */
+       WHAT is this?
+       → Watches when each lesson section appears on screen
+       → As soon as 30% of a lesson is visible = mark it done
+       → User gets credit for SEEING the lesson, not just
+         clicking inside it
+
+       WHY 30% threshold?
+       → 100% = user must scroll entire lesson into view (too strict)
+       → 10% = triggers too early before they read anything
+       → 30% = they have clearly reached and started the lesson
+    ============================================================ */
+
+    const lessonObserver = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            if (id === 'lesson-html') markLesson('html');
+            if (id === 'lesson-css')  markLesson('css');
+            if (id === 'lesson-js')   markLesson('js');
+          }
+        });
+      },
+      { threshold: 0.3 }
+      /*
+        WHAT is threshold: 0.3?
+        → 0 = trigger as soon as 1 pixel is visible
+        → 0.3 = trigger when 30% of element is visible
+        → 1 = trigger only when 100% visible
+      */
+    );
+
+    /* Observe all 3 lesson sections */
+    const lessonHTML = document.getElementById('lesson-html');
+    const lessonCSS  = document.getElementById('lesson-css');
+    const lessonJS   = document.getElementById('lesson-js');
+
+    if (lessonHTML) lessonObserver.observe(lessonHTML);
+    if (lessonCSS)  lessonObserver.observe(lessonCSS);
+    if (lessonJS)   lessonObserver.observe(lessonJS);
+
+    /* ── LIVE HTML EDITOR ── */
     function runHTML() {
-      const input = document.getElementById('html-input');
+      const input   = document.getElementById('html-input');
       const preview = document.getElementById('html-preview');
+      if (!input || !preview) return;
       preview.innerHTML = input.value;
-      /* Show achievement on first edit */
-      document.getElementById('achieve-html')
-        .classList.add('show');
-      markLesson('html');
+      const ach = document.getElementById('achieve-html');
+      if (ach) ach.classList.add('show');
     }
 
-    /* Run once on page load to show initial state */
+    /* Run once on load to show initial preview */
     runHTML();
 
     /* ── CSS PLAYGROUND ── */
-    /*
-      WHAT does this do?
-      → Reads 3 slider values (hue, size, radius)
-      → Builds CSS property values from them
-      → Applies them to the preview box
-      → Updates the live code display simultaneously
-    */
     function updateCSS() {
-      const hue    = document.getElementById('css-hue').value;
-      const size   = document.getElementById('css-size').value;
-      const radius = document.getElementById('css-radius').value;
+      const hue    = document.getElementById('css-hue');
+      const size   = document.getElementById('css-size');
+      const radius = document.getElementById('css-radius');
+      if (!hue || !size || !radius) return;
 
-      /* Update the preview box */
+      const h = hue.value;
+      const s = size.value;
+      const r = radius.value;
+
       const box = document.getElementById('css-preview');
-      box.style.background =
-        'hsl(' + hue + ', 70%, 45%)';
-      box.style.fontSize   = size + 'px';
-      box.style.borderRadius = radius + 'px';
+      if (box) {
+        box.style.background    = 'hsl(' + h + ',70%,45%)';
+        box.style.fontSize      = s + 'px';
+        box.style.borderRadius  = r + 'px';
+      }
 
-      /* Update the value labels */
-      document.getElementById('hue-val').textContent =
-        'hue: ' + hue;
-      document.getElementById('size-val').textContent =
-        size + 'px';
-      document.getElementById('radius-val').textContent =
-        radius + 'px';
+      const hv = document.getElementById('hue-val');
+      const sv = document.getElementById('size-val');
+      const rv = document.getElementById('radius-val');
+      if (hv) hv.textContent = 'hue: ' + h;
+      if (sv) sv.textContent = s + 'px';
+      if (rv) rv.textContent = r + 'px';
 
-      /* Update the live code display */
-      document.getElementById('code-bg').textContent =
-        'hsl(' + hue + ', 70%, 45%)';
-      document.getElementById('code-size').textContent =
-        size + 'px';
-      document.getElementById('code-radius').textContent =
-        radius + 'px';
+      const cb = document.getElementById('code-bg');
+      const cs = document.getElementById('code-size');
+      const cr = document.getElementById('code-radius');
+      if (cb) cb.textContent = 'hsl(' + h + ', 70%, 45%)';
+      if (cs) cs.textContent = s + 'px';
+      if (cr) cr.textContent = r + 'px';
 
-      /* Show achievement */
-      document.getElementById('achieve-css')
-        .classList.add('show');
-      markLesson('css');
+      const ach = document.getElementById('achieve-css');
+      if (ach) ach.classList.add('show');
     }
+
+    /* Run once on load */
+    updateCSS();
+
+    /* ── JS CLICK COUNTER ── */
+    let clickTotal = 0;
+
+    function clickCount() {
+      clickTotal++;
+
+      const display = document.getElementById('js-count');
+      if (display) {
+        display.textContent = clickTotal;
+        display.classList.add('bump');
+        setTimeout(function() {
+          display.classList.remove('bump');
+        }, 100);
+      }
+
+      /* Reveal code on first click */
+      if (clickTotal === 1) {
+        const reveal = document.getElementById('js-reveal');
+        if (reveal) reveal.classList.add('show');
+        const ach = document.getElementById('achieve-js');
+        if (ach) ach.classList.add('show');
+      }
+
+      /* Confetti at 10 clicks */
+      if (clickTotal === 10) {
+        celebrate();
+        const btn = document.getElementById('js-btn');
+        if (btn) btn.textContent = '🎉 Amazing!';
+      }
+
+      /* Color change at milestones */
+      if (display && clickTotal % 5 === 0 && clickTotal > 0) {
+        display.style.color =
+          'hsl(' + (clickTotal * 36) + ', 80%, 60%)';
+      }
+    }
+
+    /* ── CONFETTI CELEBRATION ── */
+    function celebrate() {
+      const colors = [
+        '#00ffcc','#ff4081','#ffb300',
+        '#aa00ff','#00e676'
+      ];
+      for (let i = 0; i < 60; i++) {
+        setTimeout(function() {
+          const dot = document.createElement('div');
+          const c = colors[Math.floor(
+            Math.random() * colors.length
+          )];
+          dot.style.cssText =
+            'position:fixed;width:8px;height:8px;' +
+            'border-radius:50%;pointer-events:none;' +
+            'z-index:9999;background:' + c + ';' +
+            'left:' + (Math.random() * 100) + 'vw;' +
+            'top:-10px;' +
+            'animation:fall ' +
+            (1 + Math.random()) + 's linear forwards;';
+          document.body.appendChild(dot);
+          setTimeout(function() { dot.remove(); }, 2500);
+        }, i * 30);
+      }
+      if (!document.getElementById('fall-style')) {
+        const s = document.createElement('style');
+        s.id = 'fall-style';
+        s.textContent =
+          '@keyframes fall{to{' +
+          'transform:translateY(110vh) rotate(720deg);' +
+          'opacity:0;}}';
+        document.head.appendChild(s);
+      }
+    }
+
+    /* ── LEVEL TABS ── */
+    function switchLevel(lesson, level, btn) {
+      const box = btn.closest('.levels-box');
+      if (!box) return;
+
+      box.querySelectorAll('.level-content')
+        .forEach(function(c) {
+          c.classList.remove('active');
+        });
+
+      btn.closest('.level-tab-row')
+        .querySelectorAll('.level-tab')
+        .forEach(function(t) {
+          t.classList.remove('active');
+        });
+
+      const target = document.getElementById(
+        lesson + '-' + level
+      );
+      if (target) target.classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* ── SEO TEXT SECTIONS ── */
+    /*
+      WHAT is this?
+      → Adds text content after each lesson
+      → Google reads this text to understand what page is about
+      → More relevant text = better chance of ranking
+      → Added dynamically so it does not clutter the HTML
+    */
+    const seoSections = [
+      {
+        after: 'lesson-html',
+        content: `
+          <div style="max-width:700px;margin:3rem auto 0;
+               padding:0 1rem;">
+            <h3 style="font-size:1.1rem;margin-bottom:1rem;
+                 color:var(--text-primary);">
+              HTML — The Foundation of Every Website
+            </h3>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">
+              HTML is the foundation of every website on
+              the internet. It defines the structure of a
+              page using elements such as headings,
+              paragraphs, buttons, images, and links.
+              Every web developer in the world — from
+              beginner to expert — uses HTML every day.
+            </p>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">
+              When you visit any website, your browser
+              reads an HTML file and converts it into a
+              visible page. Without HTML there would be
+              no structure — only plain text with no
+              formatting, no layout, and no interaction.
+            </p>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;font-size:0.95rem;">
+              Beginners should start with simple tags —
+              headings, paragraphs, and buttons —
+              then move on to links, images, and forms.
+              The live editor above is the fastest way
+              to build that understanding.
+            </p>
+          </div>
+        `
+      },
+      {
+        after: 'lesson-css',
+        content: `
+          <div style="max-width:700px;margin:3rem auto 0;
+               padding:0 1rem;">
+            <h3 style="font-size:1.1rem;margin-bottom:1rem;
+                 color:var(--text-primary);">
+              CSS — What Makes Websites Beautiful
+            </h3>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">
+              CSS controls how every website looks.
+              Colors, fonts, spacing, layouts, animations —
+              all of it is CSS. Without CSS every website
+              would be plain black text on a white background.
+              CSS is what separates a professional-looking
+              site from a plain document.
+            </p>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;font-size:0.95rem;">
+              CSS works by selecting HTML elements and
+              applying rules to them. Change the color.
+              Change the size. Add rounded corners.
+              The sliders above show exactly how CSS
+              properties control the visual appearance
+              of elements in real time.
+            </p>
+          </div>
+        `
+      },
+      {
+        after: 'lesson-js',
+        content: `
+          <div style="max-width:700px;margin:3rem auto 0;
+               padding:0 1rem;">
+            <h3 style="font-size:1.1rem;margin-bottom:1rem;
+                 color:var(--text-primary);">
+              JavaScript — The Language That Makes
+              Websites React
+            </h3>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;margin-bottom:1rem;font-size:0.95rem;">
+              JavaScript is the only programming language
+              that runs natively inside every browser
+              on earth. It is what makes websites
+              interactive. Without JavaScript, clicking
+              a button would do nothing. Forms could
+              not submit. Menus could not open.
+              Nothing would respond to the user.
+            </p>
+            <p style="color:var(--text-secondary);
+               line-height:1.8;font-size:0.95rem;">
+              Every major website in the world —
+              from Google to YouTube to online shops —
+              runs JavaScript. Learning even the basics
+              of JavaScript opens enormous opportunities
+              for building tools, websites, and
+              income online.
+            </p>
+          </div>
+        `
+      }
+    ];
+
+    /* Insert SEO sections after each lesson */
+    seoSections.forEach(function(sec) {
+      const lesson = document.getElementById(sec.after);
+      if (!lesson) return;
+      const div = document.createElement('div');
+      div.innerHTML = sec.content;
+      lesson.appendChild(div);
+    });
 
     /* Run once to set initial state */
     updateCSS();
