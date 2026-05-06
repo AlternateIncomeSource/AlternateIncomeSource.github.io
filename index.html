@@ -404,7 +404,7 @@
       <!-- Bottom bar -->
       <div class="footer-bottom">
         <p class="footer-copy">
-          © 2025 AlternateIncomeSource.com — All rights reserved.
+         © <span id="yr"></span> AlternateIncomeSource.com — All rights reserved.
         </p>
         <p class="footer-copy">
           Made with ❤️ for everyone, worldwide.
@@ -442,5 +442,10 @@
     For now this line just waits — no error occurs
   -->
 
+<script>
+    var y=document.getElementById('yr');
+    if(y) y.textContent=new Date().getFullYear();
+  </script>
+  
 </body>
 </html>
