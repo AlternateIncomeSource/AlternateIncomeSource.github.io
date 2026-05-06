@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  AlternateIncomeSource.com — XML Sitemap
+  File: sitemap.xml (lives in ROOT of repository)
+  ============================================================
+
+  WHAT IS THIS FILE?
+  → A map of every page on your website
+  → Google reads this to discover all your pages
+  → Without this Google finds pages slowly
+  → With this Google finds all pages fast
+
+  WHY IS IT XML FORMAT?
+  → XML (Extensible Markup Language) is a language
+    that machines read perfectly
+  → Like HTML is for browsers
+  → XML is for robots like Google
+
+  HOW DOES GOOGLE USE THIS?
+  → Google visits this URL:
+    www.alternateincomesource.com/sitemap.xml
+  → Reads every URL listed here
+  → Adds each page to its index (search results)
+  → Checks back every few days for new pages
+
+  HOW TO ADD A NEW PAGE IN THE FUTURE:
+  → Copy the 5 lines between <url> and </url>
+  → Paste them at the bottom before </urlset>
+  → Change the <loc> to your new page URL
+  → Change <lastmod> to today's date (YYYY-MM-DD)
+  → Commit the file
+  → Done in 30 seconds
+
+  EXAMPLE OF ADDING NEW PAGE:
+  <url>
+    <loc>https://www.alternateincomesource.com/blog/new-article/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  ============================================================
+-->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!--
+    PRIORITY EXPLAINED:
+    1.0 = most important page (homepage only)
+    0.8 = very important pages
+    0.7 = normal important pages (blog articles)
+    0.5 = less important pages (legal pages)
+
+    CHANGEFREQ EXPLAINED:
+    weekly  = Google checks this page every week
+    monthly = Google checks this page every month
+    yearly  = Google checks this page once a year
+  -->
+
+  <!-- ══════════════════════════════════════
+       HOMEPAGE — Most important page
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://www.alternateincomesource.com/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+       MAIN NAVIGATION PAGES
+  ══════════════════════════════════════ -->
+
+  <url>
+    <loc>https://www.alternateincomesource.com/about/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/earn/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/school/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/blog/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+       BLOG ARTICLES
+       Add new articles here as you write them
+  ══════════════════════════════════════ -->
+
+  <url>
+    <loc>https://www.alternateincomesource.com/blog/earn-from-task-sites/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!--
+    Priority 0.9 for this article because:
+    → Contains referral links (earns you money)
+    → High search volume keywords
+    → Most important earning article on the site
+  -->
+
+  <url>
+    <loc>https://www.alternateincomesource.com/blog/free-domain-from-earnings/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+       TOOLS SECTION
+       Add each tool page here when built
+       Example for future:
+       <url>
+         <loc>https://www.alternateincomesource.com/tools/word-counter/</loc>
+         <lastmod>2026-05-04</lastmod>
+         <changefreq>yearly</changefreq>
+         <priority>0.7</priority>
+       </url>
+  ══════════════════════════════════════ -->
+
+  <!-- ══════════════════════════════════════
+       LEGAL PAGES
+       Priority 0.4 — important but not for ranking
+  ══════════════════════════════════════ -->
+
+  <url>
+    <loc>https://www.alternateincomesource.com/legal/privacy.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/legal/terms.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/legal/disclaimer.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/legal/affiliate.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.alternateincomesource.com/legal/earnings.html</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!--
+    ══════════════════════════════════════
+    HOW TO ADD NEW PAGES IN FUTURE
+    (copy these 5 lines exactly):
+
+    <url>
+      <loc>https://www.alternateincomesource.com/YOUR-PAGE-URL/</loc>
+      <lastmod>YYYY-MM-DD</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    PASTE ABOVE THE </urlset> LINE BELOW
+    ══════════════════════════════════════
+  -->
+
+</urlset>
