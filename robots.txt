@@ -1,0 +1,35 @@
+# ============================================================
+# AlternateIncomeSource.com — robots.txt
+# File: robots.txt (lives in ROOT of repository)
+# ============================================================
+#
+# WHAT IS THIS FILE?
+# → Instructions for Google and all search engines
+# → Tells them what to read and what to skip
+# → Points them to your sitemap automatically
+#
+# WHY IS IT IMPORTANT?
+# → Google finds your sitemap instantly
+# → Crawls your site more efficiently
+# → Faster indexing = faster ranking
+#
+# THE # SYMBOL means comment — Google ignores these lines
+# Only the actual instructions below matter to Google
+# ============================================================
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Tell Google exactly where your sitemap is
+# This is the most important line in this file
+# Google reads this and immediately goes to check your sitemap
+Sitemap: https://www.alternateincomesource.com/sitemap.xml
+
+# Block search engines from indexing legal pages
+# WHY: Legal pages should not appear in Google search results
+# They should only be found via footer links on your site
+Disallow: /legal/
+
+# That is all this file needs
+# Simple. Clean. Effective.
