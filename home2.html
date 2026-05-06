@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home 2 — AlternateIncomeSource | Digital Income Blueprint</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Drink the Internet. Build Your Income. Discover how to earn online with AI, blogging, freelancing and digital tools — starting from absolute zero. No investment needed.">
+  <meta name="keywords" content="alternate income source, earn online India, AI tools money, blogging income, freelancing guide, digital marketing, passive income, side hustle">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="AlternateIncomeSource">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AlternateIncomeSource — Drink the Internet, Build Your Income">
+  <meta property="og:description" content="Learn how to earn online using AI, blogging, freelancing and digital tools — even starting from zero.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alternateincomesource.com/home2.html">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.alternateincomesource.com/home2.html">
+
+  <!-- Fonts: Orbitron for headings, Syne for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== ROOT VARIABLES ===== */
+    :root {
+      --bg:           #050915;
+      --bg2:          #0a1228;
+      --violet:       #7c3aed;
+      --violet-glow:  rgba(124, 58, 237, 0.4);
+      --violet-light: #a78bfa;
+      --teal:         #06d6a0;
+      --teal-glow:    rgba(6, 214, 160, 0.35);
+      --pink:         #f72585;
+      --pink-glow:    rgba(247, 37, 133, 0.35);
+      --text:         #e2e8f0;
+      --muted:        #64748b;
+      --border:       rgba(124, 58, 237, 0.25);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ===== PARTICLE CANVAS (fixed background) ===== */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      height: 64px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5, 9, 21, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--violet-light);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    .nav-logo em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(124,58,237,0.12); }
+    .nav-links a.active {
+      color: var(--violet-light);
+      background: rgba(124,58,237,0.18);
+      border: 1px solid rgba(124,58,237,0.4);
+    }
+    .nav-links .nav-cta {
+      background: var(--violet);
+      color: #fff !important;
+      margin-left: 6px;
+    }
+    .nav-links .nav-cta:hover {
+      background: #6d28d9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--violet-glow);
+    }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 64px;
+      left: 0; right: 0;
+      background: rgba(5,9,21,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 20px;
+      z-index: 99;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a.active {
+      color: var(--violet-light);
+      background: rgba(124,58,237,0.15);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 40px 70px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    /* ===== HERO LEFT ===== */
+    .hero-left {}
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6,214,160,0.08);
+      border: 1px solid rgba(6,214,160,0.3);
+      color: var(--teal);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:0.4;transform:scale(0.7)}
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', monospace;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 22px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-title .t1 { display: block; color: var(--text); }
+    .hero-title .t2 { display: block; color: var(--violet-light); }
+    .hero-title .t3 {
+      display: block;
+      background: linear-gradient(90deg, var(--teal), var(--violet-light), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200%;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      0%{background-position:0% 50%}
+      100%{background-position:200% 50%}
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #8899bb;
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 460px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--violet);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      pointer-events: none;
+    }
+    .btn-primary:hover {
+      background: #6d28d9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px var(--violet-glow);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--violet-light);
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: 1px solid rgba(124,58,237,0.45);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      background: rgba(124,58,237,0.1);
+      border-color: var(--violet);
+      transform: translateY(-2px);
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 36px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat { display: flex; flex-direction: column; gap: 3px; }
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* ===== HERO RIGHT (photo + nodes) ===== */
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    .photo-scene {
+      position: relative;
+      width: 400px;
+      height: 500px;
+    }
+
+    /* Ambient glow behind photo */
+    .photo-glow {
+      position: absolute;
+      inset: -60px;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(124,58,237,0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 20%, rgba(6,214,160,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 30% at 20% 80%, rgba(247,37,133,0.15) 0%, transparent 60%);
+      animation: glowBreathe 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes glowBreathe {
+      0%,100%{transform:scale(1);opacity:0.7}
+      50%{transform:scale(1.08);opacity:1}
+    }
+
+    /* The actual photo */
+    .hero-photo {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 1.5px solid rgba(124,58,237,0.45);
+      animation: floatPhoto 7s ease-in-out infinite;
+      box-shadow:
+        0 0 0 1px rgba(124,58,237,0.15),
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 80px rgba(124,58,237,0.2);
+    }
+    @keyframes floatPhoto {
+      0%,100%{transform:translateY(0px)}
+      50%{transform:translateY(-14px)}
+    }
+
+    /* Photo scan line effect */
+    .photo-scan {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      border-radius: 28px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .photo-scan::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(124,58,237,0.04) 50%,
+        transparent 100%);
+      animation: scanLine 6s ease-in-out infinite 2s;
+    }
+    @keyframes scanLine {
+      0%{top:-30%}
+      100%{top:130%}
+    }
+
+    /* Corner accents on photo */
+    .corner {
+      position: absolute;
+      z-index: 4;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+    }
+    .corner-tl { top: 8px; left: 8px; border-top: 2px solid var(--teal); border-left: 2px solid var(--teal); border-radius: 4px 0 0 0; }
+    .corner-tr { top: 8px; right: 8px; border-top: 2px solid var(--teal); border-right: 2px solid var(--teal); border-radius: 0 4px 0 0; }
+    .corner-bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--teal); border-left: 2px solid var(--teal); border-radius: 0 0 0 4px; }
+    .corner-br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--teal); border-right: 2px solid var(--teal); border-radius: 0 0 4px 0; }
+
+    /* ===== FLOATING INCOME NODES ===== */
+    .nodes-wrap {
+      position: absolute;
+      inset: -90px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .inode {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .inode.visible { opacity: 1; }
+
+    .inode-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(8, 14, 32, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      backdrop-filter: blur(12px);
+      position: relative;
+    }
+    /* Rotating ring border */
+    .inode-circle::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--ring-color, var(--violet)) 0deg,
+        transparent 180deg,
+        var(--ring-color, var(--violet)) 360deg
+      );
+      animation: spin 4s linear infinite;
+      opacity: 0.8;
+    }
+    .inode-circle::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 50%;
+      background: rgba(8,14,32,0.95);
+    }
+    .inode-circle span {
+      position: relative;
+      z-index: 2;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .inode-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #7c8aa0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    /* Ring color variants */
+    .inode.violet  { --ring-color: var(--violet); }
+    .inode.teal    { --ring-color: var(--teal); }
+    .inode.pink    { --ring-color: var(--pink); }
+    .inode.amber   { --ring-color: #f59e0b; }
+
+    /* Individual node positions + float animations */
+    .n1  { top: 8%;  left: -8%;  animation: nfloat1 8.0s ease-in-out infinite 0.0s; }
+    .n2  { top: -4%; left: 28%;  animation: nfloat2 7.0s ease-in-out infinite 0.4s; }
+    .n3  { top: 3%;  right: -4%; animation: nfloat3 9.0s ease-in-out infinite 0.8s; }
+    .n4  { top: 30%; right:-18%; animation: nfloat4 7.5s ease-in-out infinite 1.2s; }
+    .n5  { bottom:26%; right:-14%; animation: nfloat5 8.5s ease-in-out infinite 1.6s; }
+    .n6  { bottom:6%;  right: 6%; animation: nfloat6 7.2s ease-in-out infinite 2.0s; }
+    .n7  { bottom:2%;  left: 22%; animation: nfloat7 8.8s ease-in-out infinite 0.6s; }
+    .n8  { bottom:22%; left:-15%; animation: nfloat8 7.8s ease-in-out infinite 1.0s; }
+    .n9  { top: 52%; left:-20%;  animation: nfloat9 9.2s ease-in-out infinite 0.2s; }
+
+    @keyframes nfloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-7px,-11px)} }
+    @keyframes nfloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(5px,-9px)} }
+    @keyframes nfloat3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(9px,-7px)} }
+    @keyframes nfloat4 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(11px,5px)} }
+    @keyframes nfloat5 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(9px,9px)} }
+    @keyframes nfloat6 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(5px,11px)} }
+    @keyframes nfloat7 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3px,10px)} }
+    @keyframes nfloat8 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-11px,5px)} }
+    @keyframes nfloat9 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-13px,0)} }
+
+    /* ===== TAGLINE BAR ===== */
+    .tagbar {
+      position: relative;
+      z-index: 1;
+      padding: 18px 40px;
+      background: rgba(10,18,40,0.8);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .tag-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #7c8eaa;
+    }
+    .tag-icon { font-size: 1.15rem; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 28px 40px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(124,58,237,0.1);
+      line-height: 1.8;
+    }
+    footer a { color: var(--violet-light); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+
+    /* ===== KEYFRAME: fadeUp ===== */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 90px 20px 50px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+      }
+      .hero-right { order: -1; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .stats-row { justify-content: center; }
+
+      .photo-scene {
+        width: 280px;
+        height: 350px;
+        margin: 0 auto;
+      }
+      .nodes-wrap { inset: -60px; }
+      .inode-circle { width: 38px; height: 38px; }
+      .inode-circle span { font-size: 1rem; }
+      .inode-label { font-size: 0.52rem; }
+
+      .tagbar { gap: 18px; padding: 14px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 1.55rem; }
+      .btn-primary, .btn-outline { padding: 11px 20px; font-size: 0.85rem; }
+      .photo-scene { width: 240px; height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== PARTICLES ====== -->
+<canvas id="particles"></canvas>
+
+<!-- ====== NAVIGATION ====== -->
+<nav>
+  <a href="/" class="nav-logo">AIS<em>.</em></a>
+
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/home2.html" class="active">Home 2</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/earn/">Earn</a></li>
+    <li><a href="/school/">School</a></li>
+    <li><a href="/earn/" class="nav-cta">Start Free →</a></li>
+  </ul>
+
+  <button class="hamburger" onclick="toggleMobile()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/home2.html" class="active">Home 2</a>
+  <a href="/about/">About</a>
+  <a href="/blog/">Blog</a>
+  <a href="/earn/">Earn</a>
+  <a href="/school/">School</a>
+  <a href="/earn/" style="color:#a78bfa;font-weight:700;margin-top:6px;">→ Start Free</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- LEFT: TEXT -->
+    <div class="hero-left">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Digital Income Blueprint
+      </div>
+
+      <h1 class="hero-title">
+        <span class="t1">Drink the Internet.</span>
+        <span class="t2">Build Real Income.</span>
+        <span class="t3">Be Your Own Boss.</span>
+      </h1>
+
+      <p class="hero-desc">
+        I started from zero — no degree, no technical skills, no capital.
+        Just the internet, hunger to learn, and the right tools.
+        Now I share everything so <strong>YOU</strong> can build your own income machine too.
+      </p>
+
+      <div class="hero-btns">
+        <a href="/earn/" class="btn-primary">🚀 Explore Income Sources</a>
+        <a href="/about/" class="btn-outline">👋 My Story</a>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">10+</span>
+          <span class="stat-lbl">Income Sources</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">₹0</span>
+          <span class="stat-lbl">To Start</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-lbl">Beginner Friendly</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: PHOTO + NODES -->
+    <div class="hero-right">
+      <div class="photo-scene">
+        <!-- Ambient glow -->
+        <div class="photo-glow"></div>
+
+        <!--
+          ============================================================
+          IMPORTANT: Rename YOUR photo file to:  my-photo.png
+          Then put it in the SAME folder as this home2.html file.
+          ============================================================
+        -->
+        <img src="my-photo.png"
+             alt="AlternateIncomeSource — Drinking The Internet World"
+             class="hero-photo"
+             loading="eager">
+
+        <!-- Scan line + corners (decorative UI frame) -->
+        <div class="photo-scan"></div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- FLOATING INCOME NODES -->
+        <div class="nodes-wrap">
+
+          <div class="inode violet n1">
+            <div class="inode-circle"><span>🤖</span></div>
+            <span class="inode-label">AI Tools</span>
+          </div>
+
+          <div class="inode amber n2">
+            <div class="inode-circle"><span>₿</span></div>
+            <span class="inode-label">Bitcoin</span>
+          </div>
+
+          <div class="inode teal n3">
+            <div class="inode-circle"><span>✍️</span></div>
+            <span class="inode-label">Blogging</span>
+          </div>
+
+          <div class="inode violet n4">
+            <div class="inode-circle"><span>🎯</span></div>
+            <span class="inode-label">Affiliate</span>
+          </div>
+
+          <div class="inode pink n5">
+            <div class="inode-circle"><span>▶️</span></div>
+            <span class="inode-label">YouTube</span>
+          </div>
+
+          <div class="inode teal n6">
+            <div class="inode-circle"><span>💼</span></div>
+            <span class="inode-label">Freelancing</span>
+          </div>
+
+          <div class="inode pink n7">
+            <div class="inode-circle"><span>📱</span></div>
+            <span class="inode-label">Social Media</span>
+          </div>
+
+          <div class="inode violet n8">
+            <div class="inode-circle"><span>📈</span></div>
+            <span class="inode-label">Marketing</span>
+          </div>
+
+          <div class="inode teal n9">
+            <div class="inode-circle"><span>🛒</span></div>
+            <span class="inode-label">eCommerce</span>
+          </div>
+
+        </div><!-- /nodes-wrap -->
+      </div><!-- /photo-scene -->
+    </div><!-- /hero-right -->
+
+  </div><!-- /hero-inner -->
+</section>
+
+<!-- ====== TAGLINE BAR ====== -->
+<div class="tagbar">
+  <div class="tag-item">
+    <span class="tag-icon">🌱</span>
+    Zero Investment · Endless Possibilities
+  </div>
+  <div class="tag-item">
+    <span class="tag-icon">🎯</span>
+    Learn. Apply. Earn. Repeat.
+  </div>
+  <div class="tag-item">
+    <span class="tag-icon">👑</span>
+    Be Your Own Boss
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <p>
+    © 2025 <a href="/">AlternateIncomeSource.com</a> &nbsp;·&nbsp;
+    <a href="/legal/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="/legal/terms.html">Terms</a> &nbsp;·&nbsp;
+    <a href="/legal/affiliate.html">Affiliate Disclosure</a> &nbsp;·&nbsp;
+    <a href="/legal/disclaimer.html">Disclaimer</a>
+  </p>
+  <p style="margin-top:6px;font-size:0.76rem;color:#3d4a5c;">
+    Built with ❤️ from India &nbsp;·&nbsp; Drinking the Internet one sip at a time 🌐
+  </p>
+</footer>
+
+<!-- ====== SCRIPTS ====== -->
+<script>
+// ─── PARTICLE BACKGROUND ───────────────────────────────────────────────────
+const canvas = document.getElementById('particles');
+const ctx    = canvas.getContext('2d');
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['#7c3aed','#06d6a0','#f72585','#a78bfa','#06d6a0'];
+const ptcs = Array.from({length: 90}, () => ({
+  x:  Math.random() * window.innerWidth,
+  y:  Math.random() * window.innerHeight,
+  vx: (Math.random() - 0.5) * 0.28,
+  vy: (Math.random() - 0.5) * 0.28,
+  r:  Math.random() * 1.4 + 0.4,
+  color: COLORS[Math.floor(Math.random() * COLORS.length)],
+  opacity: Math.random() * 0.45 + 0.08
+}));
+
+function tick() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw connections
+  for (let i = 0; i < ptcs.length; i++) {
+    for (let j = i + 1; j < ptcs.length; j++) {
+      const dx = ptcs[i].x - ptcs[j].x;
+      const dy = ptcs[i].y - ptcs[j].y;
+      const d  = Math.hypot(dx, dy);
+      if (d < 115) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(100,58,220,${0.12*(1-d/115)})`;
+        ctx.lineWidth   = 0.5;
+        ctx.moveTo(ptcs[i].x, ptcs[i].y);
+        ctx.lineTo(ptcs[j].x, ptcs[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw & move particles
+  ptcs.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + Math.round(p.opacity*255).toString(16).padStart(2,'0');
+    ctx.fill();
+  });
+
+  requestAnimationFrame(tick);
+}
+tick();
+
+// ─── MOBILE MENU ────────────────────────────────────────────────────────────
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ─── NODE ENTRANCE ANIMATION ─────────────────────────────────────────────────
+const nodes = document.querySelectorAll('.inode');
+nodes.forEach((node, i) => {
+  node.style.transform = 'scale(0.4)';
+  setTimeout(() => {
+    node.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(.34,1.56,.64,1)';
+    node.classList.add('visible');
+    node.style.transform  = 'scale(1)';
+  }, 700 + i * 130);
+});
+</script>
+
+</body>
+</html>
