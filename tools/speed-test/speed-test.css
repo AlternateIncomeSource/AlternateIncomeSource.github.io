@@ -1,0 +1,489 @@
+/* ============================================================
+   AlternateIncomeSource.com — Speed Test CSS
+   File: tools/speed-test/speed-test.css
+
+   WHAT THIS FILE DOES:
+   → Controls ALL visual design for the speed test page
+   → Colors, sizes, layouts, animations — all here
+   → Does NOT affect any other page on your site
+
+   HOW TO EDIT IN FUTURE:
+   → Change gauge color     → find "--st-accent" and edit
+   → Change card look       → find ".st-card" section
+   → Change layout/spacing  → find the section you want
+   → Change animations      → find "@keyframes" sections
+
+   NOTE: Colors use var(--accent) and other CSS variables
+   from your main style.css — so palette switching (cyan,
+   purple, gold etc) automatically works on this page too.
+   ============================================================ */
+
+
+/* ============================================================
+   PAGE WRAPPER
+   Centers and pads all page content below the navbar
+   ============================================================ */
+.st-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 110px 1.25rem 4rem;
+}
+
+
+/* ============================================================
+   BREADCRUMB
+   The "Home › Tools › Speed Test" navigation trail
+   ============================================================ */
+.st-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+}
+
+.st-breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.st-breadcrumb a:hover {
+  color: var(--accent);
+}
+
+.st-breadcrumb span {
+  color: var(--text-muted);
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.st-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.st-header h1 {
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin: 0.6rem 0;
+  color: var(--text-primary);
+}
+
+.st-header-sub {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   GAUGE STAGE
+   The container holding the circular speedometer
+   ============================================================ */
+.st-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The SVG canvas that JavaScript draws the arc into */
+.st-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+
+/* ============================================================
+   DECORATIVE ORBIT RING
+   Slowly spinning dashed ring behind the gauge for visual depth
+   ============================================================ */
+.st-orbit-ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  animation: st-spin 22s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes st-spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ============================================================
+   GAUGE CENTER TEXT
+   The number, unit (Mbps) and phase label shown inside gauge
+   ============================================================ */
+.st-gauge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* The large speed number e.g. "47.3" */
+.st-big-num {
+  font-size: clamp(2.4rem, 10vw, 3.4rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--text-primary);
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* "Mbps" label below the number */
+.st-unit {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  letter-spacing: 0.04em;
+}
+
+/* Phase status e.g. "Measuring download..." */
+.st-phase {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  min-height: 1.1em;
+  transition: opacity 0.3s ease;
+}
+
+
+/* ============================================================
+   START BUTTON
+   ============================================================ */
+.st-btn-wrap {
+  text-align: center;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.st-btn {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #02020A;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 28px var(--accent-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.st-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 42px var(--accent-glow);
+}
+
+.st-btn:active {
+  transform: translateY(0);
+}
+
+.st-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.st-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+
+/* ============================================================
+   STATUS MESSAGES
+   ============================================================ */
+
+/* Summary message shown after test completes */
+.st-meta {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  min-height: 1.3em;
+}
+
+/* Error message shown if test fails */
+.st-error {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #FF6B6B;
+  margin-top: 0.3rem;
+  min-height: 1.1em;
+}
+
+
+/* ============================================================
+   SPEED RESULT CARDS
+   Download / Upload / Ping cards shown after test runs
+   ============================================================ */
+.st-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Each individual result card */
+.st-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.3rem 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.st-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Colored top-edge line that slides in on hover */
+.st-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.st-card:hover::before {
+  transform: scaleX(1);
+}
+
+.st-card-icon {
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.st-card-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.st-card-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.st-card-unit {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   IP ADDRESS & PROVIDER INFO CARDS
+   Shown below the speed cards
+   ============================================================ */
+.st-info-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.st-info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  transition: border-color 0.25s ease;
+}
+
+.st-info-card:hover {
+  border-color: var(--accent);
+}
+
+.st-info-icon {
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.st-info-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+/* The actual IP address / provider name text */
+.st-info-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+
+/* ============================================================
+   EXPLANATION / SEO CONTENT SECTION
+   ============================================================ */
+.st-explain {
+  margin-top: 3rem;
+}
+
+.st-explain h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 2rem 0 0.8rem;
+}
+
+.st-explain h2:first-child {
+  margin-top: 0;
+}
+
+.st-explain p {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.97rem;
+  margin-bottom: 1rem;
+}
+
+/* Speed rating comparison table */
+.st-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.st-table th,
+.st-table td {
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+}
+
+.st-table th {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.st-table td {
+  color: var(--text-secondary);
+}
+
+/* FAQ items */
+.st-faq {
+  border-top: 1px solid var(--border);
+  padding: 1.1rem 0;
+}
+
+.st-faq h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.45rem;
+}
+
+.st-faq p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.st-faq a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.st-faq a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   EXPLORE MORE / INTERNAL LINKS SECTION
+   ============================================================ */
+.st-next {
+  margin-top: 3rem;
+}
+
+.st-next h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.st-next-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE SCREENS
+   Below 640px wide (most phones)
+   ============================================================ */
+@media (max-width: 640px) {
+
+  /* Stack speed cards vertically on phones */
+  .st-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack info cards vertically on phones */
+  .st-info-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack explore cards vertically on phones */
+  .st-next-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Slightly smaller gauge on small phones */
+  .st-stage {
+    max-width: 260px;
+  }
+
+}
