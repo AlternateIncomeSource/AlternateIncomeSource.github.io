@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<!--
+  AlternateIncomeSource.com — Internet Speed Test
+  File: tools/speed-test/index.html
+
+  WHAT THIS FILE DOES:
+  → Only contains the PAGE STRUCTURE (HTML)
+  → No design code here (that is in speed-test.css)
+  → No logic code here (that is in speed-test.js)
+  → This is the file GitHub Pages serves to visitors
+
+  HOW TO EDIT IN FUTURE:
+  → Change page text / labels → edit THIS file
+  → Change colors / design → edit speed-test.css
+  → Change how the test works → edit speed-test.js
+
+  FOLDER STRUCTURE ON GITHUB:
+  tools/
+  └── speed-test/
+      ├── index.html       ← you are here
+      ├── speed-test.css   ← all design
+      └── speed-test.js    ← all logic
+-->
+<html lang="en" data-theme="dark">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO TITLE — what appears on Google and browser tab -->
+  <title>Free Internet Speed Test — Check Download, Upload & Ping | AlternateIncomeSource</title>
+
+  <!-- SEO DESCRIPTION — what appears under your link on Google -->
+  <meta name="description" content="Free internet speed test. Check your real download speed, upload speed, ping, IP address and internet provider instantly. No app, no registration, works worldwide.">
+
+  <!-- KEYWORDS — helps search engines understand this page -->
+  <meta name="keywords" content="free internet speed test, check internet speed online, download speed test, upload speed test, ping test, check my IP address, find internet provider, no registration speed test">
+
+  <meta name="author" content="AlternateIncomeSource">
+
+  <!-- ROBOTS — tells Google to index this page -->
+  <meta name="robots" content="index, follow">
+
+  <!-- CANONICAL — tells Google the official URL of this page -->
+  <link rel="canonical" href="https://www.alternateincomesource.com/tools/speed-test/">
+
+  <!-- OPEN GRAPH — controls how this page looks when shared on WhatsApp, Facebook etc -->
+  <meta property="og:title" content="Free Internet Speed Test — AlternateIncomeSource">
+  <meta property="og:description" content="Check your real download speed, upload speed, ping, IP address and internet provider. 100% free, no registration, works worldwide.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alternateincomesource.com/tools/speed-test/">
+  <meta property="og:site_name" content="AlternateIncomeSource">
+
+  <!--
+    SCHEMA MARKUP (JSON-LD)
+    This is what tells AI engines like ChatGPT, Perplexity, Claude, Gemini
+    exactly what this page is — so they recommend it when users search.
+    DO NOT REMOVE OR EDIT unless you know what you are doing.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Internet Speed Test",
+    "url": "https://www.alternateincomesource.com/tools/speed-test/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A free browser-based internet speed test that measures real download speed, upload speed, ping, IP address and internet service provider with no registration required.",
+    "featureList": [
+      "Real download speed measurement",
+      "Real upload speed measurement",
+      "Ping and latency measurement",
+      "IP address detection",
+      "Internet service provider detection"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlternateIncomeSource",
+      "url": "https://www.alternateincomesource.com"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does this internet speed test work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool downloads and uploads real data using your browser, times exactly how long it takes, and converts that into Megabits per second. It also sends quick signals to measure ping (how fast your connection responds), and detects your public IP address and internet service provider automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this speed test free and accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This speed test is completely free, requires no registration, and uses real network measurements. Results can vary slightly between tests because network conditions change moment to moment — this is normal for all speed tests."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good internet speed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For browsing and video calls, 10 to 25 Mbps download is comfortable. For HD streaming, 25 Mbps or higher is recommended. For 4K streaming or multiple devices, 100 Mbps or higher is ideal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find my IP address?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your public IP address is shown automatically when you run this speed test. It is the address your internet provider assigns to your connection and is visible to websites you visit."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- YOUR SITE'S MAIN CSS — already exists on your GitHub -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+
+  <!-- THIS TOOL'S OWN CSS — only styles for the speed test page -->
+  <link rel="stylesheet" href="speed-test.css">
+
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       Same navbar as every other page on your site.
+       To change navbar links → edit this section here.
+       ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Alternate<span>Income</span>Source</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/school/">Free School</a></li>
+        <li><a href="/earn/">How I Earn</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle day night mode">🌙 Night</button>
+        <button class="palette-btn" id="palette-toggle" aria-label="Change color palette">🎨</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Palette popup — same as every other page -->
+  <div class="palette-popup" id="palette-popup">
+    <div class="palette-popup-title">Choose Color Theme</div>
+    <div class="palette-list" id="palette-list"></div>
+  </div>
+
+  <!-- ============================================================
+       MAIN PAGE CONTENT
+       ============================================================ -->
+  <main class="st-wrap">
+
+    <!-- BREADCRUMB — shows visitor where they are on the site -->
+    <nav class="st-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="/tools/">Tools</a>
+      <span>›</span>
+      <span>Speed Test</span>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <header class="st-header">
+      <span class="section-label">⚡ Free Tool</span>
+      <h1>Free Internet Speed Test</h1>
+      <p class="st-header-sub">
+        Real download speed, upload speed, ping, IP address and internet
+        provider — all measured live in your browser. No app, no
+        registration required.
+      </p>
+    </header>
+
+    <!-- ============================================================
+         THE GAUGE — the spinning circular speedometer
+         Numbers and arc are controlled by speed-test.js
+         Visual style is in speed-test.css
+         ============================================================ -->
+    <div class="st-stage">
+
+      <!-- Decorative spinning ring (CSS animation) -->
+      <div class="st-orbit-ring" aria-hidden="true"></div>
+
+      <!-- SVG Canvas — the gauge arc is drawn here by JavaScript -->
+      <svg class="st-svg" viewBox="0 0 260 260" aria-hidden="true">
+        <defs>
+          <filter id="st-glow">
+            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Outer decorative ring -->
+        <circle cx="130" cy="130" r="118"
+          fill="none"
+          stroke="rgba(255,255,255,0.04)"
+          stroke-width="1">
+        </circle>
+        <!-- Track (grey background arc) — JS draws the path -->
+        <path id="st-arc-track" fill="none"></path>
+        <!-- Fill (colored foreground arc) — JS animates this -->
+        <path id="st-arc-fill" fill="none" pathLength="100" stroke-dasharray="0 100"></path>
+        <!-- Glowing dot at the tip of the arc -->
+        <circle id="st-spark" r="6" opacity="0"></circle>
+      </svg>
+
+      <!-- Number displayed in the center of the gauge -->
+      <div class="st-gauge-center">
+        <div class="st-big-num" id="st-big-num">0.0</div>
+        <div class="st-unit">Mbps</div>
+        <div class="st-phase" id="st-phase"></div>
+      </div>
+
+    </div><!-- end .st-stage -->
+
+    <!-- START BUTTON -->
+    <div class="st-btn-wrap">
+      <button class="st-btn" id="st-start-btn" type="button">
+        ▶ Start Speed Test
+      </button>
+    </div>
+
+    <!-- Status messages shown during and after the test -->
+    <p class="st-meta" id="st-meta"></p>
+    <p class="st-error" id="st-error" role="alert"></p>
+
+    <!-- ============================================================
+         RESULT CARDS
+         Shows Download / Upload / Ping after test completes.
+         Values are filled in by speed-test.js
+         ============================================================ -->
+    <section class="st-cards" aria-live="polite" aria-label="Speed test results">
+
+      <div class="st-card">
+        <span class="st-card-icon">⬇️</span>
+        <div class="st-card-label">Download</div>
+        <div class="st-card-value">
+          <span id="st-dl">—</span>
+          <span class="st-card-unit"> Mbps</span>
+        </div>
+      </div>
+
+      <div class="st-card">
+        <span class="st-card-icon">⬆️</span>
+        <div class="st-card-label">Upload</div>
+        <div class="st-card-value">
+          <span id="st-ul">—</span>
+          <span class="st-card-unit"> Mbps</span>
+        </div>
+      </div>
+
+      <div class="st-card">
+        <span class="st-card-icon">📶</span>
+        <div class="st-card-label">Ping</div>
+        <div class="st-card-value">
+          <span id="st-ping">—</span>
+          <span class="st-card-unit"> ms</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         IP ADDRESS & PROVIDER CARDS
+         Shown below the speed cards.
+         Values are filled in by speed-test.js using ipapi.co
+         ============================================================ -->
+    <section class="st-info-cards" aria-label="Connection information">
+
+      <div class="st-info-card">
+        <span class="st-info-icon">🌐</span>
+        <div class="st-info-label">Your IP Address</div>
+        <div class="st-info-value" id="st-ip">Detecting...</div>
+      </div>
+
+      <div class="st-info-card">
+        <span class="st-info-icon">📡</span>
+        <div class="st-info-label">Internet Provider</div>
+        <div class="st-info-value" id="st-isp">Detecting...</div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         EXPLANATION SECTION
+         This text helps Google rank this page for relevant searches.
+         It also genuinely helps visitors understand their results.
+         ============================================================ -->
+    <section class="st-explain">
+
+      <h2>How This Speed Test Works</h2>
+      <p>
+        This tool measures your real internet performance in three parts.
+        First, it sends quick signals to a server and times how fast they
+        return — that is your <strong>ping</strong>, measured in
+        milliseconds. Lower ping means a more responsive connection,
+        which matters most for video calls and online games.
+      </p>
+      <p>
+        Next, it downloads a real chunk of data from a fast server and
+        measures how long it takes, converting that into
+        <strong>Megabits per second (Mbps)</strong>. This is your
+        download speed — the number that matters most for streaming,
+        browsing, and downloading files.
+      </p>
+      <p>
+        Finally, it sends data in the other direction to measure your
+        <strong>upload speed</strong>, important for video calls,
+        sending files, and live streaming.
+      </p>
+      <p>
+        Your <strong>IP address</strong> and <strong>internet
+        provider</strong> are detected automatically using your
+        connection's public network information.
+      </p>
+
+      <h2>What Is a Good Internet Speed?</h2>
+      <table class="st-table">
+        <thead>
+          <tr>
+            <th>Download Speed</th>
+            <th>What It Handles Well</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Below 10 Mbps</td><td>Basic browsing and email only</td></tr>
+          <tr><td>10–25 Mbps</td><td>Video calls, standard streaming</td></tr>
+          <tr><td>25–100 Mbps</td><td>HD streaming, gaming, several devices</td></tr>
+          <tr><td>100 Mbps+</td><td>4K streaming, large downloads, many users</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="st-faq">
+        <h3>Why do my results change between tests?</h3>
+        <p>
+          Network speed varies based on how many devices share your
+          connection, time of day, and your provider's network load.
+          Running the test two or three times and averaging the results
+          gives the most accurate picture.
+        </p>
+      </div>
+
+      <div class="st-faq">
+        <h3>Does this speed test cost anything?</h3>
+        <p>
+          No. This tool is completely free, requires no sign-up, and
+          runs entirely in your browser. Nothing to download or install.
+          It works on any phone, tablet, laptop, or desktop.
+        </p>
+      </div>
+
+      <div class="st-faq">
+        <h3>Is my IP address stored anywhere?</h3>
+        <p>
+          No. Your IP address is detected from your connection and
+          displayed to you only. This site does not store, log, or share
+          your IP address. See the
+          <a href="/legal/privacy.html">Privacy Policy</a> for full details.
+        </p>
+      </div>
+
+      <div class="st-faq">
+        <h3>What does ping mean?</h3>
+        <p>
+          Ping is how long it takes a signal to travel from your device
+          to a server and back, measured in milliseconds. Under 40ms is
+          excellent. 40–100ms is good for most purposes. Above 150ms
+          can cause noticeable lag in video calls and online games.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- INTERNAL LINKS — connects this tool to other pages on your site -->
+    <section class="st-next">
+      <h2>Explore More</h2>
+      <div class="st-next-grid">
+        <a href="/tools/" class="tool-card">
+          <span class="card-icon">🚀</span>
+          <div class="card-title">More Free Tools</div>
+          <p class="card-desc">
+            Explore every free tool on AlternateIncomeSource.
+          </p>
+          <span class="card-arrow">→</span>
+        </a>
+        <a href="/earn/" class="tool-card">
+          <span class="card-icon">💰</span>
+          <div class="card-title">How I Earn Online</div>
+          <p class="card-desc">
+            My real 7-year journey. Zero investment required.
+          </p>
+          <span class="card-arrow">→</span>
+        </a>
+        <a href="/school/" class="tool-card">
+          <span class="card-icon">📚</span>
+          <div class="card-title">Free School</div>
+          <p class="card-desc">
+            Learn HTML, CSS and JavaScript for free.
+          </p>
+          <span class="card-arrow">→</span>
+        </a>
+        <a href="/blog/" class="tool-card">
+          <span class="card-icon">📝</span>
+          <div class="card-title">Free Blog</div>
+          <p class="card-desc">
+            Guides on earning online and using free tools.
+          </p>
+          <span class="card-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </main><!-- end .st-wrap -->
+
+  <!-- ============================================================
+       FOOTER
+       Same footer as every other page on your site.
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">Alternate<span>Income</span>Source</a>
+          <p>Free tools, free learning, free earning — for everyone, worldwide.</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/legal/privacy.html">Privacy Policy</a></li>
+            <li><a href="/legal/terms.html">Terms & Conditions</a></li>
+            <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
+            <li><a href="/legal/affiliate.html">Affiliate Disclosure</a></li>
+            <li><a href="/legal/earnings.html">Earnings Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © <span id="yr"></span> AlternateIncomeSource.com — All rights reserved.
+        </p>
+        <p class="footer-copy">Made with ❤️ for everyone, worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT FILES — loaded at bottom so page loads fast
+       ============================================================ -->
+
+  <!-- Your site's existing theme system (day/night + palettes) -->
+  <script src="../../assets/js/theme.js"></script>
+
+  <!-- Auto year in footer -->
+  <script>
+    var y = document.getElementById('yr');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+
+  <!-- This tool's own JavaScript -->
+  <script src="speed-test.js"></script>
+
+</body>
+</html>
