@@ -4,305 +4,216 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Free Online Tools | Speed Test, Typing Test & More | AlternateIncomeSource</title>
-  <meta name="description" content="Use free online tools for internet speed testing, typing practice, voice recording and private message sharing. Fast, simple and designed to work on modern devices.">
+  <title>Free Online Tools | AlternateIncomeSource</title>
+  <meta name="description" content="Use free online tools for internet speed testing, typing practice, voice recording, and private messages. Fast, simple, browser-based tools with no account required.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.alternateincomesource.com/tools/">
+  <link rel="canonical" href="https://alternateincomesource.com/tools/">
 
-  <meta property="og:type" content="website">
   <meta property="og:title" content="Free Online Tools | AlternateIncomeSource">
-  <meta property="og:description" content="Useful free online tools for speed testing, typing practice, voice recording and more.">
-  <meta property="og:url" content="https://www.alternateincomesource.com/tools/">
-  <meta property="og:site_name" content="AlternateIncomeSource">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Free Online Tools | AlternateIncomeSource">
-  <meta name="twitter:description" content="Useful free online tools for speed testing, typing practice, voice recording and more.">
+  <meta property="og:description" content="Fast, free browser-based tools for everyday digital tasks.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alternateincomesource.com/tools/">
 
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/tools-page.css">
+  <link rel="stylesheet" href="css/tools.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="../">AlternateIncomeSource</a>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../">Home</a>
+        <a href="../blog/">Blog</a>
+        <a href="../school/">Free School</a>
+        <a href="./" aria-current="page">Tools</a>
+        <a href="../about/">About</a>
+      </nav>
+
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="tools-hero">
+      <div class="container">
+        <p class="eyebrow">FREE ONLINE TOOLS</p>
+        <h1>Useful tools for your digital journey</h1>
+        <p class="tools-intro">
+          Fast, simple browser-based tools designed to help you test, create, practise, and work more efficiently. No account required.
+        </p>
+
+        <label class="tool-search" for="tool-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="tool-search" type="search" placeholder="Search tools..." autocomplete="off">
+        </label>
+
+        <p id="tool-count" class="tool-count">4 tools available</p>
+      </div>
+    </section>
+
+    <section class="tools-section" aria-labelledby="featured-tools">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">START HERE</p>
+            <h2 id="featured-tools">Featured tools</h2>
+          </div>
+          <p>Choose a tool and get started in seconds.</p>
+        </div>
+
+        <div id="tools-grid" class="tools-grid">
+          <article class="tool-card" data-tool="internet speed test download upload ping latency network">
+            <div class="tool-card-top">
+              <span class="tool-icon" aria-hidden="true">⚡</span>
+              <span class="tool-status">Live</span>
+            </div>
+            <h3>Internet Speed Test</h3>
+            <p>Check your connection speed and understand your internet performance in a clear, simple way.</p>
+            <ul class="tool-benefits">
+              <li>Quick results</li>
+              <li>Browser-based</li>
+              <li>No sign-up</li>
+            </ul>
+            <a class="tool-link" href="speed-test/">Open Speed Test <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="tool-card" data-tool="typing speed test typing test wpm keyboard practice typing aura">
+            <div class="tool-card-top">
+              <span class="tool-icon" aria-hidden="true">⌨</span>
+              <span class="tool-status">Live</span>
+            </div>
+            <h3>Typing Speed Test</h3>
+            <p>Practise your typing, measure speed, and improve accuracy with a focused typing experience.</p>
+            <ul class="tool-benefits">
+              <li>Speed practice</li>
+              <li>Accuracy focus</li>
+              <li>Instant feedback</li>
+            </ul>
+            <a class="tool-link" href="../typingaura/">Open Typing Test <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="tool-card tool-card--coming" data-tool="voice recorder audio record microphone voice recording">
+            <div class="tool-card-top">
+              <span class="tool-icon" aria-hidden="true">🎙</span>
+              <span class="tool-status tool-status--soon">Coming soon</span>
+            </div>
+            <h3>Voice Recorder</h3>
+            <p>Record audio directly in your browser for quick notes, ideas, practice, and simple voice captures.</p>
+            <ul class="tool-benefits">
+              <li>Private by design</li>
+              <li>Simple recording</li>
+              <li>Browser-based</li>
+            </ul>
+            <span class="tool-link tool-link--disabled">Preparing this tool <span aria-hidden="true">→</span></span>
+          </article>
+
+          <article class="tool-card tool-card--coming" data-tool="secret message private message chat words secure message">
+            <div class="tool-card-top">
+              <span class="tool-icon" aria-hidden="true">🔒</span>
+              <span class="tool-status tool-status--soon">Coming soon</span>
+            </div>
+            <h3>Secret Message Tool</h3>
+            <p>Create a private message experience for sharing words, notes, and small moments more thoughtfully.</p>
+            <ul class="tool-benefits">
+              <li>Easy to use</li>
+              <li>Privacy-focused</li>
+              <li>Simple sharing</li>
+            </ul>
+            <span class="tool-link tool-link--disabled">Preparing this tool <span aria-hidden="true">→</span></span>
+          </article>
+        </div>
+
+        <p id="no-tools-message" class="no-tools-message" hidden>
+          No tools match that search. Try a different word.
+        </p>
+      </div>
+    </section>
+
+    <section class="tools-info">
+      <div class="container tools-info-grid">
+        <div>
+          <p class="eyebrow">WHY THESE TOOLS</p>
+          <h2>Simple tools, without unnecessary friction</h2>
+          <p>
+            Each tool is designed to be clear, quick, and useful on desktop, tablet, and mobile devices. We focus on practical experiences instead of clutter.
+          </p>
+        </div>
+
+        <div class="tools-points">
+          <div>
+            <strong>Fast to use</strong>
+            <span>Open a tool and start without creating an account.</span>
+          </div>
+          <div>
+            <strong>Built for every screen</strong>
+            <span>Responsive layouts for phones, tablets, and desktops.</span>
+          </div>
+          <div>
+            <strong>Growing carefully</strong>
+            <span>New tools are added only when they are ready and useful.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tools-faq" aria-labelledby="tools-faq-title">
+      <div class="container">
+        <p class="eyebrow">HELP</p>
+        <h2 id="tools-faq-title">Tools FAQ</h2>
+
+        <details>
+          <summary>Are these tools free to use?</summary>
+          <p>Yes. The tools on this page are free to access. Individual tools may have their own instructions and features.</p>
+        </details>
+
+        <details>
+          <summary>Do I need to create an account?</summary>
+          <p>No account is required to use the currently available tools.</p>
+        </details>
+
+        <details>
+          <summary>Why are some tools marked “Coming soon”?</summary>
+          <p>We show future tools only while they are being prepared. They are not linked until their working pages are ready, so visitors never reach a broken page.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> AlternateIncomeSource. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="../legal/privacy.html">Privacy</a>
+        <a href="../legal/terms.html">Terms</a>
+        <a href="../legal/disclaimer.html">Disclaimer</a>
+      </nav>
+    </div>
+  </footer>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Free Online Tools",
-    "description": "A collection of free online tools including an internet speed test and typing speed test.",
-    "url": "https://www.alternateincomesource.com/tools/",
+    "description": "Free browser-based tools for internet speed testing, typing practice, voice recording, and private messages.",
+    "url": "https://alternateincomesource.com/tools/",
     "isPartOf": {
       "@type": "WebSite",
       "name": "AlternateIncomeSource",
-      "url": "https://www.alternateincomesource.com/"
+      "url": "https://alternateincomesource.com/"
     }
   }
   </script>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Are these tools free to use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. The tools listed on this page are free to use."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need to create an account?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No account is required to use the available tools."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which tool is available now?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The Internet Speed Test is currently available. More tools are being prepared."
-        }
-      }
-    ]
-  }
-  </script>
-</head>
-
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <header class="site-header">
-    <div class="container nav-container">
-      <a class="logo" href="../" aria-label="AlternateIncomeSource home">
-        Alternate<span>Income</span>Source
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="../">Home</a>
-        <a href="../earn/">Earn</a>
-        <a href="../blog/">Blog</a>
-        <a href="../school/">Free School</a>
-        <a class="active" href="./" aria-current="page">Tools</a>
-        <a href="../about/">About</a>
-      </nav>
-
-      <button class="theme-toggle" type="button" aria-label="Switch colour theme">
-        <span aria-hidden="true">◐</span>
-      </button>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <section class="tools-hero">
-      <div class="container tools-hero-grid">
-        <div class="tools-hero-content">
-          <p class="tools-eyebrow">FREE DIGITAL TOOLKIT</p>
-          <h1>Simple tools for practical digital tasks.</h1>
-          <p class="tools-hero-text">
-            Use fast, straightforward tools built to help with everyday online work, learning and productivity.
-            No unnecessary steps. No account required for available tools.
-          </p>
-
-          <div class="tools-hero-actions">
-            <a class="btn btn-primary" href="#tool-library">Explore tools</a>
-            <a class="btn btn-secondary" href="../blog/">Read practical guides</a>
-          </div>
-
-          <ul class="tools-trust-list" aria-label="Tool benefits">
-            <li>Fast to open</li>
-            <li>Works on mobile and desktop</li>
-            <li>Free to use</li>
-          </ul>
-        </div>
-
-        <div class="tools-hero-panel" aria-hidden="true">
-          <div class="tools-orbit tools-orbit-one"></div>
-          <div class="tools-orbit tools-orbit-two"></div>
-          <div class="tools-panel-card tools-panel-card-main">
-            <span class="tools-panel-icon">⚡</span>
-            <strong>Useful tools</strong>
-            <small>Built for simple tasks</small>
-          </div>
-          <div class="tools-panel-card tools-panel-card-small">
-            <span>⌨</span>
-            <small>Practice</small>
-          </div>
-          <div class="tools-panel-card tools-panel-card-small tools-panel-card-bottom">
-            <span>◉</span>
-            <small>Create</small>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools-library section" id="tool-library">
-      <div class="container">
-        <div class="section-heading">
-          <p class="tools-eyebrow">TOOL LIBRARY</p>
-          <h2>Choose a tool</h2>
-          <p>Each tool has its own page, so it can stay fast, focused and easy to improve over time.</p>
-        </div>
-
-        <div class="tools-grid">
-          <article class="tool-card tool-card-featured">
-            <div class="tool-card-top">
-              <span class="tool-icon" aria-hidden="true">⚡</span>
-              <span class="tool-status tool-status-live">Available now</span>
-            </div>
-            <p class="tool-category">CONNECTION</p>
-            <h3>Internet Speed Test</h3>
-            <p>Check your connection speed with a simple browser-based test.</p>
-            <a class="tool-card-link" href="./speed-test/">
-              Open Speed Test <span aria-hidden="true">→</span>
-            </a>
-          </article>
-
-          <article class="tool-card">
-            <div class="tool-card-top">
-              <span class="tool-icon" aria-hidden="true">⌨</span>
-              <span class="tool-status tool-status-soon">Preparing</span>
-            </div>
-            <p class="tool-category">PRACTICE</p>
-            <h3>Typing Speed Test</h3>
-            <p>Measure typing speed, accuracy and progress through focused practice.</p>
-            <span class="tool-card-disabled" aria-label="Typing Speed Test is being prepared">
-              Coming soon <span aria-hidden="true">→</span>
-            </span>
-          </article>
-
-          <article class="tool-card">
-            <div class="tool-card-top">
-              <span class="tool-icon" aria-hidden="true">◉</span>
-              <span class="tool-status tool-status-soon">Coming soon</span>
-            </div>
-            <p class="tool-category">AUDIO</p>
-            <h3>Voice Recorder</h3>
-            <p>Record audio directly in your browser for quick notes and simple recordings.</p>
-            <span class="tool-card-disabled" aria-label="Voice Recorder is coming soon">
-              Coming soon <span aria-hidden="true">→</span>
-            </span>
-          </article>
-
-          <article class="tool-card">
-            <div class="tool-card-top">
-              <span class="tool-icon" aria-hidden="true">✦</span>
-              <span class="tool-status tool-status-soon">Coming soon</span>
-            </div>
-            <p class="tool-category">PRIVACY</p>
-            <h3>Secret Message Tool</h3>
-            <p>Create and share private messages with a simple, clear experience.</p>
-            <span class="tool-card-disabled" aria-label="Secret Message Tool is coming soon">
-              Coming soon <span aria-hidden="true">→</span>
-            </span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools-benefits section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="tools-eyebrow">BUILT WITH PURPOSE</p>
-          <h2>Useful without unnecessary complexity</h2>
-        </div>
-
-        <div class="tools-benefit-grid">
-          <article>
-            <span aria-hidden="true">↯</span>
-            <h3>Speed first</h3>
-            <p>Pages are designed to stay focused and avoid unnecessary heavy features.</p>
-          </article>
-          <article>
-            <span aria-hidden="true">▣</span>
-            <h3>Clear on every screen</h3>
-            <p>Layouts are designed to adapt from smaller phones to larger desktop screens.</p>
-          </article>
-          <article>
-            <span aria-hidden="true">◎</span>
-            <h3>Built to grow</h3>
-            <p>Every tool has its own folder, making future changes easier and safer.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools-faq section">
-      <div class="container tools-faq-layout">
-        <div>
-          <p class="tools-eyebrow">QUESTIONS</p>
-          <h2>Tools FAQ</h2>
-          <p>Short answers about using the tool library.</p>
-        </div>
-
-        <div class="faq-list">
-          <details>
-            <summary>Are these tools free to use?</summary>
-            <p>Yes. The available tools on this page are free to use.</p>
-          </details>
-          <details>
-            <summary>Do I need to create an account?</summary>
-            <p>No. Available tools can be used without creating an account.</p>
-          </details>
-          <details>
-            <summary>Why are some tools marked “Coming soon”?</summary>
-            <p>They are listed so visitors can see what is planned, but they remain unavailable until their real tool pages are ready.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools-related section">
-      <div class="container tools-related-box">
-        <div>
-          <p class="tools-eyebrow">KEEP LEARNING</p>
-          <h2>Explore practical digital guides</h2>
-          <p>Read beginner-friendly articles about building useful digital skills and online projects.</p>
-        </div>
-        <a class="btn btn-primary" href="../blog/">Visit the blog</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="logo" href="../">Alternate<span>Income</span>Source</a>
-        <p>Practical tools, learning and guides for building useful digital skills.</p>
-      </div>
-
-      <div>
-        <h2>Explore</h2>
-        <a href="../earn/">Earn</a>
-        <a href="../blog/">Blog</a>
-        <a href="../school/">Free School</a>
-        <a href="./">Tools</a>
-      </div>
-
-      <div>
-        <h2>Information</h2>
-        <a href="../about/">About</a>
-        <a href="../legal/privacy.html">Privacy Policy</a>
-        <a href="../legal/terms.html">Terms of Use</a>
-        <a href="../legal/disclaimer.html">Disclaimer</a>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>© <span id="yr"></span> AlternateIncomeSource.com — All rights reserved.</p>
-    </div>
-  </footer>
-
   <script src="../assets/js/theme.js"></script>
-  <script src="../assets/js/animation.js"></script>
-  <script src="../assets/js/tools-page.js"></script>
+  <script src="js/tools.js"></script>
 </body>
 </html>
