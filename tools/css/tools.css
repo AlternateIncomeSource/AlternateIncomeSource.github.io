@@ -1,0 +1,291 @@
+.tools-hero {
+  padding: 7rem 0 4.5rem;
+  text-align: center;
+}
+
+.tools-hero h1,
+.tools-section h2,
+.tools-info h2,
+.tools-faq h2 {
+  margin: 0;
+}
+
+.tools-hero h1 {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: clamp(2.3rem, 5vw, 4.5rem);
+  line-height: 1.08;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  opacity: 0.72;
+}
+
+.tools-intro {
+  max-width: 690px;
+  margin: 1.3rem auto 0;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  opacity: 0.82;
+}
+
+.tool-search {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: min(100%, 590px);
+  margin: 2rem auto 0;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+  border-radius: 16px;
+  background: rgba(127, 127, 127, 0.08);
+}
+
+.tool-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.tool-count {
+  margin: 0.85rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.68;
+}
+
+.tools-section,
+.tools-info,
+.tools-faq {
+  padding: 4.5rem 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading p:last-child {
+  max-width: 360px;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.tool-card {
+  display: flex;
+  min-height: 350px;
+  flex-direction: column;
+  padding: 1.7rem;
+  border: 1px solid rgba(127, 127, 127, 0.25);
+  border-radius: 22px;
+  background: rgba(127, 127, 127, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(127, 127, 127, 0.5);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.tool-card--coming {
+  opacity: 0.78;
+}
+
+.tool-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.tool-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(127, 127, 127, 0.13);
+  font-size: 1.35rem;
+}
+
+.tool-status {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(55, 180, 105, 0.14);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.tool-status--soon {
+  background: rgba(210, 160, 35, 0.16);
+}
+
+.tool-card h3 {
+  margin: 1.55rem 0 0.65rem;
+  font-size: 1.35rem;
+}
+
+.tool-card p {
+  margin: 0;
+  line-height: 1.65;
+  opacity: 0.8;
+}
+
+.tool-benefits {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.35rem 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.tool-benefits li::before {
+  content: "✓";
+  margin-right: 0.55rem;
+  font-weight: 800;
+}
+
+.tool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  margin-top: auto;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.tool-link:hover span {
+  transform: translateX(4px);
+}
+
+.tool-link span {
+  transition: transform 180ms ease;
+}
+
+.tool-link--disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.no-tools-message {
+  margin: 2rem 0 0;
+  text-align: center;
+  opacity: 0.75;
+}
+
+.tools-info {
+  border-top: 1px solid rgba(127, 127, 127, 0.2);
+  border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.tools-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.tools-info p:not(.eyebrow) {
+  line-height: 1.75;
+  opacity: 0.8;
+}
+
+.tools-points {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.tools-points div {
+  padding: 1.15rem;
+  border-left: 3px solid currentColor;
+  background: rgba(127, 127, 127, 0.06);
+}
+
+.tools-points strong,
+.tools-points span {
+  display: block;
+}
+
+.tools-points span {
+  margin-top: 0.35rem;
+  line-height: 1.55;
+  opacity: 0.75;
+}
+
+.tools-faq details {
+  max-width: 850px;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.24);
+}
+
+.tools-faq summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.tools-faq details p {
+  max-width: 760px;
+  margin: 0.9rem 0 0;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+@media (max-width: 760px) {
+  .tools-hero {
+    padding: 5.5rem 0 3.5rem;
+  }
+
+  .tools-section,
+  .tools-info,
+  .tools-faq {
+    padding: 3.5rem 0;
+  }
+
+  .section-heading,
+  .tools-info-grid {
+    grid-template-columns: 1fr;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    min-height: 0;
+  }
+
+  .tools-info-grid {
+    gap: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card,
+  .tool-link span {
+    transition: none;
+  }
+
+  .tool-card:hover {
+    transform: none;
+  }
+}
