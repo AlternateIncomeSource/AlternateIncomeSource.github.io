@@ -413,6 +413,64 @@ data-theme="dark"→ Sets dark mode as default→ theme.js reads this and applie
 
   </footer>
 
+  
+  <!-- FEEDPULSE LIVE TRAFFIC START -->
+<section class="section" id="live-traffic">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">📡 Live Activity</span>
+      <h2 class="section-title">Recent Website Visitors</h2>
+      <p class="section-desc">
+        See recent anonymous visitor activity from around the world.
+      </p>
+    </div>
+
+    <div style="display: flex; justify-content: center; max-width: 100%; overflow-x: auto; padding: 10px;">
+      
+      <script
+        src="https://visitor-tracker-129.emergent.host/api/embed/traffic-feed.js?site_id=8fc080db-9deb-45b4-8531-1729a7a56813&w=520&bc=ffffff&tc=0A0A0A&brd=E5E7EB&hb=002FA7&hf=ffffff&lnk=002FA7&font=IBM+Plex+Sans&rows=10&poll=3000&lang=en&bstyle=minimal&v=15"
+        async>
+      </script>
+
+      <script>
+        (function () {
+          function trackVisit() {
+            try {
+              var image = new Image();
+              var title = (document.title || '').slice(0, 160);
+
+              image.src =
+                'https://visitor-tracker-129.emergent.host/api/track-pixel/8fc080db-9deb-45b4-8531-1729a7a56813' +
+                '?path=' + encodeURIComponent(location.pathname || '/') +
+                '&title=' + encodeURIComponent(title) +
+                '&host=' + encodeURIComponent(location.host) +
+                '&ref=' + encodeURIComponent(document.referrer || '');
+            } catch (error) {}
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', trackVisit, { once: true });
+          } else {
+            setTimeout(trackVisit, 80);
+          }
+        })();
+      </script>
+
+      <noscript>
+        <img
+          src="https://visitor-tracker-129.emergent.host/api/track-pixel/8fc080db-9deb-45b4-8531-1729a7a56813?via=img&nojs=1"
+          referrerpolicy="no-referrer-when-downgrade"
+          style="position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;"
+          alt=""
+        />
+      </noscript>
+
+    </div>
+  </div>
+</section>
+<!-- FEEDPULSE LIVE TRAFFIC END -->
+  
   <!-- ================================================
        JAVASCRIPT FILES
        
