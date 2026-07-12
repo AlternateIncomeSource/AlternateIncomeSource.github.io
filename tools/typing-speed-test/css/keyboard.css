@@ -1,0 +1,250 @@
+/* ============================================================
+   TYPINGAURA — keyboard.css
+   Full RGB keyboard layout: key shapes, zones, glow states.
+   All @keyframes referenced here live in animations.css.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   KEYBOARD CONTAINER
+---------------------------------------------------------- */
+#keyboard-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.keyboard {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--key-gap);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow:
+    0 0 0 1px rgba(0,229,255,0.04),
+    0 8px 40px rgba(0,0,0,0.6),
+    0 0 60px rgba(0,170,255,0.05);
+}
+
+/* Each row of keys */
+.key-row {
+  display: flex;
+  gap: var(--key-gap);
+  align-items: center;
+}
+
+/* ----------------------------------------------------------
+   BASE KEY STYLES
+---------------------------------------------------------- */
+.key {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--key-height);
+  min-width: var(--key-unit);
+  padding: 0 var(--space-1);
+  background: var(--key-bg);
+  border: 1px solid var(--key-border);
+  border-bottom: 2px solid rgba(0,0,0,0.4);
+  border-radius: var(--key-radius);
+  font-family: var(--font-mono);
+  font-size: var(--key-font-size);
+  font-weight: 500;
+  color: var(--text-secondary);
+  user-select: none;
+  cursor: default;
+  transition:
+    background   var(--dur-fast)  var(--ease-out),
+    border-color var(--dur-fast)  var(--ease-out),
+    color        var(--dur-fast)  var(--ease-out),
+    transform    var(--dur-fast)  var(--ease-spring);
+
+  /* Idle ambient glow — driven by zone color */
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* Ambient breathing animation on all keys when idle */
+.keyboard.ambient .key {
+  animation: ambientBreathe var(--dur-ambient) var(--ease-in-out) infinite;
+}
+
+/* Stagger ambient animation per key using nth-child */
+.keyboard.ambient .key:nth-child(odd)  { animation-delay: 0ms; }
+.keyboard.ambient .key:nth-child(even) { animation-delay: 400ms; }
+
+/* ----------------------------------------------------------
+   KEY SIZE VARIANTS
+   Based on standard keyboard unit widths
+---------------------------------------------------------- */
+.key[data-width="1"]    { width: calc(var(--key-unit) * 1); }
+.key[data-width="1.25"] { width: calc(var(--key-unit) * 1.25); }
+.key[data-width="1.5"]  { width: calc(var(--key-unit) * 1.5); }
+.key[data-width="1.75"] { width: calc(var(--key-unit) * 1.75); }
+.key[data-width="2"]    { width: calc(var(--key-unit) * 2); }
+.key[data-width="2.25"] { width: calc(var(--key-unit) * 2.25); }
+.key[data-width="2.75"] { width: calc(var(--key-unit) * 2.75); }
+.key[data-width="6.25"] { width: calc(var(--key-unit) * 6.25); }
+
+/* ----------------------------------------------------------
+   KEY COLOR ZONES (RGB lighting by keyboard region)
+---------------------------------------------------------- */
+
+/* Left zone — Electric Blue */
+.key.zone-left {
+  color: var(--neon-blue);
+  border-color: rgba(0,170,255,0.15);
+}
+
+/* Center zone — Neon Purple */
+.key.zone-mid {
+  color: var(--neon-purple);
+  border-color: rgba(170,68,255,0.15);
+}
+
+/* Right zone — Cyber Cyan */
+.key.zone-right {
+  color: var(--neon-cyan);
+  border-color: rgba(0,229,255,0.15);
+}
+
+/* Function row — subtle white */
+.key.zone-fn {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+/* Spacebar — subtle center glow blend */
+.key.zone-space {
+  color: var(--neon-purple);
+  border-color: rgba(170,68,255,0.1);
+}
+
+/* ----------------------------------------------------------
+   KEY INTERACTION STATES
+---------------------------------------------------------- */
+
+/* Hover — slight brightening */
+.key:hover {
+  background: var(--key-bg-hover);
+  border-color: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+/* Active — key is physically pressed right now */
+.key.key--active {
+  background: var(--key-bg-active);
+  transform: translateY(1px) scale(0.97);
+  animation: keyPress var(--dur-fast) var(--ease-out);
+}
+
+.key.key--active.zone-left {
+  box-shadow: var(--glow-blue);
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+}
+
+.key.key--active.zone-mid {
+  box-shadow: var(--glow-purple);
+  border-color: var(--neon-purple);
+  color: var(--neon-purple);
+}
+
+.key.key--active.zone-right,
+.key.key--active.zone-space {
+  box-shadow: var(--glow-cyan);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.key.key--active.zone-fn {
+  box-shadow: 0 0 6px rgba(255,255,255,0.3);
+  color: #ffffff;
+}
+
+/* Correct — green flash, fades out */
+.key.key--correct {
+  color: var(--neon-green);
+  border-color: rgba(0,255,136,0.4);
+  animation: keyCorrect var(--dur-slow) var(--ease-out) forwards;
+}
+
+/* Error — red flash, fades out */
+.key.key--error {
+  color: var(--neon-red);
+  border-color: rgba(255,34,85,0.5);
+  animation: keyError var(--dur-slow) var(--ease-out) forwards;
+}
+
+/* Ripple — spread from pressed key to neighbours */
+.key.key--ripple {
+  animation: keyRipple var(--dur-ripple) var(--ease-out) forwards;
+}
+
+/* Streak — gold sustained glow during combo */
+.key.key--streak {
+  animation: streakPulse 800ms var(--ease-in-out) infinite;
+}
+
+/* Personal best — rainbow sweep */
+.key.key--rainbow {
+  animation: rainbowSweep 1200ms var(--ease-in-out) forwards;
+}
+
+/* Lesson mode — highlight the key to press */
+.key.key--lesson-hint {
+  background: rgba(255,204,0,0.12);
+  border-color: rgba(255,204,0,0.5);
+  color: var(--neon-gold);
+  box-shadow: 0 0 8px rgba(255,204,0,0.3);
+}
+
+/* Disabled in lesson — dim unused keys */
+.key.key--disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   SPECIAL KEY LABEL STYLES
+---------------------------------------------------------- */
+
+/* Keys with top + bottom labels (e.g. number row: ! over 1) */
+.key__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  gap: 1px;
+}
+
+.key__label .top {
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+.key__label .bottom {
+  font-size: var(--key-font-size);
+}
+
+/* Arrow keys — larger symbols */
+.key.key--arrow {
+  font-size: 14px;
+}
+
+/* ----------------------------------------------------------
+   FINGER COLOR GUIDE UNDERLINE (visible in learn mode)
+---------------------------------------------------------- */
+.key.show-finger::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  opacity: 0.5;
+}

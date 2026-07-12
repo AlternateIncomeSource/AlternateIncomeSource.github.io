@@ -1,0 +1,123 @@
+/* ============================================================
+   TYPINGAURA — achievements.css
+   Achievement badge cards, unlock overlay, notification.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   ACHIEVEMENT UNLOCK OVERLAY
+   Appears momentarily when a badge is earned
+---------------------------------------------------------- */
+#achievement-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+#achievement-overlay.visible {
+  pointer-events: all;
+  animation: achieveBg var(--dur-achieve) var(--ease-in-out) forwards;
+}
+
+.achievement-popup {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(255,204,0,0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(255,204,0,0.1),
+    0 0 60px rgba(255,204,0,0.2),
+    0 20px 60px rgba(0,0,0,0.6);
+  animation: achieveUnlock var(--dur-achieve) var(--ease-spring) forwards;
+}
+
+.achievement-popup__icon {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.achievement-popup__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--neon-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.achievement-popup__name {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.achievement-popup__desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+  max-width: 260px;
+}
+
+/* ----------------------------------------------------------
+   ACHIEVEMENTS LIST PAGE (inside Learn Mode)
+---------------------------------------------------------- */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.badge-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow   var(--dur-fast) var(--ease-out);
+}
+
+.badge-card.unlocked {
+  border-color: rgba(255,204,0,0.2);
+  box-shadow: 0 0 16px rgba(255,204,0,0.06);
+}
+
+.badge-card.locked {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.badge-card__icon {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.badge-card__name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.badge-card__desc {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.badge-card.unlocked .badge-card__name {
+  color: var(--neon-gold);
+}

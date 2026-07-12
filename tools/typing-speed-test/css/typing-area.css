@@ -1,0 +1,244 @@
+/* ============================================================
+   TYPINGAURA — typing-area.css
+   The text display zone: words, characters, cursor, input.
+   This is the hero element — everything else supports it.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   TYPING AREA WRAPPER
+---------------------------------------------------------- */
+#typing-area {
+  width: 100%;
+  max-width: var(--content-width);
+  position: relative;
+  cursor: text;
+}
+
+/* ----------------------------------------------------------
+   WORD DISPLAY PANEL
+---------------------------------------------------------- */
+.typing-display {
+  position: relative;
+  background: var(--bg-input);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-8);
+  /* Fixed height for exactly 3 lines — was min-height before, which let the
+     card grow taller every time more words were appended, pushing the
+     keyboard and everything below it further down the page as you typed. */
+  height: calc(var(--typing-line-height) * 3 + var(--space-8) * 2);
+  overflow: hidden;
+  --aura-color: var(--neon-cyan);
+  transition: border-color 700ms var(--ease-out),
+              box-shadow    700ms var(--ease-out);
+}
+
+/* Focus glow — reacts gently to typing speed via --aura-color (set by JS in
+   main.js, updated only when the speed tier changes, not on every keystroke,
+   so the colour drifts calmly instead of flickering) */
+.typing-display.is-focused {
+  border-color: var(--aura-color);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--aura-color) 12%, transparent),
+              0 0 30px color-mix(in srgb, var(--aura-color) 7%, transparent);
+}
+
+/* Error shake on wrong key */
+.typing-display.shake {
+  animation: charShake var(--dur-fast) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   THE TEXT WORDS
+---------------------------------------------------------- */
+.typing-words {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  line-height: var(--typing-line-height);
+  color: var(--text-pending);
+  letter-spacing: 0.02em;
+  word-break: break-all;
+  white-space: pre-wrap;
+  user-select: none;
+  transform: translateY(0);
+  transition: transform 220ms var(--ease-out);
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------
+   INDIVIDUAL CHARACTER STATES
+---------------------------------------------------------- */
+.char {
+  display: inline;
+  position: relative;
+  transition: color var(--dur-instant) var(--ease-out);
+}
+
+/* Not yet typed */
+.char.pending {
+  color: var(--text-pending);
+}
+
+/* Currently being typed — highlighted + cursor before it */
+.char.current {
+  color: var(--text-highlight);
+  background: rgba(0,229,255,0.08);
+  border-radius: 2px;
+}
+
+/* Cursor appears before the current character */
+.char.current::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 10%;
+  height: 80%;
+  width: 2px;
+  background: var(--text-cursor);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 6px var(--neon-cyan);
+  animation: cursorBlink 1000ms step-end infinite;
+}
+
+/* Correctly typed */
+.char.correct {
+  color: var(--text-correct);
+}
+
+/* Incorrectly typed */
+.char.error {
+  color: var(--text-error);
+  background: rgba(255,34,85,0.08);
+  border-radius: 2px;
+}
+
+/* Extra character typed beyond word length */
+.char.extra {
+  color: var(--neon-red);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,34,85,0.5);
+}
+
+/* Space character — shows a subtle dot when in error state */
+.char.error[data-char=" "]::after {
+  content: '·';
+  color: var(--neon-red);
+  font-size: 0.8em;
+}
+
+/* ----------------------------------------------------------
+   WORD BOUNDARIES
+---------------------------------------------------------- */
+.word {
+  display: inline;
+  position: relative;
+}
+
+/* Incorrect word underline — appears when word is fully typed wrong */
+.word.word-error {
+  text-decoration: underline;
+  text-decoration-color: rgba(255,34,85,0.3);
+  text-underline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   HIDDEN INPUT — captures keystrokes without being visible
+---------------------------------------------------------- */
+#hidden-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  border: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  pointer-events: none;
+  z-index: -1;
+  resize: none;
+  outline: none;
+}
+
+/* ----------------------------------------------------------
+   READY / CLICK TO START OVERLAY
+---------------------------------------------------------- */
+.typing-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-overlay);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(4px);
+  transition: opacity var(--dur-normal) var(--ease-out);
+  cursor: text;
+}
+
+.typing-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-prompt {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.overlay-prompt strong {
+  color: var(--neon-cyan);
+  font-size: var(--text-lg);
+  text-shadow: var(--glow-cyan);
+}
+
+/* ----------------------------------------------------------
+   RESTART / CONTROL BAR BELOW TYPING AREA
+---------------------------------------------------------- */
+.typing-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.btn-restart {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-5);
+  transition: color     var(--dur-fast) var(--ease-out),
+              border    var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.btn-restart:hover {
+  color: var(--neon-cyan);
+  border-color: var(--border-active);
+  box-shadow: 0 0 12px rgba(0,229,255,0.1);
+}
+
+.btn-restart svg {
+  width: 14px;
+  height: 14px;
+}
+
+.typing-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}

@@ -1,0 +1,266 @@
+/* ============================================================
+   TYPINGAURA — results.css  (v2)
+   Q5 fix: stat cards visible immediately when reduced-motion.
+   Added: session trend bar styles, share card styles.
+   ============================================================ */
+
+.results-header { text-align:center; width:100%; }
+.results-title  { font-family:var(--font-mono); font-size:var(--text-xl); font-weight:700; color:var(--text-primary); margin-bottom:var(--space-1); }
+.results-subtitle { font-size:var(--text-sm); color:var(--text-secondary); }
+
+/* Container for the hero ring + stat strip below it — replaces the old
+   4-column card grid, so this is ID-based rather than the old shared class */
+#stat-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* Lesson pass/fail state — set as a class on results-subtitle only
+   when results are shown for a lesson attempt, not a free test */
+.results-subtitle--pass { color: var(--neon-green); font-weight:600; }
+.results-subtitle--fail { color: var(--neon-red); font-weight:600; }
+
+/* ============================================================
+   RESULTS HERO
+   A combined WPM + accuracy ring as the focal point, rather than
+   four equal-weight cards — WPM is the headline metric, accuracy
+   is visualised as the ring around it, everything else becomes
+   secondary supporting detail below.
+   ============================================================ */
+.results-hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0 var(--space-2);
+  opacity: 0;
+  animation: statReveal var(--dur-normal) var(--ease-spring) forwards;
+}
+@media (prefers-reduced-motion: reduce) { .results-hero { opacity: 1; animation: none; } }
+
+.hero-ring-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.hero-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.hero-ring__track {
+  fill: none;
+  stroke: var(--bg-elevated);
+  stroke-width: 10;
+}
+
+.hero-ring__fill {
+  fill: none;
+  stroke: var(--hero-ring-color, var(--neon-cyan));
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 552.9;
+  stroke-dashoffset: 552.9;
+  filter: drop-shadow(0 0 6px var(--hero-ring-color, var(--neon-cyan)));
+  transition: stroke-dashoffset 1100ms var(--ease-out),
+              stroke 400ms var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring__fill { transition: stroke 400ms var(--ease-out); }
+}
+
+.hero-ring__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.hero-ring__value {
+  font-family: var(--font-mono);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-ring__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.hero-tier {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--hero-ring-color, var(--neon-cyan));
+  background: color-mix(in srgb, var(--hero-ring-color, var(--neon-cyan)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hero-ring-color, var(--neon-cyan)) 30%, transparent);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-4);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: heroTierPop var(--dur-achieve) var(--ease-spring) calc(var(--dur-slow) * 0.7) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tier { opacity: 1; animation: none; }
+}
+
+.hero-sub {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.hero-sub strong { color: var(--text-primary); font-weight: 600; }
+
+@keyframes heroTierPop {
+  from { opacity: 0; transform: translateY(6px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* SECONDARY STAT STRIP — supporting metrics, deliberately smaller and
+   quieter than the hero ring above */
+.stat-strip {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  animation: statReveal var(--dur-normal) var(--ease-spring) calc(var(--dur-slow) * 0.9) forwards;
+}
+@media (prefers-reduced-motion: reduce) { .stat-strip { opacity: 1; animation: none; } }
+
+.stat-strip__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--space-4) var(--space-2);
+  text-align: center;
+}
+
+.stat-strip__divider {
+  width: 1px;
+  background: var(--border-normal);
+  margin: var(--space-3) 0;
+}
+
+.stat-strip__value {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-strip__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* GRAPH */
+.graph-container {
+  width:100%;
+  background:var(--bg-surface);
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-xl);
+  padding:var(--space-5);
+  opacity:0;
+  animation:statReveal var(--dur-normal) var(--ease-spring) var(--dur-slow) forwards;
+}
+@media (prefers-reduced-motion:reduce) { .graph-container { opacity:1; animation:none; } }
+.graph-title { font-size:var(--text-sm); font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-4); text-transform:uppercase; letter-spacing:0.08em; }
+#wpm-graph { width:100%; height:140px; display:block; border-radius:var(--radius-md); }
+
+/* ERROR BREAKDOWN */
+.error-breakdown {
+  width:100%;
+  background:var(--bg-surface);
+  border:1px solid var(--border-normal);
+  border-radius:var(--radius-xl);
+  padding:var(--space-5);
+  opacity:0;
+  animation:statReveal var(--dur-normal) var(--ease-spring) calc(var(--dur-slow)+var(--dur-result)) forwards;
+}
+@media (prefers-reduced-motion:reduce) { .error-breakdown { opacity:1; animation:none; } }
+.error-breakdown__title { font-size:var(--text-sm); font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-4); text-transform:uppercase; letter-spacing:0.08em; }
+.error-row { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3); }
+.error-row__char { font-family:var(--font-mono); font-size:var(--text-lg); font-weight:700; color:var(--neon-red); width:28px; text-align:center; }
+.error-row__bar-wrap { flex:1; height:6px; background:var(--bg-elevated); border-radius:var(--radius-full); overflow:hidden; }
+.error-row__bar { height:100%; background:var(--neon-red); border-radius:var(--radius-full); transition:width 600ms var(--ease-out); }
+.error-row__count { font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-secondary); min-width:24px; text-align:right; }
+.no-errors { font-size:var(--text-sm); color:var(--neon-green); text-align:center; padding:var(--space-4) 0; }
+
+/* IMPROVEMENT TIP */
+.improvement-tip {
+  width:100%;
+  background:rgba(0,170,255,0.05);
+  border:1px solid rgba(0,170,255,0.15);
+  border-radius:var(--radius-xl);
+  padding:var(--space-5) var(--space-6);
+  display:flex; gap:var(--space-4); align-items:flex-start;
+  opacity:0;
+  animation:statReveal var(--dur-normal) var(--ease-spring) calc(var(--dur-slow)*2) forwards;
+}
+@media (prefers-reduced-motion:reduce) { .improvement-tip { opacity:1; animation:none; } }
+.tip-icon { font-size:var(--text-xl); flex-shrink:0; margin-top:2px; }
+.tip-text { font-size:var(--text-base); color:var(--text-secondary); line-height:var(--leading-loose); }
+.tip-text strong { color:var(--text-primary); }
+
+/* ACTION BUTTONS */
+.results-actions {
+  display:flex; gap:var(--space-3); justify-content:center; flex-wrap:wrap; width:100%;
+  opacity:0;
+  animation:statReveal var(--dur-normal) var(--ease-spring) calc(var(--dur-slow)*2.5) forwards;
+}
+@media (prefers-reduced-motion:reduce) { .results-actions { opacity:1; animation:none; } }
+
+.btn-primary {
+  font-family:var(--font-ui); font-size:var(--text-base); font-weight:600;
+  color:var(--bg-page); background:var(--neon-cyan);
+  border-radius:var(--radius-full); padding:var(--space-3) var(--space-8);
+  transition:background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-spring);
+}
+.btn-primary:hover { background:#33eeff; box-shadow:var(--glow-cyan); transform:translateY(-1px); }
+.btn-primary:active { transform:translateY(0); }
+
+.btn-secondary {
+  font-family:var(--font-ui); font-size:var(--text-base); font-weight:500;
+  color:var(--text-secondary); background:var(--bg-surface);
+  border:1px solid var(--border-normal); border-radius:var(--radius-full);
+  padding:var(--space-3) var(--space-6);
+  transition:color var(--dur-fast) var(--ease-out), border var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-secondary:hover { color:var(--neon-cyan); border-color:var(--border-active); box-shadow:0 0 12px rgba(0,229,255,0.08); }
+
+/* PB COMPARISON */
+.pb-comparison {
+  width:100%; background:var(--bg-surface); border:1px solid var(--border-normal);
+  border-radius:var(--radius-xl); padding:var(--space-5);
+  display:flex; justify-content:space-between; align-items:center; gap:var(--space-4);
+}
+.pb-item { display:flex; flex-direction:column; align-items:center; gap:var(--space-1); }
+.pb-item__label { font-size:var(--text-xs); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; }
+.pb-item__value { font-family:var(--font-mono); font-size:var(--text-xl); font-weight:700; color:var(--text-primary); }
+.pb-item--best .pb-item__value { color:var(--neon-gold); text-shadow:var(--glow-gold); }
+.pb-gap { font-family:var(--font-mono); font-size:var(--text-sm); color:var(--text-secondary); text-align:center; }
+.pb-gap--improved { color:var(--neon-green); }

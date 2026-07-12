@@ -1,0 +1,307 @@
+/* ============================================================
+   TYPINGAURA — responsive.css
+   Mobile-first breakpoints. Keyboard hides on small screens.
+   Breakpoints: 480px / 768px / 1024px / 1440px
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   MOBILE BASE (up to 479px)
+   Default — designed for small screens first
+---------------------------------------------------------- */
+
+/* Hide visual keyboard on mobile — device keyboard takes over */
+#keyboard-container {
+  display: none;
+}
+
+/* Back-link: icon only on the smallest screens, keep the word from 480px up */
+.back-link span {
+  display: none;
+}
+
+/* Stack live stats vertically */
+.live-stats {
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.live-stat__value {
+  font-size: var(--text-xl);
+}
+
+/* Typing display smaller padding */
+.typing-display {
+  padding: var(--space-5) var(--space-4);
+  height: calc(var(--typing-line-height) * 3 + var(--space-5) * 2);
+}
+
+.typing-words {
+  font-size: var(--text-base);
+}
+
+/* Hero ring scales down on narrow screens */
+.hero-ring-wrap {
+  width: 150px;
+  height: 150px;
+}
+
+.hero-ring__value {
+  font-size: 38px;
+}
+
+.stat-strip__label {
+  font-size: 9px;
+}
+
+/* Lesson levels — 2 columns */
+.lesson-levels {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Results actions stack on mobile */
+.results-actions {
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Mode nav wraps if needed */
+.mode-nav {
+  gap: 2px;
+}
+
+.mode-btn {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+/* Header compact */
+#site-header {
+  padding: 0 var(--space-4);
+}
+
+.logo {
+  font-size: var(--text-base);
+}
+
+/* Main padding tighter */
+#main-content {
+  padding: var(--space-5) var(--space-4) var(--space-12);
+}
+
+/* Duration bar wraps */
+.duration-bar {
+  gap: var(--space-1);
+}
+
+.duration-btn {
+  font-size: 12px;
+  padding: var(--space-1) var(--space-3);
+}
+
+/* Personal best comparison stacks */
+.pb-comparison {
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+/* Toast bottom center on mobile */
+#toast-container {
+  right: var(--space-4);
+  left: var(--space-4);
+  bottom: var(--space-4);
+}
+
+/* ----------------------------------------------------------
+   SMALL TABLET (480px and up)
+---------------------------------------------------------- */
+@media (min-width: 480px) {
+
+  .typing-words {
+    font-size: var(--text-md);
+  }
+
+  .live-stat__value {
+    font-size: var(--text-2xl);
+  }
+
+  .back-link span {
+    display: inline;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   TABLET (768px and up)
+   Keyboard appears — but scaled down
+---------------------------------------------------------- */
+@media (min-width: 768px) {
+
+  /* Show keyboard */
+  #keyboard-container {
+    display: flex;
+  }
+
+  /* Scale keyboard down for tablet */
+  .keyboard {
+    --key-unit: 32px;
+    --key-height: 32px;
+    --key-gap: 3px;
+    --key-font-size: 9px;
+    padding: var(--space-4);
+  }
+
+  /* 4-column lesson levels */
+  .lesson-levels {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Curriculum reference list: two columns once there's room */
+  .seo-content .curriculum-list {
+    columns: 2;
+    column-gap: var(--space-6);
+  }
+
+  .seo-content .curriculum-list li {
+    break-inside: avoid;
+  }
+
+  /* Results actions side by side */
+  .results-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: auto;
+    max-width: none;
+  }
+
+  /* Live stats full size */
+  .live-stat__value {
+    font-size: var(--text-2xl);
+  }
+
+  /* Typing display full padding — height stays fixed (set in typing-area.css),
+     only padding changes here, so the 3-line viewport doesn't grow again at
+     this breakpoint */
+  .typing-display {
+    padding: var(--space-8);
+  }
+
+  .typing-words {
+    font-size: var(--text-lg);
+  }
+
+  /* Header full size */
+  #site-header {
+    padding: 0 var(--space-6);
+  }
+
+  #main-content {
+    padding: var(--space-8) var(--space-6) var(--space-16);
+  }
+
+}
+
+/* ----------------------------------------------------------
+   DESKTOP (1024px and up)
+   Full keyboard at standard size
+---------------------------------------------------------- */
+@media (min-width: 1024px) {
+
+  /* Keyboard at full standard size */
+  .keyboard {
+    --key-unit: 42px;
+    --key-height: 42px;
+    --key-gap: 4px;
+    --key-font-size: 11px;
+    padding: var(--space-5);
+  }
+
+  /* Larger live stat values */
+  .live-stat__value {
+    font-size: var(--text-2xl);
+  }
+
+  /* Footer links inline */
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+}
+
+/* ----------------------------------------------------------
+   WIDE DESKTOP (1440px and up)
+---------------------------------------------------------- */
+@media (min-width: 1440px) {
+
+  #main-content {
+    padding-top: var(--space-12);
+  }
+
+  .live-stat__value {
+    font-size: var(--text-3xl);
+  }
+
+}
+
+/* ----------------------------------------------------------
+   PRINT STYLES — clean results for printing / PDF
+---------------------------------------------------------- */
+@media print {
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  #site-header,
+  #keyboard-container,
+  .typing-controls,
+  .results-actions,
+  .improvement-tip,
+  #site-footer,
+  #toast-container,
+  #achievement-overlay {
+    display: none !important;
+  }
+
+  .stat-strip {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  .stat-strip__value,
+  .hero-ring__value {
+    color: black;
+    text-shadow: none;
+  }
+
+  .hero-ring__fill {
+    stroke: black !important;
+    filter: none;
+  }
+
+  .hero-ring__track {
+    stroke: #ddd;
+  }
+
+  .hero-tier {
+    color: black;
+    background: none;
+    border-color: #ccc;
+  }
+
+}

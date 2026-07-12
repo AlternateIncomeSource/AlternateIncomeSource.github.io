@@ -1,0 +1,137 @@
+/* ============================================================
+   TYPINGAURA — animations.css
+   ALL @keyframes live here and nowhere else.
+   Other CSS files reference animation names by name only.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   PAGE / SECTION TRANSITIONS
+---------------------------------------------------------- */
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------------------------------------------
+   KEYBOARD KEY ANIMATIONS
+---------------------------------------------------------- */
+
+/* Key press bounce */
+@keyframes keyPress {
+  0%   { transform: translateY(0)    scale(1); }
+  40%  { transform: translateY(2px)  scale(0.96); }
+  100% { transform: translateY(0)    scale(1); }
+}
+
+/* Key glow pulse — used for correct */
+@keyframes keyCorrect {
+  0%   { box-shadow: 0 0 4px var(--neon-green), 0 0 16px rgba(0,255,136,0.5); }
+  100% { box-shadow: 0 0 0px transparent; }
+}
+
+/* Key error flash */
+@keyframes keyError {
+  0%   { box-shadow: 0 0 6px var(--neon-red), 0 0 20px rgba(255,34,85,0.6); }
+  100% { box-shadow: 0 0 0px transparent; }
+}
+
+/* Ripple spread to adjacent keys */
+@keyframes keyRipple {
+  0%   { box-shadow: 0 0 2px currentColor, 0 0 8px rgba(255,255,255,0.2); opacity: 0.7; }
+  100% { box-shadow: 0 0 0px transparent; opacity: 0; }
+}
+
+/* Ambient keyboard breathe — slow neon pulse when idle */
+@keyframes ambientBreathe {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.7; }
+}
+
+/* Streak glow — all keys pulse gold on combo */
+@keyframes streakPulse {
+  0%   { box-shadow: 0 0 4px var(--neon-gold), 0 0 12px rgba(255,204,0,0.3); }
+  50%  { box-shadow: 0 0 8px var(--neon-gold), 0 0 24px rgba(255,204,0,0.5); }
+  100% { box-shadow: 0 0 4px var(--neon-gold), 0 0 12px rgba(255,204,0,0.3); }
+}
+
+/* Rainbow sweep across keyboard on personal best */
+@keyframes rainbowSweep {
+  0%   { filter: hue-rotate(0deg)   brightness(1.2); }
+  100% { filter: hue-rotate(360deg) brightness(1.2); }
+}
+
+/* ----------------------------------------------------------
+   TYPING AREA ANIMATIONS
+---------------------------------------------------------- */
+
+/* Cursor blink */
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100%{ opacity: 0; }
+}
+
+/* Character error shake */
+@keyframes charShake {
+  0%  { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100%{ transform: translateX(0); }
+}
+
+/* ----------------------------------------------------------
+   RESULTS PAGE ANIMATIONS
+---------------------------------------------------------- */
+
+/* Stat card reveal — staggered via JS delay */
+@keyframes statReveal {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----------------------------------------------------------
+   ACHIEVEMENT ANIMATIONS
+---------------------------------------------------------- */
+
+/* Achievement badge unlock */
+@keyframes achieveUnlock {
+  0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  50%  { transform: scale(1.15) rotate(3deg);  opacity: 1; }
+  75%  { transform: scale(0.95) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Achievement overlay background pulse */
+@keyframes achieveBg {
+  0%, 100% { background: rgba(7,7,15,0.85); }
+  50%       { background: rgba(20,10,40,0.92); }
+}
+
+/* ----------------------------------------------------------
+   SCREEN EFFECTS
+---------------------------------------------------------- */
+
+/* ----------------------------------------------------------
+   TOAST NOTIFICATION
+---------------------------------------------------------- */
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----------------------------------------------------------
+   TIMER WARNING
+---------------------------------------------------------- */
+
+/* Timer pulses red in last 5 seconds */
+@keyframes timerWarning {
+  0%, 100% { color: var(--neon-red); text-shadow: var(--glow-red); }
+  50%       { color: #ff6680; text-shadow: none; }
+}

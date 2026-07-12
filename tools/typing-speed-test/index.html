@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- sr-only utility — hides H1 visually but keeps it for SEO and screen readers -->
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+    kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      font-family: var(--font-mono, monospace);
+      font-size: 0.85em;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 3px;
+      color: inherit;
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════════
+       PRIMARY SEO META TAGS
+  ══════════════════════════════════════════════════ -->
+  <title>Free Typing Speed Test — WPM & Accuracy Test Online | AlternateIncomeSource</title>
+
+  <meta name="description" content="A free online typing speed test that measures your WPM, accuracy, and consistency — then tells you exactly what to improve. No signup needed.">
+  <meta name="keywords" content="typing speed test, free typing test, WPM test, words per minute test, typing accuracy test, online typing test, improve typing speed, typing test for beginners, CPM test, touch typing practice, free WPM test no signup, typing speed test with keyboard">
+  <meta name="author"      content="AlternateIncomeSource.com">
+  <meta name="robots"      content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#07070f">
+  <meta name="rating"      content="general">
+  <meta name="language"     content="English">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.alternateincomesource.com/tools/typing-speed-test/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <!-- hreflang: single global English page, no region-specific variants exist,
+       so only x-default is declared (avoids falsely implying one region is prioritised) -->
+  <link rel="alternate" hreflang="x-default" href="https://www.alternateincomesource.com/tools/typing-speed-test/">
+
+  <!-- Fonts used throughout variables.css — loaded here so the design
+       actually renders as designed instead of silently falling back
+       to the browser's default system font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Performance: preload critical CSS -->
+  <link rel="preload" href="css/variables.css" as="style">
+  <link rel="preload" href="css/layout.css"    as="style">
+
+  <!-- ═══════════════════════════════════════════════
+       OPEN GRAPH
+  ══════════════════════════════════════════════════ -->
+  <meta property="og:type"             content="website">
+  <meta property="og:title"            content="Free Typing Speed Test — AlternateIncomeSource">
+  <meta property="og:description"      content="Find out how fast you actually type — and what's slowing you down. Free typing speed test with live RGB keyboard, WPM tracking, and real improvement tips.">
+  <meta property="og:url"              content="https://www.alternateincomesource.com/tools/typing-speed-test/">
+  <meta property="og:site_name"        content="AlternateIncomeSource.com">
+  <meta property="og:image"            content="https://www.alternateincomesource.com/tools/typing-speed-test/assets/icons/typing-test-og.jpg">
+  <meta property="og:image:width"      content="1200">
+  <meta property="og:image:height"     content="630">
+  <meta property="og:locale"           content="en_US">
+
+  <!-- ═══════════════════════════════════════════════
+       TWITTER CARDS
+  ══════════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Free Typing Speed Test — AlternateIncomeSource">
+  <meta name="twitter:description" content="Find out how fast you actually type — and what's slowing you down. Free WPM test with live keyboard and real improvement tips.">
+  <meta name="twitter:image"       content="https://www.alternateincomesource.com/tools/typing-speed-test/assets/icons/typing-test-og.jpg">
+
+  <!-- ═══════════════════════════════════════════════
+       SCHEMA.ORG STRUCTURED DATA
+  ══════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Typing Speed Test",
+        "description": "A free browser-based typing speed test and learning platform with live RGB keyboard visualization, WPM tracking, accuracy measurement, and personalized improvement tips.",
+        "url": "https://www.alternateincomesource.com/tools/typing-speed-test/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All (browser-based, no installation required)",
+        "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Typing speed test (Words Per Minute)",
+          "Characters Per Minute (CPM) measurement",
+          "Accuracy percentage tracking",
+          "Live RGB keyboard visualization",
+          "Multiple test durations: 15s, 30s, 60s, 120s",
+          "27-lesson touch typing course across 4 levels",
+          "Personal best tracking",
+          "Session history (last 30 tests)",
+          "Improvement tips based on your actual errors",
+          "Achievement system",
+          "No sign-up required",
+          "Works on all modern browsers",
+          "Mobile friendly"
+        ],
+        "creator": {
+          "@type": "Organization",
+          "name": "AlternateIncomeSource.com",
+          "url": "https://www.alternateincomesource.com"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.alternateincomesource.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Free Tools",
+            "item": "https://www.alternateincomesource.com/tools/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Typing Speed Test",
+            "item": "https://www.alternateincomesource.com/tools/typing-speed-test/"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this typing test completely free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Every feature — speed tests, all 27 lessons, history, achievements — is free. No account, no payment, no ads interrupting your test. Your results are stored privately in your own browser and never sent anywhere."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is WPM calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One word in a typing test equals 5 characters including spaces. Gross WPM divides your total character count by 5 then by time in minutes. Net WPM subtracts one WPM for every error you made per minute. This test displays both so you can see the real cost of mistakes on your score."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good typing speed in WPM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "38-45 WPM is average for adults who never learned formal touch typing. 60+ WPM is considered above average. Most professional typing roles expect 65-75 WPM, and experienced data entry specialists often reach 80-100+ WPM."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between WPM and CPM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WPM (Words Per Minute) counts every 5 characters, including spaces, as one word — it is the standard used by almost all typing tests and job requirements. CPM (Characters Per Minute) is the raw character count with no averaging. CPM is roughly WPM multiplied by 5."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What typing speed do I need for data entry jobs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most data entry roles require 45 to 60 WPM with 95 percent or higher accuracy. Some specialist positions ask for 70 to 80 WPM. This test tracks both metrics and shows exactly where accuracy is dropping so you can target the right practice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this to prepare for a job typing test?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Practice with the 60-second and 120-second modes to match the duration of most employment typing assessments. Aim for 95 percent or higher accuracy at your target WPM before applying, and use the lesson system to fix your weakest keys specifically."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to learn touch typing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most people can learn solid home-row fundamentals within one to two weeks of daily 10-15 minute practice, and reach a comfortable, accurate 40+ WPM within four to eight weeks. Reaching 70+ WPM typically takes several months of regular use, since speed comes from repetition, not from any single technique."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the RGB keyboard affect my typing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The visual keyboard is a feedback tool, not a distraction. It shows which key you just pressed and whether it was correct — reinforcing the connection between your fingers and the keys. For beginners this visual confirmation accelerates learning considerably."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this work on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The test, results, and full lesson system all work on phones and tablets using your device's own keyboard. The on-screen RGB keyboard is a desktop feature and is hidden on small screens since your device keyboard takes its place."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I improve my typing speed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Focus on accuracy before speed. Learn proper finger placement using the home row keys (ASDF JKL;). Practice daily for 10-15 minutes. Use the lesson system to build from foundation skills to speed. Speed increases naturally as accuracy improves."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Position Your Fingers for Touch Typing",
+        "description": "A beginner's step-by-step guide to correct home-row finger placement for touch typing, using the standard QWERTY keyboard layout.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Left Hand Home Row",
+            "text": "Rest your left pinky on A, ring finger on S, middle finger on D, and index finger on F."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Right Hand Home Row",
+            "text": "Rest your right index finger on J, middle finger on K, ring finger on L, and pinky on the semicolon (;)."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Find Home Row Without Looking",
+            "text": "Feel for the small raised bumps on the F and J keys to locate the home row by touch alone, without looking down."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Thumbs on the Space Bar",
+            "text": "Rest both thumbs lightly on the space bar. Either thumb can press it."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Practice the Full Home Row",
+            "text": "Type A S D F J K L ; repeatedly until the finger positions feel natural, then move on to structured lessons."
+          }
+        ]
+      },
+      {
+        "@type": "Course",
+        "name": "Free Touch Typing Course",
+        "description": "A free 27-lesson touch typing course across four levels — Foundation, Expansion, Speed Building, and Mastery — teaching home-row basics through advanced speed and accuracy drills.",
+        "provider": {
+          "@type": "Organization",
+          "name": "AlternateIncomeSource.com",
+          "sameAs": "https://www.alternateincomesource.com"
+        },
+        "isAccessibleForFree": true,
+        "url": "https://www.alternateincomesource.com/tools/typing-speed-test/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       CSS — variables must load first
+  ══════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/keyboard.css">
+  <link rel="stylesheet" href="css/typing-area.css">
+  <link rel="stylesheet" href="css/results.css">
+  <link rel="stylesheet" href="css/lessons.css">
+  <link rel="stylesheet" href="css/onboarding.css">
+  <link rel="stylesheet" href="css/certificate.css">
+  <link rel="stylesheet" href="css/achievements.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+<body>
+
+  <!-- SEO/accessibility: one H1 required per page — visually hidden via
+       .sr-only, but present for crawlers and screen readers. Must live in
+       body, not head — head cannot contain content elements. -->
+  <h1 class="sr-only">Free Online Typing Speed Test — WPM &amp; Accuracy Checker</h1>
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════ -->
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+
+      <div class="header-brand">
+        <a href="/tools/" class="back-link" aria-label="Back to all tools">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Tools</span>
+        </a>
+
+        <a href="/tools/typing-speed-test/" class="logo" aria-label="Typing Speed Test — a free tool by AlternateIncomeSource">
+          <svg class="logo-mark" width="22" height="22" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 10.5 L16 16 L9 21.5" fill="none" stroke="var(--neon-cyan)" stroke-width="3.1"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="17.5" y="19.5" width="7.5" height="3.1" rx="1.4" fill="var(--neon-purple)"/>
+          </svg>
+          <span class="logo-text">Typing Test</span>
+        </a>
+      </div>
+
+      <nav class="mode-nav" aria-label="Test modes">
+        <button class="mode-btn active" data-mode="test" aria-current="page">
+          Test
+        </button>
+        <button class="mode-btn" data-mode="lessons" aria-current="false">
+          Learn
+        </button>
+      </nav>
+
+      <div class="header-controls">
+        <button class="icon-btn active" id="btn-sound" aria-label="Mute sound" title="Toggle sound">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        </button>
+
+        <!-- Caps Lock warning — shown by JS when Caps Lock detected -->
+        <div id="caps-warning" style="display:none"
+             aria-live="polite"
+             title="Caps Lock is on">
+          <span style="font-size:11px; color:var(--neon-gold); font-family:var(--font-mono);">⇪ CAPS</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════ -->
+  <main id="main-content" role="main">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="https://www.alternateincomesource.com/">Home</a></li>
+        <li><a href="https://www.alternateincomesource.com/tools/">Free Tools</a></li>
+        <li aria-current="page">Typing Speed Test</li>
+      </ol>
+    </nav>
+
+    <!-- ─── TEST MODE ──────────────────────────────────── -->
+    <!-- NOTE: NO hidden attribute here — CSS controls visibility via .active class -->
+    <section id="test-mode" class="app-section active" aria-label="Typing speed test">
+
+      <!-- Daily streak banner — filled by JS -->
+      <div id="streak-banner" style="display:none" aria-live="polite"></div>
+
+      <div class="duration-bar" role="group" aria-label="Select test duration">
+        <button class="duration-btn" data-duration="15"  aria-label="15 second typing test">15s</button>
+        <button class="duration-btn" data-duration="30"  aria-label="30 second typing test">30s</button>
+        <button class="duration-btn active" data-duration="60"  aria-label="60 second typing test">60s</button>
+        <button class="duration-btn" data-duration="120" aria-label="120 second typing test">120s</button>
+      </div>
+
+      <div class="live-stats" aria-live="polite" aria-atomic="false" aria-label="Live typing statistics">
+        <div class="live-stat live-stat--wpm">
+          <div class="live-stat__value" id="live-wpm" aria-label="Words per minute">0</div>
+          <div class="live-stat__label">WPM</div>
+        </div>
+        <div class="live-stat live-stat--timer">
+          <div class="live-stat__value" id="live-timer" aria-label="Time remaining">60</div>
+          <div class="live-stat__label">Seconds</div>
+        </div>
+        <div class="live-stat live-stat--acc">
+          <div class="live-stat__value" id="live-acc" aria-label="Accuracy percentage">100%</div>
+          <div class="live-stat__label">Accuracy</div>
+        </div>
+      </div>
+
+      <div id="typing-area" role="application" aria-label="Typing area — start typing to begin the test">
+
+        <div class="typing-display" id="typing-display">
+
+          <div class="typing-overlay" id="typing-overlay" aria-hidden="true">
+            <div class="overlay-prompt">
+              <strong>Start typing to begin</strong>
+              <span>Press <kbd>Tab</kbd> to restart &nbsp;·&nbsp; <kbd>Esc</kbd> to reset</span>
+            </div>
+          </div>
+
+          <div class="typing-words" id="typing-words" aria-hidden="true"></div>
+
+          <textarea
+            id="hidden-input"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-hidden="true"
+            tabindex="-1"
+            aria-label="Typing input">
+          </textarea>
+
+        </div>
+
+        <div class="typing-controls">
+          <button class="btn-restart" id="btn-restart" aria-label="Restart typing test">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 .49-4.99"/>
+            </svg>
+            Restart
+          </button>
+          <span class="typing-hint"><kbd>Tab</kbd> to restart &nbsp;·&nbsp; <kbd>Esc</kbd> to reset</span>
+        </div>
+
+      </div>
+
+      <div id="keyboard-container" aria-hidden="true" role="presentation"></div>
+
+      <!-- Lesson hint panel (visible in Learn mode) -->
+      <div class="lesson-hint" id="lesson-hint" aria-live="polite" aria-atomic="true"></div>
+
+    </section>
+
+
+    <!-- ─── RESULTS MODE ───────────────────────────────── -->
+    <!-- NOTE: NO hidden attribute — CSS .active class controls visibility -->
+    <section id="results-mode" class="app-section" aria-label="Typing test results">
+
+      <div class="results-header">
+        <h2 class="results-title" id="results-title">Your Results</h2>
+        <p class="results-subtitle" id="results-subtitle">Here is how you did — and what it means.</p>
+      </div>
+
+      <div id="stat-cards" aria-live="polite" aria-label="Test statistics"></div>
+
+      <div class="pb-comparison" id="pb-comparison" aria-label="Personal best comparison"></div>
+
+      <!-- Session trend — last 5 WPM scores -->
+      <div class="graph-container" id="trend-container" style="display:none">
+        <div class="graph-title">Recent Sessions</div>
+        <div id="session-trend" aria-label="Recent session scores"></div>
+      </div>
+
+      <div class="graph-container">
+        <div class="graph-title">WPM Over Time</div>
+        <canvas id="wpm-graph" width="800" height="140"
+                aria-label="Chart showing words per minute over time during your test"></canvas>
+      </div>
+
+      <div class="error-breakdown">
+        <div class="error-breakdown__title">Top Mistakes</div>
+        <div id="error-breakdown"></div>
+      </div>
+
+      <div class="improvement-tip" id="improvement-tip" aria-live="polite"></div>
+
+      <!-- Copy-your-score card (Bonus B3) -->
+      <div class="share-card" id="share-card" style="display:none" aria-label="Share your score"></div>
+
+      <div class="results-actions" id="results-actions"></div>
+
+    </section>
+
+
+    <!-- ─── LESSONS MODE ───────────────────────────────── -->
+    <!-- NOTE: NO hidden attribute — CSS .active class controls visibility -->
+    <section id="lessons-mode" class="app-section" aria-label="Typing lessons">
+
+      <div class="results-header">
+        <h2 class="results-title">Typing Lessons</h2>
+        <p class="results-subtitle">Build your skills step by step — from home row to full speed.</p>
+      </div>
+
+      <button type="button" class="getting-started-card" id="btn-getting-started"
+              aria-label="Getting Started: learn finger placement before your first lesson">
+        <div class="getting-started-card__icon" aria-hidden="true">✋</div>
+        <div class="getting-started-card__body">
+          <div class="getting-started-card__title">
+            Getting Started
+            <span class="getting-started-card__badge" id="getting-started-badge" hidden>✓ Done</span>
+          </div>
+          <div class="getting-started-card__desc">
+            New here? Learn exactly where to place your fingers before your first lesson — takes about a minute.
+          </div>
+        </div>
+        <div class="getting-started-card__arrow" aria-hidden="true">→</div>
+      </button>
+
+      <div class="lesson-levels" id="lessons-grid" aria-label="Lesson level selector"></div>
+
+      <!-- Lesson panel — shown when a lesson is selected. Uses CSS class, NOT inline style -->
+      <div class="lesson-panel" id="lesson-panel">
+        <div class="lesson-panel__header">
+          <div class="lesson-title" id="lesson-title">Lesson</div>
+          <div class="lesson-step-badge" id="lesson-step">Step 1 of 8</div>
+        </div>
+        <p class="lesson-instruction" id="lesson-instruction"></p>
+        <div class="lesson-progress-bar">
+          <div class="lesson-progress-fill" id="lesson-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="finger-guide" id="finger-guide">
+        <div class="finger-guide__title">Hand Position Guide</div>
+        <svg id="finger-diagram" viewBox="0 0 400 200"
+             aria-label="Diagram showing correct finger placement on keyboard home row"
+             role="img">
+          <title>Finger placement guide: left hand on ASDF, right hand on JKL;</title>
+          <g fill="var(--neon-blue)" opacity="0.5">
+            <ellipse cx="60"  cy="160" rx="16" ry="28" class="finger-left" data-finger="L5"/>
+            <ellipse cx="95"  cy="140" rx="16" ry="34" class="finger-left" data-finger="L4"/>
+            <ellipse cx="130" cy="132" rx="16" ry="36" class="finger-left" data-finger="L3"/>
+            <ellipse cx="165" cy="140" rx="16" ry="34" class="finger-left" data-finger="L2"/>
+            <ellipse cx="150" cy="185" rx="22" ry="14" class="finger-left" data-finger="L1"/>
+          </g>
+          <g fill="var(--neon-cyan)" opacity="0.5">
+            <ellipse cx="235" cy="140" rx="16" ry="34" class="finger-right" data-finger="R2"/>
+            <ellipse cx="270" cy="132" rx="16" ry="36" class="finger-right" data-finger="R3"/>
+            <ellipse cx="305" cy="140" rx="16" ry="34" class="finger-right" data-finger="R4"/>
+            <ellipse cx="340" cy="160" rx="16" ry="28" class="finger-right" data-finger="R5"/>
+            <ellipse cx="250" cy="185" rx="22" ry="14" class="finger-right" data-finger="R1"/>
+          </g>
+          <text x="60"  y="198" text-anchor="middle" font-size="10" fill="var(--text-muted)">A</text>
+          <text x="95"  y="183" text-anchor="middle" font-size="10" fill="var(--text-muted)">S</text>
+          <text x="130" y="175" text-anchor="middle" font-size="10" fill="var(--text-muted)">D</text>
+          <text x="165" y="181" text-anchor="middle" font-size="10" fill="var(--text-muted)">F</text>
+          <text x="235" y="181" text-anchor="middle" font-size="10" fill="var(--text-muted)">J</text>
+          <text x="270" y="175" text-anchor="middle" font-size="10" fill="var(--text-muted)">K</text>
+          <text x="305" y="183" text-anchor="middle" font-size="10" fill="var(--text-muted)">L</text>
+          <text x="340" y="198" text-anchor="middle" font-size="10" fill="var(--text-muted)">;</text>
+        </svg>
+        <div class="finger-legend">
+          <div class="legend-item">
+            <div class="legend-dot legend-dot--left"></div>
+            <span>Left hand</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot legend-dot--right"></div>
+            <span>Right hand</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-header" style="margin-top:2rem">
+        <h3 class="results-title" style="font-size:1.2rem">Your Achievements</h3>
+      </div>
+      <div class="achievements-grid" id="achievements-grid"
+           aria-label="Achievements list" role="list"></div>
+
+    </section>
+
+
+    <!-- ─── ONBOARDING MODE: Getting Started guide ────────── -->
+    <section id="onboarding-mode" class="app-section" aria-label="Getting started: hand placement guide">
+
+      <div class="results-header">
+        <h2 class="results-title">Getting Started</h2>
+        <p class="results-subtitle" id="onboarding-step-counter">Step 1 of 5</p>
+      </div>
+
+      <div class="onboarding-dots" id="onboarding-dots" aria-hidden="true"></div>
+
+      <div class="finger-guide" id="onboarding-finger-guide">
+        <svg id="onboarding-finger-diagram" viewBox="0 0 400 200"
+             aria-label="Diagram showing correct finger placement on keyboard home row"
+             role="img">
+          <title>Finger placement guide: left hand on ASDF, right hand on JKL;</title>
+          <g fill="var(--neon-blue)" opacity="0.5">
+            <ellipse cx="60"  cy="160" rx="16" ry="28" class="finger-left" data-finger="L5"/>
+            <ellipse cx="95"  cy="140" rx="16" ry="34" class="finger-left" data-finger="L4"/>
+            <ellipse cx="130" cy="132" rx="16" ry="36" class="finger-left" data-finger="L3"/>
+            <ellipse cx="165" cy="140" rx="16" ry="34" class="finger-left" data-finger="L2"/>
+            <ellipse cx="150" cy="185" rx="22" ry="14" class="finger-left" data-finger="L1"/>
+          </g>
+          <g fill="var(--neon-cyan)" opacity="0.5">
+            <ellipse cx="235" cy="140" rx="16" ry="34" class="finger-right" data-finger="R2"/>
+            <ellipse cx="270" cy="132" rx="16" ry="36" class="finger-right" data-finger="R3"/>
+            <ellipse cx="305" cy="140" rx="16" ry="34" class="finger-right" data-finger="R4"/>
+            <ellipse cx="340" cy="160" rx="16" ry="28" class="finger-right" data-finger="R5"/>
+            <ellipse cx="250" cy="185" rx="22" ry="14" class="finger-right" data-finger="R1"/>
+          </g>
+          <text x="60"  y="198" text-anchor="middle" font-size="10" fill="var(--text-muted)">A</text>
+          <text x="95"  y="183" text-anchor="middle" font-size="10" fill="var(--text-muted)">S</text>
+          <text x="130" y="175" text-anchor="middle" font-size="10" fill="var(--text-muted)">D</text>
+          <text x="165" y="181" text-anchor="middle" font-size="10" fill="var(--text-muted)">F</text>
+          <text x="235" y="181" text-anchor="middle" font-size="10" fill="var(--text-muted)">J</text>
+          <text x="270" y="175" text-anchor="middle" font-size="10" fill="var(--text-muted)">K</text>
+          <text x="305" y="183" text-anchor="middle" font-size="10" fill="var(--text-muted)">L</text>
+          <text x="340" y="198" text-anchor="middle" font-size="10" fill="var(--text-muted)">;</text>
+        </svg>
+      </div>
+
+      <div class="onboarding-step">
+        <h3 class="onboarding-step__title" id="onboarding-step-title">Left Hand — Home Row</h3>
+        <p class="onboarding-step__text" id="onboarding-step-text"></p>
+      </div>
+
+      <div class="onboarding-actions">
+        <button type="button" class="btn-secondary" id="btn-onboarding-skip">Skip</button>
+        <div class="onboarding-actions__nav">
+          <button type="button" class="btn-secondary" id="btn-onboarding-back">← Back</button>
+          <button type="button" class="btn-primary" id="btn-onboarding-next">Next →</button>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ─── SEO CONTENT ────────────────────────────────── -->
+    <article class="seo-content" aria-label="About this typing speed test">
+
+      <h2>What Is This Typing Speed Test?</h2>
+      <p>
+        This is a free online typing speed test built for people who want to know
+        how fast they actually type — not just see a number, but understand it.
+        It measures your Words Per Minute (WPM), Characters Per Minute (CPM), accuracy,
+        and typing consistency, then gives you one specific tip based on your actual mistakes
+        from that session. No generic advice. No paywalls. No account required.
+      </p>
+
+      <h3>How the Typing Speed Test Works</h3>
+      <p>
+        Click the typing area and start typing the words you see on screen. The test begins
+        the moment your first key registers. Each character lights up green when correct
+        and red when wrong. When the timer runs out your results appear instantly with a full
+        breakdown of your performance including WPM, accuracy, error patterns, and one
+        personalised tip based on your actual session data.
+      </p>
+
+      <h3>What Your WPM Score Actually Means</h3>
+      <p>
+        The average adult types between 38 and 45 WPM. Reaching 60 WPM puts you
+        above average. Most professional typists sit between 75 and 100 WPM.
+        This test shows you both gross WPM (everything you typed) and net WPM
+        adjusted for errors — because net WPM is what matters in real-world use
+        and in professional typing assessments.
+      </p>
+
+      <h3>How to Improve Your Typing Speed</h3>
+      <p>
+        The single most effective habit is to prioritise accuracy over speed.
+        Typing fast but incorrectly trains your fingers to make the same mistakes repeatedly.
+        Start with the free lesson system, which begins at home-row basics
+        and builds progressively through 27 structured lessons across four levels. Daily practice of 10 to 15
+        minutes is more effective than occasional longer sessions. Speed follows accuracy
+        naturally — not the other way around.
+      </p>
+
+      <h3>The Complete Lesson Curriculum</h3>
+      <p>
+        The lesson system is organised into four levels, each building directly on the last.
+        Every lesson checks your accuracy and speed against a target before letting you move on,
+        so progress reflects real skill rather than just time spent. In total: 27 lessons across
+        four levels, free, no account required.
+      </p>
+
+      <h4>Level 1 — Foundation (8 lessons)</h4>
+      <ol class="curriculum-list">
+        <li>Left Hand Home Row</li>
+        <li>Right Hand Home Row</li>
+        <li>Both Hands Together</li>
+        <li>Add G and H</li>
+        <li>Full Home Row</li>
+        <li>Add E and I</li>
+        <li>Add R and U</li>
+        <li>Common Short Words</li>
+      </ol>
+
+      <h4>Level 2 — Expansion (8 lessons)</h4>
+      <ol class="curriculum-list">
+        <li>Full Top Row</li>
+        <li>Full Bottom Row</li>
+        <li>Numbers 1 to 5</li>
+        <li>Numbers 6 to 0</li>
+        <li>Shift Key and Capitals</li>
+        <li>Common Punctuation</li>
+        <li>Top 100 Common Words</li>
+        <li>Short Sentences</li>
+      </ol>
+
+      <h4>Level 3 — Speed Building (6 lessons)</h4>
+      <ol class="curriculum-list">
+        <li>Common Words Timed</li>
+        <li>Accuracy Drill</li>
+        <li>Speed Bursts</li>
+        <li>Mixed Case Sentences</li>
+        <li>Numbers in Context</li>
+        <li>Paragraph Typing</li>
+      </ol>
+
+      <h4>Level 4 — Mastery (5 lessons)</h4>
+      <ol class="curriculum-list">
+        <li>Weak Finger Drills</li>
+        <li>Custom Problem Key Practice</li>
+        <li>Speed Consistency</li>
+        <li>Cold Start Drills</li>
+        <li>Advanced Punctuation</li>
+      </ol>
+
+      <h3>What's a Good Typing Speed? (By Skill Level and Job)</h3>
+      <p>
+        Typing speed is usually grouped into rough bands rather than one fixed number, since it
+        depends heavily on practice and how someone learned to type in the first place:
+      </p>
+      <ul>
+        <li><strong>Beginner:</strong> 10–20 WPM — still finding keys, mostly without touch typing</li>
+        <li><strong>Average adult typist:</strong> 38–45 WPM — the typical range for someone who
+          types daily but was never formally trained</li>
+        <li><strong>Above average:</strong> 60+ WPM — comfortable touch typing, few corrections needed</li>
+        <li><strong>Professional typist:</strong> 65–75 WPM — the common baseline for administrative
+          and data-heavy roles</li>
+        <li><strong>Advanced / specialist:</strong> 80–100+ WPM — experienced data entry and
+          transcription professionals</li>
+        <li><strong>Elite / competitive typists:</strong> 120+ WPM — a small minority, usually
+          with years of deliberate practice</li>
+      </ul>
+      <p>
+        By job type, commonly expected minimums look like this: general office and administrative
+        roles typically ask for 40–60 WPM; data entry specialist roles usually require 50–70 WPM
+        at 95% or higher accuracy; legal and medical transcription often expects 65–80 WPM;
+        executive assistant roles commonly sit at 60–80 WPM. These are typical ranges seen in job
+        postings, not fixed rules — some employers set the bar lower for training positions and
+        higher for senior ones.
+      </p>
+
+      <h3>WPM vs CPM: What's the Difference?</h3>
+      <p>
+        WPM (Words Per Minute) is the standard used across almost every typing test, including
+        this one. By convention, one "word" equals 5 characters, including spaces — this keeps
+        the measurement consistent regardless of whether the text you typed happened to use short
+        or long words. CPM (Characters Per Minute) is the raw character count typed per minute,
+        with no averaging applied. As a rule of thumb, CPM is roughly WPM × 5. WPM is more useful
+        for comparing your result against typical benchmarks and job requirements, since almost
+        every published typing benchmark uses WPM. CPM can be more informative if you're typing
+        in a language where average word length differs significantly from English.
+      </p>
+
+      <h3>Frequently Asked Questions</h3>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">Is this typing test completely free?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            Yes. Every feature — speed tests, all 27 lessons, history, achievements — is free.
+            No account, no payment, no ads interrupting your test. Your results are stored
+            privately in your own browser and never sent anywhere.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">How is WPM calculated?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            One word in a typing test equals 5 characters including spaces. Gross WPM
+            divides your total character count by 5 then by time in minutes. Net WPM
+            subtracts one WPM for every error you made per minute. This test displays
+            both so you can see the real cost of mistakes on your score.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">What is a good typing speed in WPM?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            38–45 WPM is average for adults who never learned formal touch typing. 60+ WPM is
+            considered above average. Most professional typing roles expect 65–75 WPM, and
+            experienced data entry specialists often reach 80–100+ WPM.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">What is the difference between WPM and CPM?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            WPM (Words Per Minute) counts every 5 characters, including spaces, as one word — it's
+            the standard used by almost all typing tests and job requirements. CPM (Characters
+            Per Minute) is the raw character count with no averaging. CPM is roughly WPM multiplied by 5.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">What typing speed do I need for data entry jobs?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            Most data entry roles require 45 to 60 WPM with 95 percent or higher accuracy.
+            Some specialist positions ask for 70 to 80 WPM. This test tracks both metrics
+            and shows exactly where accuracy is dropping so you can target the right practice.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">Can I use this to prepare for a job typing test?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            Yes. Practice with the 60-second and 120-second modes to match the duration of most
+            employment typing assessments. Aim for 95 percent or higher accuracy at your target
+            WPM before applying, and use the lesson system to fix your weakest keys specifically.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">How long does it take to learn touch typing?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            Most people can learn solid home-row fundamentals within one to two weeks of daily
+            10–15 minute practice, and reach a comfortable, accurate 40+ WPM within four to eight
+            weeks. Reaching 70+ WPM typically takes several months of regular use, since speed
+            comes from repetition, not from any single technique.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">Does the RGB keyboard affect my typing?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            The visual keyboard is a feedback tool, not a distraction. It shows which
+            key you just pressed and whether it was correct — reinforcing the connection
+            between your fingers and the keys. For beginners this visual confirmation
+            accelerates learning considerably.
+          </span>
+        </div>
+      </div>
+
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="faq-question" itemprop="name">Does this work on mobile?</div>
+        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <span itemprop="text">
+            Yes. The test, results, and full lesson system all work on phones and tablets using
+            your device's own keyboard. The on-screen RGB keyboard is a desktop feature and is
+            hidden on small screens since your device keyboard takes its place.
+          </span>
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════
+       ACHIEVEMENT OVERLAY
+       NO hidden attribute — JS controls via removeAttribute/setAttribute
+  ══════════════════════════════════════════════════ -->
+  <div id="achievement-overlay"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Achievement unlocked"
+       aria-live="assertive"
+       style="display:none">
+    <div class="achievement-popup" id="achievement-popup"></div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       CERTIFICATE MODAL
+  ══════════════════════════════════════════════════ -->
+  <div id="certificate-modal"
+       class="certificate-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Generate your typing certificate"
+       style="display:none">
+    <div class="certificate-modal__panel">
+      <button type="button" class="certificate-modal__close" id="btn-certificate-close"
+              aria-label="Close">✕</button>
+
+      <div class="certificate-modal__form" id="certificate-form-view">
+        <h3>Generate Your Certificate</h3>
+        <p>Enter your name exactly as you'd like it to appear on the certificate.</p>
+        <input type="text" id="certificate-name-input" maxlength="40"
+               placeholder="Your full name" autocomplete="name">
+        <button type="button" class="btn-primary" id="btn-certificate-generate"
+                style="width:100%">Generate Certificate</button>
+        <p class="certificate-eligibility-note">
+          This creates a self-verified certificate based on your test result.
+          It isn't a third-party credential — think of it as a shareable,
+          personal record you can attach to a resume or freelance profile.
+        </p>
+      </div>
+
+      <div class="certificate-modal__preview" id="certificate-preview-view" style="display:none">
+        <canvas id="certificate-canvas" width="1400" height="990"
+                aria-label="Your typing proficiency certificate"></canvas>
+        <div class="certificate-modal__actions">
+          <button type="button" class="btn-secondary" id="btn-certificate-edit">← Edit Name</button>
+          <button type="button" class="btn-primary" id="btn-certificate-download">Download PNG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       TOAST NOTIFICATIONS
+  ══════════════════════════════════════════════════ -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <nav class="footer-links" aria-label="Site footer links">
+        <a href="https://www.alternateincomesource.com"
+           class="footer-link"
+           rel="noopener noreferrer">AlternateIncomeSource.com</a>
+        <a href="https://www.alternateincomesource.com/tools/"
+           class="footer-link"
+           rel="noopener noreferrer">Free Tools</a>
+        <a href="https://www.alternateincomesource.com/tools/typing-speed-test/"
+           class="footer-link">Typing Speed Test</a>
+      </nav>
+      <p class="footer-copy">
+        This typing speed test is a free tool by
+        <a href="https://www.alternateincomesource.com"
+           class="footer-link"
+           rel="noopener noreferrer">AlternateIncomeSource.com</a>.
+        All results are stored locally in your browser. No data is collected or shared.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════
+       JAVASCRIPT — utilities first, main last
+  ══════════════════════════════════════════════════ -->
+  <script src="js/utilities.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/typing-engine.js"></script>
+  <script src="js/statistics.js"></script>
+  <script src="js/keyboard.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/onboarding.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
